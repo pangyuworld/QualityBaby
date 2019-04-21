@@ -144,7 +144,7 @@ public class ActivityService {
      */
     public List<Activity> getActivityByUserId(int userId,int pageNumber,int pageSize){
         Pageable pageable=PageRequest.of(pageNumber-1,pageSize);
-        List<UserAndActivity> list = userAndActivityDAO.findAllByActivity_ActivityId(userId,pageable).getContent();
+        List<UserAndActivity> list = userAndActivityDAO.findAllByUser_UserId(userId,pageable).getContent();
         List<Activity> activityList=list.stream()
                 .map(UserAndActivity::getActivity)
                 .collect(Collectors.toList());
