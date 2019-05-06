@@ -10,7 +10,33 @@ import java.util.List;
  * @description: 分页生成
  * @date 2019/5/5 15:13
  */
-public interface PageHandler<E> {
-    List<E> getLists();
-    Integer getCount();
+public abstract class PageHandler<E> {
+    private int pageNum;
+    private int pageSize;
+    public abstract List<E> getLists();
+    public abstract Integer getCount();
+
+    public PageHandler(int pageNum, int pageSize) {
+        this.pageNum = pageNum;
+        this.pageSize = pageSize;
+
+    }
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public PageHandler<E> setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+        return this;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public PageHandler<E> setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+        return this;
+    }
 }

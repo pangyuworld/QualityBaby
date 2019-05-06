@@ -18,13 +18,18 @@ public class Page<E> {
     private Boolean count;
     private List data;
 
-    public Page(int pageNum, int pageSize, PageHandler handler) {
+    public Page(PageHandler handler) {
         data = handler.getLists();
         total = handler.getCount();
-        totalPage = total / pageSize;
-        this.pageNum = pageNum;
-        this.pageSize = pageSize;
-        count = pageNum != totalPage;
+        try {
+            totalPage = total / pageSize;
+        }catch (NullPointerException e){
+            // 除数为0的操作
+            totalPage = 0;
+        }
+        this.pageNum = handler.getPageNum();
+        this.pageSize = handler.getPageSize();
+        count = pageNum<=totalPage;
     }
 
     public List<E> getList() {
