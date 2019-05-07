@@ -3,6 +3,7 @@ package com.swust.fund.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -19,7 +20,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @date 2019/4/6 17:18
  */
 @Configuration
-// @EnableCaching
+@EnableCaching
 public class RedisConfig {
     @Bean
     @SuppressWarnings("all")
@@ -43,19 +44,19 @@ public class RedisConfig {
         template.afterPropertiesSet();
         return template;
     }
-    // @Value("${spring.redis.host}")
+    // @Value("${spring.Testaaa.host}")
     // private String host;
     //
-    // @Value("${spring.redis.port}")
+    // @Value("${spring.Testaaa.port}")
     // private int port;
     //
-    // @Value("${spring.redis.timeout}")
+    // @Value("${spring.Testaaa.timeout}")
     // private int timeout;
     //
-    // @Value("${spring.redis.pool.max-idle}")
+    // @Value("${spring.Testaaa.pool.max-idle}")
     // private int maxIdle;
     //
-    // @Value("${spring.redis.pool.max-wait}")
+    // @Value("${spring.Testaaa.pool.max-wait}")
     // private long maxWaitMillis;
     //
     // @Bean
@@ -89,7 +90,7 @@ public class RedisConfig {
     // }
     //
     // /**
-    //  * 设置数据存入 redis 的序列化方式
+    //  * 设置数据存入 Testaaa 的序列化方式
     //  *
     //  * @param redisTemplate
     //  * @param factory

@@ -48,7 +48,7 @@ public class AdminService {
         if (adminUser == null) {
             return null;
         }
-        if (!adminUser.getAdminLoginPassword().equals(PasswordUtil.SHA256(password+CommonConst.salt))) {
+        if (!adminUser.getAdminLoginPassword().equals(PasswordUtil.SHA256(password + CommonConst.salt))) {
             return "-1";
         }
         String token = TokenUtil.createJWT(1000 * 60 * 60, username, "administrator");

@@ -1,24 +1,37 @@
 package com.swust.fund.entity;
 
-import java.util.Date;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
-public class Activity {
+import java.io.Serializable;
+import java.util.Date;
+@ApiModel("活动")
+public class Activity implements Serializable {
+    @ApiModelProperty("活动ID")
     private Integer activityId;
 
+    @ApiModelProperty("活动名")
     private String activityName;
 
+    @ApiModelProperty("活动介绍")
     private String activityInformation;
 
+    @ApiModelProperty("最大人数")
     private Integer activityPersonNum;
 
+    @ApiModelProperty("活动开始时间")
     private Date activityStart;
 
+    @ApiModelProperty("活动结束时间")
     private Date activityEnd;
 
+    @ApiModelProperty("活动开始报名时间")
     private Date activitySignUp;
 
+    @ApiModelProperty("活动是否显示")
     private Boolean activityShow;
 
+    @ApiModelProperty("活动所属的工作室ID")
     private Integer studioId;
 
     public Integer getActivityId() {

@@ -1,6 +1,8 @@
 package com.swust.fund.entity;
 
-public class Questionnaire {
+import java.io.Serializable;
+
+public class Questionnaire implements Serializable {
     private Integer questionnaireId;
 
     private String questionnaireDetail;

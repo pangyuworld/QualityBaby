@@ -1,6 +1,8 @@
 package com.swust.fund.entity;
 
-public class User {
+import java.io.Serializable;
+
+public class User  implements Serializable {
     private Integer userId;
 
     private Integer stuId;

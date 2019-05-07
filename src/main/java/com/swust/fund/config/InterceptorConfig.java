@@ -21,10 +21,11 @@ public class InterceptorConfig extends WebMvcConfigurationSupport {
 
     /**
      * 添加token拦截器
-     * @author pang
-     * @date 2019/4/7
+     *
      * @param registry
      * @return void
+     * @author pang
+     * @date 2019/4/7
      */
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
@@ -32,6 +33,7 @@ public class InterceptorConfig extends WebMvcConfigurationSupport {
                 .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**");
         super.addInterceptors(registry);
     }
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");

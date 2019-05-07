@@ -11,25 +11,61 @@ import java.util.List;
  * @date 2019/5/5 15:06
  */
 public class Page<E> {
+    /**
+     * 页码
+     */
     private Integer pageNum;
+    /**
+     * 页大小
+     */
     private Integer pageSize;
+    /**
+     * 总条数
+     */
     private Integer total;
+    /**
+     * 总页数
+     */
     private Integer totalPage;
+    /**
+     * 是否还有下一页
+     */
     private Boolean count;
+    /**
+     * 内容
+     */
     private List data;
 
+    /***
+     * 构造方法
+     * @author pang
+     * @date 19-5-7 上午10:46
+     * @parm [handler] 对取出数据的处理
+     * @return
+     */
     public Page(PageHandler handler) {
+        // TODO 赋值数据
         data = handler.getLists();
+        // TODO 获得总数
         total = handler.getCount();
+        // TODO 获得页码
+        this.pageNum = handler.getPageNum();
+        // TODO 获得页大小
+        this.pageSize = handler.getPageSize();
+        // TODO 获得总页数
         try {
             totalPage = total / pageSize;
-        }catch (NullPointerException e){
-            // 除数为0的操作
+            // TODO 如果不能整除，还需要再加一页
+            if (total % pageSize > 0) {
+                totalPage++;
+            }
+        } catch (NullPointerException e) {
+            // TODO 除数为0的操作
+            e.printStackTrace();
             totalPage = 0;
         }
-        this.pageNum = handler.getPageNum();
-        this.pageSize = handler.getPageSize();
-        count = pageNum<=totalPage;
+        // TODO 判断是否还有下一页
+        count = pageNum < totalPage;
     }
 
     public List<E> getList() {

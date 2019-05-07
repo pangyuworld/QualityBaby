@@ -1,6 +1,8 @@
 package com.swust.fund.entity;
 
-public class Aspect {
+import java.io.Serializable;
+
+public class Aspect implements Serializable {
     private Integer aspectId;
 
     private String aspectName;

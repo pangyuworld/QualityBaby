@@ -1,6 +1,8 @@
 package com.swust.fund.entity;
 
-public class AdminUser {
+import java.io.Serializable;
+
+public class AdminUser implements Serializable {
     private Integer adminId;
 
     private String adminRealName;

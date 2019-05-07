@@ -1,6 +1,8 @@
 package com.swust.fund.entity;
 
-public class Tag {
+import java.io.Serializable;
+
+public class Tag  implements Serializable {
     private Integer tagId;
 
     private String tagName;

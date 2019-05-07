@@ -1,8 +1,9 @@
 package com.swust.fund.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Answer {
+public class Answer implements Serializable {
     private Integer answerId;
 
     private Date answerTime;

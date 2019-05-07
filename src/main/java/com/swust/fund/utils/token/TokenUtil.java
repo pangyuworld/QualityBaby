@@ -13,36 +13,42 @@ import java.util.UUID;
 
 /**
  * Token工具
+ *
  * @author pang
  * @version 1.0
  */
 public class TokenUtil {
-    /** 加密秘钥，保存在内存中 **/
-    private static final String KEY="chuangXinJJijin";
-    /** 签发人 **/
-    private static final String ISSUER="localhost";
+    /**
+     * 加密秘钥，保存在内存中
+     **/
+    private static final String KEY = "chuangXinJJijin";
+    /**
+     * 签发人
+     **/
+    private static final String ISSUER = "localhost";
 
-    /** 
-     * 功能描述 
+    /**
+     * 功能描述
+     *
+     * @return java.lang.String
      * @author pang
      * @date 19-3-6 下午1:02
      * @parm [ttlMillis, userName, subject]
-     * @return java.lang.String
-    */
-    public static String createJWT(long ttlMillis,String userName,String subject){
+     */
+    public static String createJWT(long ttlMillis, String userName, String subject) {
         //使用HS256加密算法
-        SignatureAlgorithm signatureAlgorithm= SignatureAlgorithm.HS256;
+        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
         //生成当前时间戳
-        long nowMill=System.currentTimeMillis();
+        long nowMill = System.currentTimeMillis();
         //生成token时间
-        Date now=new Date(nowMill);
+        Date now = new Date(nowMill);
         //payload私有声明，注意这里可以添加任意信息，根据业务进行实际修改
-        Map<String ,Object> calims=new HashMap<>();
+        Map<String, Object> calims = new HashMap<>();
         //添加用户名
-        calims.put("username",userName);
+        calims.put("username", userName);
         //...
 
-        JwtBuilder builder= Jwts.builder()
+        JwtBuilder builder = Jwts.builder()
                 //如果有私有声明，要先设置私有声明，然后再设置其他的，不然会覆盖掉
                 .setClaims(calims)
                 //设置token的唯一主键，方便识别，这里使用UUID
@@ -56,11 +62,11 @@ public class TokenUtil {
                 //设置受众
                 .setAudience(userName)
                 //设置签名算法和秘钥
-                .signWith(signatureAlgorithm,KEY);
-        if (ttlMillis>0){
+                .signWith(signatureAlgorithm, KEY);
+        if (ttlMillis > 0) {
             //如果过期时间大于0，则设置过期时间
             //生成过期时间
-            Date exp=new Date(nowMill+ttlMillis);
+            Date exp = new Date(nowMill + ttlMillis);
             //设置过期时间
             builder.setExpiration(exp);
         }
@@ -70,13 +76,14 @@ public class TokenUtil {
 
     /**
      * 功能描述 解密token
+     *
+     * @return io.jsonwebtoken.Claims
      * @author pang
      * @date 19-3-6 下午8:46
      * @parm [token, username]
-     * @return io.jsonwebtoken.Claims
-    */
-    public static Claims parseJWT(String token){
-        Claims claims=Jwts.parser()
+     */
+    public static Claims parseJWT(String token) {
+        Claims claims = Jwts.parser()
                 .setSigningKey(KEY)
                 .parseClaimsJws(token).getBody();
         return claims;

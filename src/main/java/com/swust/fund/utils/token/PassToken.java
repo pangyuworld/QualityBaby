@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  * PassToken注解，跳过Token认证
  */
 
-@Target({ElementType.METHOD,ElementType.TYPE})
+@Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PassToken {
     boolean required() default false;

@@ -20,7 +20,7 @@ public class ResponseJSON<T> {
     public ResponseJSON(boolean success, T data) {
         super();
         this.success = success;
-        this.data=data;
+        this.data = data;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class ResponseJSON<T> {
     public ResponseJSON(boolean success, T data, String errCode, String errMsg) {
         super();
         this.success = success;
-        this.data=data;
+        this.data = data;
         this.errCode = errCode;
         this.errMsg = errMsg;
     }
@@ -55,7 +55,7 @@ public class ResponseJSON<T> {
 
     public ResponseJSON(boolean success, T data, UnicomResponseEnums enums) {
         this.success = success;
-        this.data=data;
+        this.data = data;
         this.errCode = enums.getCode();
         this.errMsg = enums.getMsg();
     }
@@ -68,7 +68,6 @@ public class ResponseJSON<T> {
         this.success = success;
         return this;
     }
-
 
 
     public String getErrCode() {

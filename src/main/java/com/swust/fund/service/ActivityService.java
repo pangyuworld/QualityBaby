@@ -1,9 +1,13 @@
 package com.swust.fund.service;
 
+import com.swust.fund.common.Page;
+import com.swust.fund.common.PageHandler;
 import com.swust.fund.dao.ActivityMapper;
 import com.swust.fund.entity.Activity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author pang
@@ -18,8 +22,90 @@ public class ActivityService {
     @Autowired
     private ActivityMapper activityMapper;
 
-    public Activity getById(int id){
+
+    /***
+     * 根据ID获取活动
+     * @author pang
+     * @date 19-5-7 上午10:36
+     * @parm [id]
+     * @return com.swust.fund.entity.Activity
+     */
+    public Activity getById(int id) {
         return activityMapper.selectByPrimaryKey(id);
     }
 
+    /***
+     * 根据ID删除活动
+     * @author pang
+     * @date 19-5-7 上午10:37
+     * @parm [id]
+     * @return int
+     */
+    public int deleteById(int id) {
+        return activityMapper.deleteByPrimaryKey(id);
+    }
+
+    /***
+     * 添加新的活动
+     * @author pang
+     * @date 19-5-7 上午10:38
+     * @parm [activity]
+     * @return int
+     */
+    public int add(Activity activity) {
+        return activityMapper.insert(activity);
+    }
+
+    /***
+     * 修改活动内容
+     * @author pang
+     * @date 19-5-7 上午10:39
+     * @parm [activity]
+     * @return int
+     */
+    public int edit(Activity activity) {
+        return activityMapper.updateByPrimaryKey(activity);
+    }
+
+    /***
+     * 分页获取活动列表
+     * @author pang
+     * @date 19-5-7 上午10:41
+     * @parm [pageNum, pageSize]
+     * @return com.swust.fund.common.Page<com.swust.fund.entity.Activity>
+     */
+    public Page<Activity> getAll(int pageNum, int pageSize) {
+        return new Page<>(new PageHandler(pageNum, pageSize) {
+            @Override
+            public List getLists() {
+                return activityMapper.selectAll((this.getPageNum() - 1) * this.getPageSize(), this.getPageSize());
+            }
+
+            @Override
+            public Integer getCount() {
+                return activityMapper.selectCount();
+            }
+        });
+    }
+
+    /***
+     * 根据工作室ID分页获取活动列表
+     * @author pang
+     * @date 19-5-7 上午11:05
+     * @parm [studioId, pageNum, pageSize]
+     * @return com.swust.fund.common.Page<com.swust.fund.entity.Activity>
+     */
+    public Page<Activity> getAllByStudio(int studioId, int pageNum, int pageSize) {
+        return new Page<>(new PageHandler(pageNum, pageSize) {
+            @Override
+            public List getLists() {
+                return activityMapper.selectAllByStudio(studioId, (this.getPageNum() - 1) * this.getPageSize(), this.getPageSize());
+            }
+
+            @Override
+            public Integer getCount() {
+                return activityMapper.selectCountByStudio(studioId);
+            }
+        });
+    }
 }

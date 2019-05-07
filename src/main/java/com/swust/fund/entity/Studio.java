@@ -1,14 +1,14 @@
 package com.swust.fund.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @ApiModel("工作室")
-public class Studio {
+public class Studio  implements Serializable {
     @ApiModelProperty("工作室ID")
     private Integer studioId;
 

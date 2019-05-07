@@ -1,6 +1,5 @@
 package com.swust.fund.dao;
 
-import com.github.pagehelper.Page;
 import com.swust.fund.entity.Studio;
 import org.apache.ibatis.annotations.Param;
 
@@ -19,7 +18,7 @@ public interface StudioMapper {
 
     int updateByPrimaryKey(Studio record);
 
-    List<Studio> selectAll(@Param(value = "pageNum") Integer pageNum,@Param(value = "pageSize") Integer pageSize);
+    List<Studio> selectAll(@Param(value = "pageNum") Integer pageNum, @Param(value = "pageSize") Integer pageSize);
 
     int selectCount();
 }

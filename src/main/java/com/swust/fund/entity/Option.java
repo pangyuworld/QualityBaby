@@ -1,6 +1,8 @@
 package com.swust.fund.entity;
 
-public class Option {
+import java.io.Serializable;
+
+public class Option  implements Serializable {
     private Integer optionId;
 
     private String optionDetail;

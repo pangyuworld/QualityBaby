@@ -15,11 +15,11 @@ import java.util.Set;
  * @date 2019/4/6 12:35
  */
 public class JsonUtil {
-    public static Map<String,String> json2Map(JSONObject jsonObject){
-        Set<String> keySet=jsonObject.keySet();
-        Map<String,String> result=new HashMap<>();
-        for (String str:keySet){
-            result.put(str,jsonObject.getString(str));
+    public static Map<String, String> json2Map(JSONObject jsonObject) {
+        Set<String> keySet = jsonObject.keySet();
+        Map<String, String> result = new HashMap<>();
+        for (String str : keySet) {
+            result.put(str, jsonObject.getString(str));
         }
         return result;
     }

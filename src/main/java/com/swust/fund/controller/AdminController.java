@@ -52,7 +52,7 @@ public class AdminController {
     @RequestMapping(value = "/admin/registered", method = RequestMethod.POST)
     public ResponseJSON registered(String realName, String username, String password) {
         adminService.registered(realName, username, password);
-        return new ResponseJSON(true,"注册成功",UnicomResponseEnums.SUCCESS_OPTION);
+        return new ResponseJSON(true, "注册成功", UnicomResponseEnums.SUCCESS_OPTION);
     }
 
     @ApiOperation("获得验证码")

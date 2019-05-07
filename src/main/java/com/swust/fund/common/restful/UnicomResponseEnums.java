@@ -51,11 +51,12 @@ public enum UnicomResponseEnums {
 
     /**
      * 构造方法，生成返回码和返回说明
-     * @author pang
-     * @date 2019/3/23
+     *
      * @param code
      * @param msg
      * @return
+     * @author pang
+     * @date 2019/3/23
      */
     private UnicomResponseEnums(String code, String msg) {
 

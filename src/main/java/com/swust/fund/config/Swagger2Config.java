@@ -1,4 +1,3 @@
-
 package com.swust.fund.config;
 
 import com.fasterxml.classmate.TypeResolver;
