@@ -29,4 +29,7 @@ HELP.md
 .vscode/
 
 
+logs/
+/src/test/
+
 /src/main/resources/
