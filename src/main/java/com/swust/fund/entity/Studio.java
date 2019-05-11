@@ -6,10 +6,9 @@ import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @ApiModel("工作室")
-public class Studio  implements Serializable {
+public class Studio implements Serializable {
     @ApiModelProperty("工作室ID")
     private Integer studioId;
 
@@ -19,14 +18,13 @@ public class Studio  implements Serializable {
     @ApiModelProperty("工作室介绍")
     private String studioInformation;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @ApiModelProperty("工作室开始时间")
     private Date studioStart;
 
     @ApiModelProperty("工作室是否显示")
     private Boolean studioShow;
 
-    private List<Activity> activityList;
 
     public Integer getStudioId() {
         return studioId;
@@ -66,14 +64,5 @@ public class Studio  implements Serializable {
 
     public void setStudioShow(Boolean studioShow) {
         this.studioShow = studioShow;
-    }
-
-    public List<Activity> getActivityList() {
-        return activityList;
-    }
-
-    public Studio setActivityList(List<Activity> activityList) {
-        this.activityList = activityList;
-        return this;
     }
 }

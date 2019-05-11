@@ -1,6 +1,9 @@
 package com.swust.fund.dao;
 
 import com.swust.fund.entity.User;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer userId);
@@ -16,4 +19,10 @@ public interface UserMapper {
     int updateByPrimaryKeyWithBLOBs(User record);
 
     int updateByPrimaryKey(User record);
+
+    User selectByOpenId(@Param(value = "openId") String openId);
+
+    List<User> selectAll(@Param(value = "pageNum") Integer pageNum, @Param(value = "pageSize") Integer pageSize);
+
+    int selectCount();
 }

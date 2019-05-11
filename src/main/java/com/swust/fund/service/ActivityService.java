@@ -1,7 +1,6 @@
 package com.swust.fund.service;
 
 import com.swust.fund.common.Page;
-import com.swust.fund.common.PageHandler;
 import com.swust.fund.dao.ActivityMapper;
 import com.swust.fund.entity.Activity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +63,7 @@ public class ActivityService {
      * @return int
      */
     public int edit(Activity activity) {
-        return activityMapper.updateByPrimaryKey(activity);
+        return activityMapper.updateByPrimaryKeySelective(activity);
     }
 
     /***
@@ -75,17 +74,9 @@ public class ActivityService {
      * @return com.swust.fund.common.Page<com.swust.fund.entity.Activity>
      */
     public Page<Activity> getAll(int pageNum, int pageSize) {
-        return new Page<>(new PageHandler(pageNum, pageSize) {
-            @Override
-            public List getLists() {
-                return activityMapper.selectAll((this.getPageNum() - 1) * this.getPageSize(), this.getPageSize());
-            }
-
-            @Override
-            public Integer getCount() {
-                return activityMapper.selectCount();
-            }
-        });
+        List<Activity> studioList = activityMapper.selectAll((pageNum - 1) * pageSize, pageSize);
+        int total = activityMapper.selectCount();
+        return new Page<>(studioList, total, pageNum, pageSize);
     }
 
     /***
@@ -96,16 +87,8 @@ public class ActivityService {
      * @return com.swust.fund.common.Page<com.swust.fund.entity.Activity>
      */
     public Page<Activity> getAllByStudio(int studioId, int pageNum, int pageSize) {
-        return new Page<>(new PageHandler(pageNum, pageSize) {
-            @Override
-            public List getLists() {
-                return activityMapper.selectAllByStudio(studioId, (this.getPageNum() - 1) * this.getPageSize(), this.getPageSize());
-            }
-
-            @Override
-            public Integer getCount() {
-                return activityMapper.selectCountByStudio(studioId);
-            }
-        });
+        List<Activity> studioList = activityMapper.selectAllByStudio(studioId, (pageNum - 1) * pageSize, pageSize);
+        int total = activityMapper.selectCount();
+        return new Page<>(studioList, total, pageNum, pageSize);
     }
 }

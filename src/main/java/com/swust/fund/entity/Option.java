@@ -2,7 +2,7 @@ package com.swust.fund.entity;
 
 import java.io.Serializable;
 
-public class Option  implements Serializable {
+public class Option implements Serializable {
     private Integer optionId;
 
     private String optionDetail;

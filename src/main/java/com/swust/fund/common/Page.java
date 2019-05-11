@@ -36,22 +36,28 @@ public class Page<E> {
      */
     private List data;
 
-    /***
-     * 构造方法
-     * @author pang
-     * @date 19-5-7 上午10:46
-     * @parm [handler] 对取出数据的处理
+    /**
+     * @param data     已分页数据
+     * @param total    数据总数
+     * @param pageNum  页码
+     * @param pageSize 大小
      * @return
+     * @author pang
+     * @date 2019/5/11
      */
-    public Page(PageHandler handler) {
+    public Page(List data, int total, int pageNum, int pageSize) {
         // TODO 赋值数据
-        data = handler.getLists();
+        // data = handler.getLists();
+        this.data = data;
         // TODO 获得总数
-        total = handler.getCount();
+        // total = handler.getCount();
+        this.total = total;
         // TODO 获得页码
-        this.pageNum = handler.getPageNum();
+        // this.pageNum = handler.getPageNum();
+        this.pageNum = pageNum;
         // TODO 获得页大小
-        this.pageSize = handler.getPageSize();
+        // this.pageSize = handler.getPageSize();
+        this.pageSize = pageSize;
         // TODO 获得总页数
         try {
             totalPage = total / pageSize;

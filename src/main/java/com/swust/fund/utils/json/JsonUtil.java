@@ -15,6 +15,14 @@ import java.util.Set;
  * @date 2019/4/6 12:35
  */
 public class JsonUtil {
+    /**
+     * json转map
+     *
+     * @param jsonObject
+     * @return java.util.Map<java.lang.String               ,               java.lang.String>
+     * @author pang
+     * @date 2019/5/10
+     */
     public static Map<String, String> json2Map(JSONObject jsonObject) {
         Set<String> keySet = jsonObject.keySet();
         Map<String, String> result = new HashMap<>();
@@ -22,5 +30,9 @@ public class JsonUtil {
             result.put(str, jsonObject.getString(str));
         }
         return result;
+    }
+
+    public static JSONObject str2Json(String str) {
+        return JSONObject.parseObject(str);
     }
 }

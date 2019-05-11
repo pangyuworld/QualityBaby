@@ -36,7 +36,7 @@ public class SpringExceptionHandle {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ResponseJSON<String> badRequest(BindException e) {
         logger.error("请求参数错误 ,message {}", e.getMessage());
-        return new ResponseJSON<>(false, UnicomResponseEnums.BAD_REQUEST);
+        return new ResponseJSON<>(false, e.getMessage(), UnicomResponseEnums.BAD_REQUEST);
     }
 
     /**
@@ -52,7 +52,7 @@ public class SpringExceptionHandle {
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public ResponseJSON<String> badRequestNotFound(BindException e) {
         logger.error("资源未找到 ,message {}", e.getMessage());
-        return new ResponseJSON<>(false, null, UnicomResponseEnums.NOT_FOUND);
+        return new ResponseJSON<>(false, e.getMessage(), UnicomResponseEnums.NOT_FOUND);
     }
 
 
@@ -88,7 +88,7 @@ public class SpringExceptionHandle {
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseJSON<String> systemError(Exception e) {
         logger.error("数据库操作异常 ,message {}", e.getMessage());
-        return new ResponseJSON<>(false, UnicomResponseEnums.DATABASE_ERROR);
+        return new ResponseJSON<>(false, e.getMessage(), UnicomResponseEnums.DATABASE_ERROR);
     }
 
     /**
@@ -104,7 +104,7 @@ public class SpringExceptionHandle {
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseJSON<String> connect(Exception e) {
         logger.error("网络连接失败 ,message {}", e.getMessage());
-        return new ResponseJSON<>(false, UnicomResponseEnums.CONNECTION_ERROR);
+        return new ResponseJSON<>(false, e.getMessage(), UnicomResponseEnums.CONNECTION_ERROR);
     }
 
     /**
@@ -115,11 +115,11 @@ public class SpringExceptionHandle {
      * @author pang
      * @date 2019/3/22
      */
-    // @ExceptionHandler(value = {Exception.class})
-    // @ResponseBody
-    // @ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED)
-    // public ResponseJSON<String> notAllowed(Exception e) {
-    //     logger.error("发生未知错误 ,message {}", e.getMessage());
-    //     return new ResponseJSON<>(false, UnicomResponseEnums.METHOD_NOT_ALLOWED);
-    // }
+    @ExceptionHandler(value = {Exception.class})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED)
+    public ResponseJSON<String> notAllowed(Exception e) {
+        logger.error("发生未知错误 ,message {}", e.getMessage());
+        return new ResponseJSON<>(false, e.getMessage(), UnicomResponseEnums.METHOD_NOT_ALLOWED);
+    }
 }

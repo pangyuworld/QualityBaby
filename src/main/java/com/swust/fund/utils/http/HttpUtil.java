@@ -57,8 +57,8 @@ public class HttpUtil {
         for (String str : paramKey) {
             sb.append(str + "=" + params.get(str) + "&");
         }
-        T result = (T) restTemplate.getForObject(CommonConst.baseURL + sb, responseType, params);
         LOGGER.info("访问API , method = GET , url = " + CommonConst.baseURL + url + " ,params : " + params);
+        T result = (T) restTemplate.getForObject(CommonConst.baseURL + sb, responseType, params);
         return result;
     }
 

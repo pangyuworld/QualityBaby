@@ -3,7 +3,7 @@ package com.swust.fund.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Message  implements Serializable {
+public class Message implements Serializable {
     private Integer messageId;
 
     private Date messageTime;

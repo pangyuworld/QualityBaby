@@ -1,7 +1,6 @@
 package com.swust.fund.service;
 
 import com.swust.fund.common.Page;
-import com.swust.fund.common.PageHandler;
 import com.swust.fund.common.restful.UnicomResponseEnums;
 import com.swust.fund.common.restful.UnicomRuntimeException;
 import com.swust.fund.dao.StudioMapper;
@@ -73,7 +72,7 @@ public class StudioService {
         if (studio.getStudioId() == 0) {
             throw new UnicomRuntimeException(UnicomResponseEnums.BAD_REQUEST);
         }
-        return studioMapper.updateByPrimaryKey(studio);
+        return studioMapper.updateByPrimaryKeySelective(studio);
     }
 
     /**
@@ -86,17 +85,9 @@ public class StudioService {
      * @date 2019/5/6
      */
     public Page<Studio> getAll(int pageNum, int pageSize) {
-        return new Page<>(new PageHandler(pageNum, pageSize) {
-            @Override
-            public List getLists() {
-                return studioMapper.selectAll((this.getPageNum() - 1) * this.getPageSize(), this.getPageSize());
-            }
-
-            @Override
-            public Integer getCount() {
-                return studioMapper.selectCount();
-            }
-        });
+        List<Studio> studioList = studioMapper.selectAll((pageNum - 1) * pageSize, pageSize);
+        int total = studioMapper.selectCount();
+        return new Page<>(studioList, total, pageNum, pageSize);
     }
 
 }
