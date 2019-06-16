@@ -1,5 +1,8 @@
 package com.swust.fund.common.restful;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * @program: question
  * @description: 统一返回json格式
@@ -7,10 +10,15 @@ package com.swust.fund.common.restful;
  * @create: 2019-03-21 18:14
  * @version: v1.0
  **/
+@ApiModel("统一返回样式")
 public class ResponseJSON<T> {
+    @ApiModelProperty("是否成功")
     private boolean success;
+    @ApiModelProperty("数据")
     private T data;
+    @ApiModelProperty("错误码")
     private String errCode;
+    @ApiModelProperty("错误信息")
     private String errMsg;
 
 

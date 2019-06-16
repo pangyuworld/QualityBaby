@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author pang
@@ -76,5 +77,27 @@ public class UserService {
             throw new UnicomRuntimeException(UnicomResponseEnums.BAD_REQUEST);
         }
         return userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    /**
+     * 添加用户
+     * @author pang
+     * @date 2019/5/12
+     * @param user 新的用户信息
+     * @return int
+     */
+    public int addUser(User user){
+        return userMapper.insertSelective(user);
+    }
+
+    /**
+     * 查找活动下面的用户
+     * @author pang
+     * @date 2019/6/4
+     * @param activityId
+     * @return java.util.List<com.swust.fund.entity.User>
+     */
+    public List<Map> getByActivityId(Integer activityId){
+        return userMapper.selectByActivityId(activityId);
     }
 }

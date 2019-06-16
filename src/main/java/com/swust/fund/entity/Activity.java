@@ -9,7 +9,12 @@ import java.util.Date;
 
 @ApiModel("活动")
 public class Activity implements Serializable {
-    @ApiModelProperty("活动ID")
+    /**
+     * UID
+     */
+    private static final long serialVersionUID = -1308896056767610807L;
+
+    @ApiModelProperty(value = "活动ID",hidden = true)
     private Integer activityId;
 
     @ApiModelProperty("活动名")

@@ -9,7 +9,9 @@ import java.util.Date;
 
 @ApiModel("工作室")
 public class Studio implements Serializable {
-    @ApiModelProperty("工作室ID")
+
+    private static final long serialVersionUID = -1308896056767610805L;
+    @ApiModelProperty(value = "工作室ID",hidden = true)
     private Integer studioId;
 
     @ApiModelProperty("工作室名")

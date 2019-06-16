@@ -1,5 +1,8 @@
 package com.swust.fund.common;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.List;
 
 /**
@@ -10,30 +13,37 @@ import java.util.List;
  * @description: 分页查询结果集
  * @date 2019/5/5 15:06
  */
+@ApiModel("统一分页返回样式")
 public class Page<E> {
     /**
      * 页码
      */
+    @ApiModelProperty("页码")
     private Integer pageNum;
     /**
      * 页大小
      */
+    @ApiModelProperty("页大小")
     private Integer pageSize;
     /**
      * 总条数
      */
+    @ApiModelProperty("总条数")
     private Integer total;
     /**
      * 总页数
      */
+    @ApiModelProperty("总页数")
     private Integer totalPage;
     /**
      * 是否还有下一页
      */
+    @ApiModelProperty("是否还有下一页")
     private Boolean count;
     /**
      * 内容
      */
+    @ApiModelProperty("内容")
     private List data;
 
     /**

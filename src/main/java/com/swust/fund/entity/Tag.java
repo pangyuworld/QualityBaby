@@ -3,6 +3,7 @@ package com.swust.fund.entity;
 import java.io.Serializable;
 
 public class Tag implements Serializable {
+    private static final long serialVersionUID = -1308896056765512312L;
     private Integer tagId;
 
     private String tagName;

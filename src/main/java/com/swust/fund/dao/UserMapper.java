@@ -4,6 +4,7 @@ import com.swust.fund.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer userId);
@@ -25,4 +26,6 @@ public interface UserMapper {
     List<User> selectAll(@Param(value = "pageNum") Integer pageNum, @Param(value = "pageSize") Integer pageSize);
 
     int selectCount();
+
+    List<Map> selectByActivityId(@Param(value = "activityId")Integer activityId);
 }

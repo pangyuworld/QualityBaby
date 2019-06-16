@@ -1,16 +1,13 @@
 package com.swust.fund.entity;
 
-import java.io.Serializable;
-import java.util.Date;
-
-public class Answer implements Serializable {
+public class Answer {
     private Integer answerId;
 
-    private Date answerTime;
+    private Byte answerRank;
 
     private Integer userId;
 
-    private Integer optionId;
+    private Integer questionId;
 
     public Integer getAnswerId() {
         return answerId;
@@ -20,12 +17,12 @@ public class Answer implements Serializable {
         this.answerId = answerId;
     }
 
-    public Date getAnswerTime() {
-        return answerTime;
+    public Byte getAnswerRank() {
+        return answerRank;
     }
 
-    public void setAnswerTime(Date answerTime) {
-        this.answerTime = answerTime;
+    public void setAnswerRank(Byte answerRank) {
+        this.answerRank = answerRank;
     }
 
     public Integer getUserId() {
@@ -36,11 +33,11 @@ public class Answer implements Serializable {
         this.userId = userId;
     }
 
-    public Integer getOptionId() {
-        return optionId;
+    public Integer getQuestionId() {
+        return questionId;
     }
 
-    public void setOptionId(Integer optionId) {
-        this.optionId = optionId;
+    public void setQuestionId(Integer questionId) {
+        this.questionId = questionId;
     }
 }

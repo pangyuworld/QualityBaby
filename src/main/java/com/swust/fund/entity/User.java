@@ -4,10 +4,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
+import java.util.List;
 
 @ApiModel("用户")
 public class User implements Serializable {
-    @ApiModelProperty("用户ID")
+    private static final long serialVersionUID = -1308896056767610812L;
+    @ApiModelProperty(value = "用户ID")
     private Integer userId;
 
     @ApiModelProperty("用户学号")
@@ -25,17 +27,11 @@ public class User implements Serializable {
     @ApiModelProperty("用户真实姓名")
     private String stuName;
 
-    @ApiModelProperty("用户拥有的标签名")
-    private String tagName;
-
-    @ApiModelProperty("用户ID")
-    private Integer tagId;
-
-    @ApiModelProperty("用户ID")
-    private Boolean tagShow;
-
-    @ApiModelProperty("用户ID")
+    @ApiModelProperty("微信openId")
     private byte[] openId;
+
+    @ApiModelProperty(value = "标签")
+    private List<Tag> tags;
 
     public Integer getUserId() {
         return userId;
@@ -94,30 +90,12 @@ public class User implements Serializable {
         this.openId = openId;
     }
 
-    public String getTagName() {
-        return tagName;
+    public List<Tag> getTags() {
+        return tags;
     }
 
-    public User setTagName(String tagName) {
-        this.tagName = tagName;
-        return this;
-    }
-
-    public Integer getTagId() {
-        return tagId;
-    }
-
-    public User setTagId(Integer tagId) {
-        this.tagId = tagId;
-        return this;
-    }
-
-    public Boolean getTagShow() {
-        return tagShow;
-    }
-
-    public User setTagShow(Boolean tagShow) {
-        this.tagShow = tagShow;
+    public User setTags(List<Tag> tags) {
+        this.tags = tags;
         return this;
     }
 }
