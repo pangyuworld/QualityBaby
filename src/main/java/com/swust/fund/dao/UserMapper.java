@@ -27,5 +27,11 @@ public interface UserMapper {
 
     int selectCount();
 
-    List<Map> selectByActivityId(@Param(value = "activityId")Integer activityId);
+    List<Map> selectByActivityId(@Param(value = "activityId") Integer activityId, @Param(value = "pageNum") Integer pageNum, @Param(value = "pageSize") Integer pageSize);
+
+    List<Map> selectByStudioId(@Param(value = "studioId") Integer studioId, @Param(value = "pageNum") Integer pageNum, @Param(value = "pageSize") Integer pageSize);
+
+    int selectCountByActivityId(@Param(value = "activityId") Integer activityId);
+
+    int selectCountByStudioId(@Param(value = "studioId") Integer studioId);
 }

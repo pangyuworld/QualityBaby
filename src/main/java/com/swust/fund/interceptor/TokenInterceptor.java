@@ -67,7 +67,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
                 throw new UnicomRuntimeException(UnicomResponseEnums.NO_USER_EXIST, "用户不存在");
             }
             if (!redisUtil.get("token_" + username).toString().equals(tokenStr)) {
-                // TODO 如果token和redis中的不相同，则为失效的token（单点登录？）
+                // TODO 如果token和redis中的不相同，则为失效的token
                 throw new UnicomRuntimeException(UnicomResponseEnums.LOGOUT_SUCCESS, "用户不存在");
             }
             // TODO token验证通过

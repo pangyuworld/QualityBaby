@@ -8,6 +8,7 @@ import com.swust.fund.entity.Studio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -90,5 +91,46 @@ public class StudioService {
         return new Page<>(studioList, total, pageNum, pageSize);
     }
 
+    /**
+     * 获得用户参加的工作室
+     *
+     * @param userId   用户ID
+     * @param pageNum  页码
+     * @param pageSize 大小
+     * @return com.swust.fund.common.Page<com.swust.fund.entity.Studio>
+     * @author pang
+     * @date 2019/6/16
+     */
+    public Page<Studio> getByUserId(int userId, int pageNum, int pageSize) {
+        List<Studio> studioList = studioMapper.selectByUserId(userId, (pageNum - 1) * pageSize, pageSize);
+        int total = studioMapper.selectCountByUserId(userId);
+        return new Page<>(studioList, total, pageNum, pageSize);
+    }
+
+    /**
+     * 加入工作室
+     *
+     * @param studioId 工作室ID
+     * @param userId   用户ID
+     * @return int
+     * @author pang
+     * @date 2019/6/16
+     */
+    public int signIn(int studioId, int userId) {
+        return studioMapper.signInStudio(studioId, userId, new Date());
+    }
+
+    /**
+     * 退出工作室
+     *
+     * @param studioId 工作室ID
+     * @param userId   用户ID
+     * @return int
+     * @author pang
+     * @date 2019/6/16
+     */
+    public int signOut(int studioId, int userId) {
+        return studioMapper.signOutStudio(studioId, userId);
+    }
 }
 

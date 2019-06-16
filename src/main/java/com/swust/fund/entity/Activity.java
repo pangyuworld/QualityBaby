@@ -14,7 +14,7 @@ public class Activity implements Serializable {
      */
     private static final long serialVersionUID = -1308896056767610807L;
 
-    @ApiModelProperty(value = "活动ID",hidden = true)
+    @ApiModelProperty(value = "活动ID", hidden = true)
     private Integer activityId;
 
     @ApiModelProperty("活动名")

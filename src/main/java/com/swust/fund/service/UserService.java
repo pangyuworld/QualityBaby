@@ -81,23 +81,47 @@ public class UserService {
 
     /**
      * 添加用户
-     * @author pang
-     * @date 2019/5/12
+     *
      * @param user 新的用户信息
      * @return int
+     * @author pang
+     * @date 2019/5/12
      */
-    public int addUser(User user){
+    public int addUser(User user) {
         return userMapper.insertSelective(user);
     }
 
+
     /**
      * 查找活动下面的用户
+     *
+     * @param activityId 活动ID
+     * @param pageNum    页码
+     * @param pageSize   大小
+     * @return com.swust.fund.common.Page<java.util.Map>
      * @author pang
-     * @date 2019/6/4
-     * @param activityId
-     * @return java.util.List<com.swust.fund.entity.User>
+     * @date 2019/6/16
      */
-    public List<Map> getByActivityId(Integer activityId){
-        return userMapper.selectByActivityId(activityId);
+    public Page<Map> getByActivityId(Integer activityId, int pageNum, int pageSize) {
+        List<Map> list = userMapper.selectByActivityId(activityId, (pageNum - 1) * pageSize, pageSize);
+        int total = userMapper.selectCountByActivityId(activityId);
+        return new Page<>(list, total, pageNum, pageSize);
+    }
+
+
+    /**
+     * 查找工作室下面的用户
+     *
+     * @param studioId 工作室ID
+     * @param pageNum  页码
+     * @param pageSize 大小
+     * @return com.swust.fund.common.Page<java.util.Map>
+     * @author pang
+     * @date 2019/6/16
+     */
+    public Page<Map> getByStudioId(Integer studioId, int pageNum, int pageSize) {
+        List<Map> list = userMapper.selectByStudioId(studioId, (pageNum - 1) * pageSize, pageSize);
+        int total = userMapper.selectCountByStudioId(studioId);
+        return new Page<>(list, total, pageNum, pageSize);
     }
 }

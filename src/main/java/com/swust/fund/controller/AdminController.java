@@ -50,9 +50,9 @@ public class AdminController {
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "string", paramType = "query"),
     })
     @RequestMapping(value = "/admin/registered", method = RequestMethod.POST)
-    public ResponseJSON registered(String realName, String username, String password) {
+    public ResponseJSON<String> registered(String realName, String username, String password) {
         adminService.registered(realName, username, password);
-        return new ResponseJSON(true, "注册成功", UnicomResponseEnums.SUCCESS_OPTION);
+        return new ResponseJSON<>(true, "注册成功", UnicomResponseEnums.SUCCESS_OPTION);
     }
 
     @ApiOperation("获得验证码")

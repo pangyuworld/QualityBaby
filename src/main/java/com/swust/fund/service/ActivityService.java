@@ -6,6 +6,7 @@ import com.swust.fund.entity.Activity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -90,5 +91,47 @@ public class ActivityService {
         List<Activity> studioList = activityMapper.selectAllByStudio(studioId, (pageNum - 1) * pageSize, pageSize);
         int total = activityMapper.selectCount();
         return new Page<>(studioList, total, pageNum, pageSize);
+    }
+
+    /**
+     * 获得用户参加的活动
+     *
+     * @param userId   用户ID
+     * @param pageNum  页码
+     * @param pageSize 大小
+     * @return com.swust.fund.common.Page<com.swust.fund.entity.Studio>
+     * @author pang
+     * @date 2019/6/16
+     */
+    public Page<Activity> getByUserId(int userId, int pageNum, int pageSize) {
+        List<Activity> studioList = activityMapper.selectByUserId(userId, (pageNum - 1) * pageSize, pageSize);
+        int total = activityMapper.selectCountByUserId(userId);
+        return new Page<>(studioList, total, pageNum, pageSize);
+    }
+
+    /**
+     * 加入活动
+     *
+     * @param activityId 活动ID
+     * @param userId     用户ID
+     * @return int
+     * @author pang
+     * @date 2019/6/16
+     */
+    public int signIn(int activityId, int userId) {
+        return activityMapper.signInActivity(activityId, userId, new Date());
+    }
+
+    /**
+     * 退出活动
+     *
+     * @param activityId 活动Id
+     * @param userId     用户ID
+     * @return int
+     * @author pang
+     * @date 2019/6/16
+     */
+    public int signOut(int activityId, int userId) {
+        return activityMapper.signOutActivity(activityId, userId);
     }
 }

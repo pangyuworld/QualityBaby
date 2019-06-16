@@ -3,6 +3,7 @@ package com.swust.fund.dao;
 import com.swust.fund.entity.Studio;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface StudioMapper {
@@ -21,4 +22,12 @@ public interface StudioMapper {
     List<Studio> selectAll(@Param(value = "pageNum") Integer pageNum, @Param(value = "pageSize") Integer pageSize);
 
     int selectCount();
+
+    List<Studio> selectByUserId(@Param(value = "userId") Integer userId, @Param(value = "pageNum") Integer pageNum, @Param(value = "pageSize") Integer pageSize);
+
+    int selectCountByUserId(@Param(value = "userId") Integer userId);
+
+    int signInStudio(@Param(value = "studioId") Integer studioId, @Param(value = "userId") Integer userId, @Param(value = "joinTime") Date joinTime);
+
+    int signOutStudio(@Param(value = "studioId") Integer studioId, @Param(value = "userId") Integer userId);
 }
