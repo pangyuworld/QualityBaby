@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface StudioMapper {
     int deleteByPrimaryKey(Integer studioId);
@@ -30,4 +31,6 @@ public interface StudioMapper {
     int signInStudio(@Param(value = "studioId") Integer studioId, @Param(value = "userId") Integer userId, @Param(value = "joinTime") Date joinTime);
 
     int signOutStudio(@Param(value = "studioId") Integer studioId, @Param(value = "userId") Integer userId);
+
+    int selectUserAndStudio(@Param(value = "studioId") Integer studioId, @Param(value = "userId") Integer userId);
 }

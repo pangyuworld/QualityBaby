@@ -132,5 +132,22 @@ public class StudioService {
     public int signOut(int studioId, int userId) {
         return studioMapper.signOutStudio(studioId, userId);
     }
+
+    /**
+     * 用户是否在工作室中
+     *
+     * @param studioId 工作室id
+     * @param userId   用户id
+     * @return boolean
+     * @author pang
+     * @date 2019/6/24
+     */
+    public boolean inTheList(int studioId, int userId) {
+        if (studioMapper.selectUserAndStudio(studioId, userId) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 

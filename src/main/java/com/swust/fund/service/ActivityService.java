@@ -1,6 +1,7 @@
 package com.swust.fund.service;
 
 import com.swust.fund.common.Page;
+import com.swust.fund.common.restful.UnicomRuntimeException;
 import com.swust.fund.dao.ActivityMapper;
 import com.swust.fund.entity.Activity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ import java.util.List;
 public class ActivityService {
     @Autowired
     private ActivityMapper activityMapper;
+    @Autowired
+    private StudioService studioService;
 
 
     /***
@@ -119,7 +122,12 @@ public class ActivityService {
      * @date 2019/6/16
      */
     public int signIn(int activityId, int userId) {
-        return activityMapper.signInActivity(activityId, userId, new Date());
+        // TODO 如果用户没有报名相关的工作室，那么他就不能报名这个活动
+        if (studioService.inTheList(activityMapper.selectByPrimaryKey(activityId).getStudioId(), userId)) {
+            return activityMapper.signInActivity(activityId, userId, new Date());
+        } else {
+            return 0;
+        }
     }
 
     /**

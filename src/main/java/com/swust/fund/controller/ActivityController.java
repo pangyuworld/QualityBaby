@@ -96,7 +96,12 @@ public class ActivityController {
     @RequestMapping(value = "/activity/user/{activityId}", method = RequestMethod.POST)
     public ResponseJSON<Integer> signInStudio(@PathVariable Integer activityId, Integer userId) {
         try {
-            return new ResponseJSON<>(true, activityService.signIn(activityId, userId), UnicomResponseEnums.SUCCESS_OPTION);
+            int result = activityService.signIn(activityId, userId);
+            if (result > 0) {
+                return new ResponseJSON<>(true, result, UnicomResponseEnums.SUCCESS_OPTION);
+            } else {
+                return new ResponseJSON<>(false, result, UnicomResponseEnums.NO_RECORD);
+            }
         } catch (RuntimeException e) {
             throw new UnicomRuntimeException(UnicomResponseEnums.REPEAT_REGISTER, "重复加入活动");
         }
