@@ -109,19 +109,5 @@ public class UserService {
     }
 
 
-    /**
-     * 查找工作室下面的用户
-     *
-     * @param studioId 工作室ID
-     * @param pageNum  页码
-     * @param pageSize 大小
-     * @return com.swust.fund.common.Page<java.util.Map>
-     * @author pang
-     * @date 2019/6/16
-     */
-    public Page<Map> getByStudioId(Integer studioId, int pageNum, int pageSize) {
-        List<Map> list = userMapper.selectByStudioId(studioId, (pageNum - 1) * pageSize, pageSize);
-        int total = userMapper.selectCountByStudioId(studioId);
-        return new Page<>(list, total, pageNum, pageSize);
-    }
+
 }

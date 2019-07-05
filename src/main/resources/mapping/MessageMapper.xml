@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.fund.dao.MessageMapper">
+    <resultMap id="BaseResultMap" type="com.swust.fund.entity.Message">
+        <id column="message_id" property="messageId" jdbcType="INTEGER"/>
+        <result column="message_time" property="messageTime" jdbcType="TIMESTAMP"/>
+        <result column="message_detail" property="messageDetail" jdbcType="VARCHAR"/>
+        <result column="message_like" property="messageLike" jdbcType="INTEGER"/>
+        <result column="message_show" property="messageShow" jdbcType="BIT"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    message_id, message_time, message_detail, message_like, message_show, user_id
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_message
+        where message_id = #{messageId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_message
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.swust.fund.entity.Message">
+    insert into t_message (message_id, message_time, message_detail, 
+      message_like, message_show, user_id
+      )
+    values (#{messageId,jdbcType=INTEGER}, #{messageTime,jdbcType=TIMESTAMP}, #{messageDetail,jdbcType=VARCHAR}, 
+      #{messageLike,jdbcType=INTEGER}, #{messageShow,jdbcType=BIT}, #{userId,jdbcType=INTEGER}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.swust.fund.entity.Message">
+        insert into t_message
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="messageId != null">
+                message_id,
+            </if>
+            <if test="messageTime != null">
+                message_time,
+            </if>
+            <if test="messageDetail != null">
+                message_detail,
+            </if>
+            <if test="messageLike != null">
+                message_like,
+            </if>
+            <if test="messageShow != null">
+                message_show,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="messageId != null">
+                #{messageId,jdbcType=INTEGER},
+            </if>
+            <if test="messageTime != null">
+                #{messageTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="messageDetail != null">
+                #{messageDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="messageLike != null">
+                #{messageLike,jdbcType=INTEGER},
+            </if>
+            <if test="messageShow != null">
+                #{messageShow,jdbcType=BIT},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.swust.fund.entity.Message">
+        update t_message
+        <set>
+            <if test="messageTime != null">
+                message_time = #{messageTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="messageDetail != null">
+                message_detail = #{messageDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="messageLike != null">
+                message_like = #{messageLike,jdbcType=INTEGER},
+            </if>
+            <if test="messageShow != null">
+                message_show = #{messageShow,jdbcType=BIT},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where message_id = #{messageId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.swust.fund.entity.Message">
+    update t_message
+    set message_time = #{messageTime,jdbcType=TIMESTAMP},
+      message_detail = #{messageDetail,jdbcType=VARCHAR},
+      message_like = #{messageLike,jdbcType=INTEGER},
+      message_show = #{messageShow,jdbcType=BIT},
+      user_id = #{userId,jdbcType=INTEGER}
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+</mapper>

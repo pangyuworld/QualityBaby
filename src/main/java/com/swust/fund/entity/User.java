@@ -1,9 +1,11 @@
 package com.swust.fund.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @ApiModel("用户")
@@ -32,6 +34,19 @@ public class User implements Serializable {
 
     @ApiModelProperty(value = "标签")
     private List<Tag> tags;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @ApiModelProperty(value = "注册时间")
+    private Date signUpTime;
+
+    public Date getSignUpTime() {
+        return signUpTime;
+    }
+
+    public User setSignUpTime(Date signUpTime) {
+        this.signUpTime = signUpTime;
+        return this;
+    }
 
     public Integer getUserId() {
         return userId;

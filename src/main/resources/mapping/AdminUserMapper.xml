@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.fund.dao.AdminUserMapper">
+    <resultMap id="BaseResultMap" type="com.swust.fund.entity.AdminUser">
+        <id column="admin_id" property="adminId" jdbcType="INTEGER"/>
+        <result column="admin_real_name" property="adminRealName" jdbcType="VARCHAR"/>
+        <result column="admin_login_name" property="adminLoginName" jdbcType="VARCHAR"/>
+        <result column="admin_login_password" property="adminLoginPassword" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    admin_id, admin_real_name, admin_login_name, admin_login_password
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_admin_user
+        where admin_id = #{adminId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_admin_user
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.swust.fund.entity.AdminUser">
+    insert into t_admin_user (admin_id, admin_real_name, admin_login_name, 
+      admin_login_password)
+    values (#{adminId,jdbcType=INTEGER}, #{adminRealName,jdbcType=VARCHAR}, #{adminLoginName,jdbcType=VARCHAR}, 
+      #{adminLoginPassword,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.swust.fund.entity.AdminUser">
+        insert into t_admin_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="adminId != null">
+                admin_id,
+            </if>
+            <if test="adminRealName != null">
+                admin_real_name,
+            </if>
+            <if test="adminLoginName != null">
+                admin_login_name,
+            </if>
+            <if test="adminLoginPassword != null">
+                admin_login_password,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="adminId != null">
+                #{adminId,jdbcType=INTEGER},
+            </if>
+            <if test="adminRealName != null">
+                #{adminRealName,jdbcType=VARCHAR},
+            </if>
+            <if test="adminLoginName != null">
+                #{adminLoginName,jdbcType=VARCHAR},
+            </if>
+            <if test="adminLoginPassword != null">
+                #{adminLoginPassword,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.swust.fund.entity.AdminUser">
+        update t_admin_user
+        <set>
+            <if test="adminRealName != null">
+                admin_real_name = #{adminRealName,jdbcType=VARCHAR},
+            </if>
+            <if test="adminLoginName != null">
+                admin_login_name = #{adminLoginName,jdbcType=VARCHAR},
+            </if>
+            <if test="adminLoginPassword != null">
+                admin_login_password = #{adminLoginPassword,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where admin_id = #{adminId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.swust.fund.entity.AdminUser">
+    update t_admin_user
+    set admin_real_name = #{adminRealName,jdbcType=VARCHAR},
+      admin_login_name = #{adminLoginName,jdbcType=VARCHAR},
+      admin_login_password = #{adminLoginPassword,jdbcType=VARCHAR}
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </update>
+    <select id="findByAdminLoginName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from t_admin_user
+        where admin_login_name = #{loginName,jdbcType=VARCHAR}
+    </select>
+</mapper>

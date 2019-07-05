@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.fund.dao.ActivityGroupMapper">
+    <resultMap id="BaseResultMap" type="com.swust.fund.entity.ActivityGroup">
+        <id column="group_id" property="groupId" jdbcType="INTEGER"/>
+        <result column="gourp_name" property="gourpName" jdbcType="VARCHAR"/>
+        <result column="group_show" property="groupShow" jdbcType="BIT"/>
+        <result column="group_icon" property="groupIcon" jdbcType="VARCHAR"/>
+        <result column="group_sort" property="groupSort" jdbcType="TINYINT"/>
+        <result column="group_add_time" property="groupAddTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    group_id, gourp_name, group_show, group_icon, group_sort, group_add_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_activity_group
+        where group_id = #{groupId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_activity_group
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.swust.fund.entity.ActivityGroup">
+    insert into t_activity_group (group_id, gourp_name, group_show, 
+      group_icon, group_sort, group_add_time
+      )
+    values (#{groupId,jdbcType=INTEGER}, #{gourpName,jdbcType=VARCHAR}, #{groupShow,jdbcType=BIT}, 
+      #{groupIcon,jdbcType=VARCHAR}, #{groupSort,jdbcType=TINYINT}, #{groupAddTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.swust.fund.entity.ActivityGroup">
+        insert into t_activity_group
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="groupId != null">
+                group_id,
+            </if>
+            <if test="gourpName != null">
+                gourp_name,
+            </if>
+            <if test="groupShow != null">
+                group_show,
+            </if>
+            <if test="groupIcon != null">
+                group_icon,
+            </if>
+            <if test="groupSort != null">
+                group_sort,
+            </if>
+            <if test="groupAddTime != null">
+                group_add_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="groupId != null">
+                #{groupId,jdbcType=INTEGER},
+            </if>
+            <if test="gourpName != null">
+                #{gourpName,jdbcType=VARCHAR},
+            </if>
+            <if test="groupShow != null">
+                #{groupShow,jdbcType=BIT},
+            </if>
+            <if test="groupIcon != null">
+                #{groupIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="groupSort != null">
+                #{groupSort,jdbcType=TINYINT},
+            </if>
+            <if test="groupAddTime != null">
+                #{groupAddTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.swust.fund.entity.ActivityGroup">
+        update t_activity_group
+        <set>
+            <if test="gourpName != null">
+                gourp_name = #{gourpName,jdbcType=VARCHAR},
+            </if>
+            <if test="groupShow != null">
+                group_show = #{groupShow,jdbcType=BIT},
+            </if>
+            <if test="groupIcon != null">
+                group_icon = #{groupIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="groupSort != null">
+                group_sort = #{groupSort,jdbcType=TINYINT},
+            </if>
+            <if test="groupAddTime != null">
+                group_add_time = #{groupAddTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where group_id = #{groupId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.swust.fund.entity.ActivityGroup">
+    update t_activity_group
+    set gourp_name = #{gourpName,jdbcType=VARCHAR},
+      group_show = #{groupShow,jdbcType=BIT},
+      group_icon = #{groupIcon,jdbcType=VARCHAR},
+      group_sort = #{groupSort,jdbcType=TINYINT},
+      group_add_time = #{groupAddTime,jdbcType=TIMESTAMP}
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </update>
+    <select id="selectAllGroup" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_activity_group
+    </select>
+</mapper>

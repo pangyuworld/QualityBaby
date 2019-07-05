@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.fund.dao.UserMapper">
+    <cache type="org.mybatis.caches.redis.RedisCache"/>
+    <resultMap id="BaseResultMap" type="com.swust.fund.entity.User">
+        <id column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="stu_id" property="stuId" jdbcType="VARCHAR"/>
+        <result column="tell_num" property="tellNum" jdbcType="VARCHAR"/>
+        <result column="class_name" property="className" jdbcType="VARCHAR"/>
+        <result column="gender" property="gender" jdbcType="BIT"/>
+        <result column="stu_name" property="stuName" jdbcType="VARCHAR"/>
+        <result column="sign_up_time" property="sign_Up_Time" jdbcType="TIMESTAMP"/>
+        <collection property="tags" ofType="com.swust.fund.entity.Tag" select="selectTags" column="user_id">
+        </collection>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.swust.fund.entity.User" extends="BaseResultMap">
+        <result column="open_id" property="openId" jdbcType="BINARY"/>
+    </resultMap>
+    <resultMap id="tagMap" type="com.swust.fund.entity.Tag">
+        <id column="tag_id" property="tagId" jdbcType="INTEGER"/>
+        <result column="tag_name" property="tagName" jdbcType="VARCHAR"/>
+        <result column="tag_show" property="tagShow" jdbcType="BIT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    t_user.user_id as user_id,	stu_id,	tell_num,	class_name,	gender,	stu_name, sign_up_time
+  </sql>
+    <sql id="Blob_Column_List">
+    open_id
+  </sql>
+    <sql id="Inner">
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+        <include refid="Inner"></include>
+        where t_user.user_id = #{userId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.swust.fund.entity.User">
+    insert into t_user (user_id, stu_id, tell_num, 
+      class_name, gender, stu_name, 
+      open_id,sign_up_time)
+    values (#{userId,jdbcType=INTEGER}, #{stuId,jdbcType=INTEGER}, #{tellNum,jdbcType=VARCHAR}, 
+      #{className,jdbcType=VARCHAR}, #{gender,jdbcType=BIT}, #{stuName,jdbcType=VARCHAR}, 
+      #{openId,jdbcType=BINARY},#{signUpTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.swust.fund.entity.User">
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="stuId != null">
+                stu_id,
+            </if>
+            <if test="tellNum != null">
+                tell_num,
+            </if>
+            <if test="className != null">
+                class_name,
+            </if>
+            <if test="gender != null">
+                gender,
+            </if>
+            <if test="stuName != null">
+                stu_name,
+            </if>
+            <if test="openId != null">
+                open_id,
+            </if>
+            <if test="signUpTime != null">
+                sign_up_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="stuId != null">
+                #{stuId,jdbcType=INTEGER},
+            </if>
+            <if test="tellNum != null">
+                #{tellNum,jdbcType=VARCHAR},
+            </if>
+            <if test="className != null">
+                #{className,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=BIT},
+            </if>
+            <if test="stuName != null">
+                #{stuName,jdbcType=VARCHAR},
+            </if>
+            <if test="openId != null">
+                #{openId,jdbcType=BINARY},
+            </if>
+            <if test="signUpTime != null">
+                #{signUpTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.swust.fund.entity.User">
+        update t_user
+        <set>
+            <if test="stuId != null">
+                stu_id = #{stuId,jdbcType=INTEGER},
+            </if>
+            <if test="tellNum != null">
+                tell_num = #{tellNum,jdbcType=VARCHAR},
+            </if>
+            <if test="className != null">
+                class_name = #{className,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                gender = #{gender,jdbcType=BIT},
+            </if>
+            <if test="stuName != null">
+                stu_name = #{stuName,jdbcType=VARCHAR},
+            </if>
+            <if test="openId != null">
+                open_id = #{openId,jdbcType=BINARY},
+            </if>
+            <if test="signUpTime != null">
+                sign_up_time=#{signUpTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where user_id = #{openId,jdbcType=BINARY}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.swust.fund.entity.User">
+    update t_user
+    set stu_id = #{stuId,jdbcType=INTEGER},
+      tell_num = #{tellNum,jdbcType=VARCHAR},
+      class_name = #{className,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=BIT},
+      stu_name = #{stuName,jdbcType=VARCHAR},
+      open_id = #{openId,jdbcType=BINARY} ,
+      sign_up_time=#{signUpTime,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.swust.fund.entity.User">
+    update t_user
+    set stu_id = #{stuId,jdbcType=INTEGER},
+      tell_num = #{tellNum,jdbcType=VARCHAR},
+      class_name = #{className,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=BIT},
+      stu_name = #{stuName,jdbcType=VARCHAR},
+      sign_up_time=#{signUpTime,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+    <select id="selectByOpenId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+        <include refid="Inner"/>
+        where open_id = #{openId}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+        <include refid="Inner"/>
+        limit #{pageSize,jdbcType=INTEGER} OFFSET #{pageNum,jdbcType=INTEGER}
+    </select>
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(*) from t_user
+    </select>
+    <select id="selectTags" resultMap="tagMap">
+        select
+        a.tag_id as tag_id,	tag_name,	tag_show
+        from t_tag a
+        inner join t_user_tag tut on a.tag_id = tut.tag_id
+        where tut.user_id=#{user_id}
+    </select>
+    <select id="selectByActivityId" resultType="map" parameterType="int">
+        select
+          a.user_id as userId,
+          a.class_name as className,
+          a.gender as gender,
+          a.stu_id as stuId,
+          a.stu_name as stuName,
+          a.tell_num as tellName,
+          a.sign_up_time as signUpTime
+          DATE_FORMAT(a2.join_time,"%Y-%m-%d %H:%i:%s") as joinTime
+        from t_user a
+        inner join t_user_activity a2 on a.user_id = a2.user_id
+        where a2.activity_id=#{activityId}
+        limit #{pageSize,jdbcType=INTEGER} OFFSET #{pageNum,jdbcType=INTEGER}
+    </select>
+    <select id="selectCountByActivityId" resultType="java.lang.Integer">
+        select count(*) from t_user_activity
+        where activity_id=#{activityId}
+    </select>
+    <select id="selectCountByStudioId" resultType="java.lang.Integer">
+        select count(*) from t_user_studio
+        where studio_id=#{studioId}
+    </select>
+</mapper>

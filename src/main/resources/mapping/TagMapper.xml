@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.fund.dao.TagMapper">
+    <resultMap id="BaseResultMap" type="com.swust.fund.entity.Tag">
+        <id column="tag_id" property="tagId" jdbcType="INTEGER"/>
+        <result column="tag_name" property="tagName" jdbcType="VARCHAR"/>
+        <result column="tag_show" property="tagShow" jdbcType="BIT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    tag_id, tag_name, tag_show
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_tag
+        where tag_id = #{tagId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_tag
+    where tag_id = #{tagId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.swust.fund.entity.Tag">
+    insert into t_tag (tag_id, tag_name, tag_show
+      )
+    values (#{tagId,jdbcType=INTEGER}, #{tagName,jdbcType=VARCHAR}, #{tagShow,jdbcType=BIT}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.swust.fund.entity.Tag">
+        insert into t_tag
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tagId != null">
+                tag_id,
+            </if>
+            <if test="tagName != null">
+                tag_name,
+            </if>
+            <if test="tagShow != null">
+                tag_show,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tagId != null">
+                #{tagId,jdbcType=INTEGER},
+            </if>
+            <if test="tagName != null">
+                #{tagName,jdbcType=VARCHAR},
+            </if>
+            <if test="tagShow != null">
+                #{tagShow,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.swust.fund.entity.Tag">
+        update t_tag
+        <set>
+            <if test="tagName != null">
+                tag_name = #{tagName,jdbcType=VARCHAR},
+            </if>
+            <if test="tagShow != null">
+                tag_show = #{tagShow,jdbcType=BIT},
+            </if>
+        </set>
+        where tag_id = #{tagId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.swust.fund.entity.Tag">
+    update t_tag
+    set tag_name = #{tagName,jdbcType=VARCHAR},
+      tag_show = #{tagShow,jdbcType=BIT}
+    where tag_id = #{tagId,jdbcType=INTEGER}
+  </update>
+</mapper>

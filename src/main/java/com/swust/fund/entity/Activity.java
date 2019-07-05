@@ -4,17 +4,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import java.io.Serializable;
 import java.util.Date;
 
 @ApiModel("活动")
-public class Activity implements Serializable {
-    /**
-     * UID
-     */
-    private static final long serialVersionUID = -1308896056767610807L;
-
-    @ApiModelProperty(value = "活动ID", hidden = true)
+public class Activity {
+    @ApiModelProperty("活动id")
     private Integer activityId;
 
     @ApiModelProperty("活动名")
@@ -23,7 +17,10 @@ public class Activity implements Serializable {
     @ApiModelProperty("活动介绍")
     private String activityInformation;
 
-    @ApiModelProperty("最大人数")
+    @ApiModelProperty("活动宣传图片地址")
+    private String activityImg;
+
+    @ApiModelProperty("活动参与人数")
     private Integer activityPersonNum;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -35,14 +32,21 @@ public class Activity implements Serializable {
     private Date activityEnd;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @ApiModelProperty("活动开始报名时间")
-    private Date activitySignUp;
+    @ApiModelProperty("活动开始报名时间（即添加时间）")
+    private Date activityStartSignUp;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @ApiModelProperty("活动结束报名时间")
+    private Date activityEndSignUp;
 
     @ApiModelProperty("活动是否显示")
     private Boolean activityShow;
 
-    @ApiModelProperty("活动所属的工作室ID")
-    private Integer studioId;
+    @ApiModelProperty("活动所属于的分组ID")
+    private Integer groupId;
+
+    @ApiModelProperty("分组所属于的分组信息")
+    private ActivityGroup group;
 
     public Integer getActivityId() {
         return activityId;
@@ -66,6 +70,14 @@ public class Activity implements Serializable {
 
     public void setActivityInformation(String activityInformation) {
         this.activityInformation = activityInformation == null ? null : activityInformation.trim();
+    }
+
+    public String getActivityImg() {
+        return activityImg;
+    }
+
+    public void setActivityImg(String activityImg) {
+        this.activityImg = activityImg == null ? null : activityImg.trim();
     }
 
     public Integer getActivityPersonNum() {
@@ -92,12 +104,20 @@ public class Activity implements Serializable {
         this.activityEnd = activityEnd;
     }
 
-    public Date getActivitySignUp() {
-        return activitySignUp;
+    public Date getActivityStartSignUp() {
+        return activityStartSignUp;
     }
 
-    public void setActivitySignUp(Date activitySignUp) {
-        this.activitySignUp = activitySignUp;
+    public void setActivityStartSignUp(Date activityStartSignUp) {
+        this.activityStartSignUp = activityStartSignUp;
+    }
+
+    public Date getActivityEndSignUp() {
+        return activityEndSignUp;
+    }
+
+    public void setActivityEndSignUp(Date activityEndSignUp) {
+        this.activityEndSignUp = activityEndSignUp;
     }
 
     public Boolean getActivityShow() {
@@ -108,11 +128,20 @@ public class Activity implements Serializable {
         this.activityShow = activityShow;
     }
 
-    public Integer getStudioId() {
-        return studioId;
+    public Integer getGroupId() {
+        return groupId;
     }
 
-    public void setStudioId(Integer studioId) {
-        this.studioId = studioId;
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
+    }
+
+    public ActivityGroup getGroup() {
+        return group;
+    }
+
+    public Activity setGroup(ActivityGroup group) {
+        this.group = group;
+        return this;
     }
 }

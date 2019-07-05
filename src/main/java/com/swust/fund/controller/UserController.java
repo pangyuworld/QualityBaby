@@ -95,14 +95,4 @@ public class UserController {
         return new ResponseJSON<>(true, userService.getByActivityId(activityId, pageNum, pageSize));
     }
 
-    @ApiOperation("获得参加工作室的用户")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "studioId", value = "工作室id", required = true, dataType = "int", paramType = "path"),
-            @ApiImplicitParam(name = "pageNum", value = "页码", required = true, dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "pageSize", value = "大小", required = true, dataType = "int", paramType = "query")
-    })
-    @RequestMapping(value = "/studio/user/{studioId}", method = RequestMethod.GET)
-    public ResponseJSON<Page<Map>> getByStudioId(@PathVariable Integer studioId, Integer pageNum, Integer pageSize) {
-        return new ResponseJSON<>(true, userService.getByStudioId(studioId, pageNum, pageSize));
-    }
 }

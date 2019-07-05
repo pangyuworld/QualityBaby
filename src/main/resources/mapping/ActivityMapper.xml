@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.fund.dao.ActivityMapper">
+    <resultMap id="BaseResultMap" type="com.swust.fund.entity.Activity">
+        <id column="activity_id" property="activityId" jdbcType="INTEGER"/>
+        <result column="activity_name" property="activityName" jdbcType="VARCHAR"/>
+        <result column="activity_information" property="activityInformation" jdbcType="VARCHAR"/>
+        <result column="activity_img" property="activityImg" jdbcType="VARCHAR"/>
+        <result column="activity_person_num" property="activityPersonNum" jdbcType="INTEGER"/>
+        <result column="activity_start" property="activityStart" jdbcType="TIMESTAMP"/>
+        <result column="activity_end" property="activityEnd" jdbcType="TIMESTAMP"/>
+        <result column="activity_start_sign_up" property="activityStartSignUp" jdbcType="TIMESTAMP"/>
+        <result column="activity_end_sign_up" property="activityEndSignUp" jdbcType="TIMESTAMP"/>
+        <result column="activity_show" property="activityShow" jdbcType="BIT"/>
+        <result column="group_id" property="groupId" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    activity_id, activity_name, activity_information, activity_img, activity_person_num, 
+    activity_start, activity_end, activity_start_sign_up, activity_end_sign_up, activity_show, 
+    group_id
+  </sql>
+    <select id="selectGroup" resultType="com.swust.fund.entity.ActivityGroup" parameterType="int">
+    select
+    group_id, gourp_name, group_show, group_icon, group_sort, group_add_time
+    from t_activity_group
+    </select>
+    <select id="selectGroupByList" resultType="com.swust.fund.entity.ActivityGroup">
+        select
+        group_id, gourp_name, group_show, group_icon, group_sort, group_add_time
+        from t_activity_group
+        where group_id in
+        <foreach collection="list" item="groupId" index="index" open="(" close=")" separator=",">
+            #{groupId}
+        </foreach>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_activity
+        where activity_id = #{activityId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_activity
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.swust.fund.entity.Activity" useGeneratedKeys="true" keyProperty="id">
+    insert into t_activity (activity_id, activity_name, activity_information, 
+      activity_img, activity_person_num, activity_start, 
+      activity_end, activity_start_sign_up, activity_end_sign_up, 
+      activity_show, group_id)
+    values (#{activityId,jdbcType=INTEGER}, #{activityName,jdbcType=VARCHAR}, #{activityInformation,jdbcType=VARCHAR}, 
+      #{activityImg,jdbcType=VARCHAR}, #{activityPersonNum,jdbcType=INTEGER}, #{activityStart,jdbcType=TIMESTAMP}, 
+      #{activityEnd,jdbcType=TIMESTAMP}, #{activityStartSignUp,jdbcType=TIMESTAMP}, #{activityEndSignUp,jdbcType=TIMESTAMP}, 
+      #{activityShow,jdbcType=BIT}, #{groupId,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.swust.fund.entity.Activity">
+        insert into t_activity
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="activityId != null">
+                activity_id,
+            </if>
+            <if test="activityName != null">
+                activity_name,
+            </if>
+            <if test="activityInformation != null">
+                activity_information,
+            </if>
+            <if test="activityImg != null">
+                activity_img,
+            </if>
+            <if test="activityPersonNum != null">
+                activity_person_num,
+            </if>
+            <if test="activityStart != null">
+                activity_start,
+            </if>
+            <if test="activityEnd != null">
+                activity_end,
+            </if>
+            <if test="activityStartSignUp != null">
+                activity_start_sign_up,
+            </if>
+            <if test="activityEndSignUp != null">
+                activity_end_sign_up,
+            </if>
+            <if test="activityShow != null">
+                activity_show,
+            </if>
+            <if test="groupId != null">
+                group_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="activityId != null">
+                #{activityId,jdbcType=INTEGER},
+            </if>
+            <if test="activityName != null">
+                #{activityName,jdbcType=VARCHAR},
+            </if>
+            <if test="activityInformation != null">
+                #{activityInformation,jdbcType=VARCHAR},
+            </if>
+            <if test="activityImg != null">
+                #{activityImg,jdbcType=VARCHAR},
+            </if>
+            <if test="activityPersonNum != null">
+                #{activityPersonNum,jdbcType=INTEGER},
+            </if>
+            <if test="activityStart != null">
+                #{activityStart,jdbcType=TIMESTAMP},
+            </if>
+            <if test="activityEnd != null">
+                #{activityEnd,jdbcType=TIMESTAMP},
+            </if>
+            <if test="activityStartSignUp != null">
+                #{activityStartSignUp,jdbcType=TIMESTAMP},
+            </if>
+            <if test="activityEndSignUp != null">
+                #{activityEndSignUp,jdbcType=TIMESTAMP},
+            </if>
+            <if test="activityShow != null">
+                #{activityShow,jdbcType=BIT},
+            </if>
+            <if test="groupId != null">
+                #{groupId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.swust.fund.entity.Activity">
+        update t_activity
+        <set>
+            <if test="activityName != null">
+                activity_name = #{activityName,jdbcType=VARCHAR},
+            </if>
+            <if test="activityInformation != null">
+                activity_information = #{activityInformation,jdbcType=VARCHAR},
+            </if>
+            <if test="activityImg != null">
+                activity_img = #{activityImg,jdbcType=VARCHAR},
+            </if>
+            <if test="activityPersonNum != null">
+                activity_person_num = #{activityPersonNum,jdbcType=INTEGER},
+            </if>
+            <if test="activityStart != null">
+                activity_start = #{activityStart,jdbcType=TIMESTAMP},
+            </if>
+            <if test="activityEnd != null">
+                activity_end = #{activityEnd,jdbcType=TIMESTAMP},
+            </if>
+            <if test="activityStartSignUp != null">
+                activity_start_sign_up = #{activityStartSignUp,jdbcType=TIMESTAMP},
+            </if>
+            <if test="activityEndSignUp != null">
+                activity_end_sign_up = #{activityEndSignUp,jdbcType=TIMESTAMP},
+            </if>
+            <if test="activityShow != null">
+                activity_show = #{activityShow,jdbcType=BIT},
+            </if>
+            <if test="groupId != null">
+                group_id = #{groupId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where activity_id = #{activityId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.swust.fund.entity.Activity">
+    update t_activity
+    set activity_name = #{activityName,jdbcType=VARCHAR},
+      activity_information = #{activityInformation,jdbcType=VARCHAR},
+      activity_img = #{activityImg,jdbcType=VARCHAR},
+      activity_person_num = #{activityPersonNum,jdbcType=INTEGER},
+      activity_start = #{activityStart,jdbcType=TIMESTAMP},
+      activity_end = #{activityEnd,jdbcType=TIMESTAMP},
+      activity_start_sign_up = #{activityStartSignUp,jdbcType=TIMESTAMP},
+      activity_end_sign_up = #{activityEndSignUp,jdbcType=TIMESTAMP},
+      activity_show = #{activityShow,jdbcType=BIT},
+      group_id = #{groupId,jdbcType=INTEGER}
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </update>
+    <select id="selectAllActivity" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_activity
+    </select>
+</mapper>

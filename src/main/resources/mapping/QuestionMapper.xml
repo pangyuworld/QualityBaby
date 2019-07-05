@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swust.fund.dao.QuestionMapper">
+    <resultMap id="BaseResultMap" type="com.swust.fund.entity.Question">
+        <id column="question_id" property="questionId" jdbcType="INTEGER"/>
+        <result column="question_detail" property="questionDetail" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    question_id, question_detail
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_question
+        where question_id = #{questionId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_question
+    where question_id = #{questionId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.swust.fund.entity.Question">
+    insert into t_question (question_id, question_detail)
+    values (#{questionId,jdbcType=INTEGER}, #{questionDetail,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.swust.fund.entity.Question">
+        insert into t_question
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="questionId != null">
+                question_id,
+            </if>
+            <if test="questionDetail != null">
+                question_detail,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="questionId != null">
+                #{questionId,jdbcType=INTEGER},
+            </if>
+            <if test="questionDetail != null">
+                #{questionDetail,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.swust.fund.entity.Question">
+        update t_question
+        <set>
+            <if test="questionDetail != null">
+                question_detail = #{questionDetail,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where question_id = #{questionId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.swust.fund.entity.Question">
+    update t_question
+    set question_detail = #{questionDetail,jdbcType=VARCHAR}
+    where question_id = #{questionId,jdbcType=INTEGER}
+  </update>
+</mapper>
