@@ -6,7 +6,6 @@ import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @ApiModel("用户")
 public class User implements Serializable {
@@ -32,8 +31,8 @@ public class User implements Serializable {
     @ApiModelProperty("微信openId")
     private byte[] openId;
 
-    @ApiModelProperty(value = "标签")
-    private List<Tag> tags;
+    // @ApiModelProperty(value = "标签")
+    // private List<Tag> tags;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @ApiModelProperty(value = "注册时间")
@@ -105,12 +104,12 @@ public class User implements Serializable {
         this.openId = openId;
     }
 
-    public List<Tag> getTags() {
-        return tags;
-    }
-
-    public User setTags(List<Tag> tags) {
-        this.tags = tags;
-        return this;
-    }
+    // public List<Tag> getTags() {
+    //     return tags;
+    // }
+    //
+    // public User setTags(List<Tag> tags) {
+    //     this.tags = tags;
+    //     return this;
+    // }
 }

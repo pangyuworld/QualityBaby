@@ -16,5 +16,5 @@ public interface ActivityGroupMapper {
 
     int updateByPrimaryKey(ActivityGroup record);
 
-    Page<ActivityGroup> selectAllGroup();
+    Page<ActivityGroup> selectAllGroup(boolean showAll);
 }

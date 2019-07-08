@@ -1,5 +1,6 @@
 package com.swust.fund.dao;
 
+import com.github.pagehelper.Page;
 import com.swust.fund.entity.Message;
 
 public interface MessageMapper {
@@ -14,4 +15,10 @@ public interface MessageMapper {
     int updateByPrimaryKeySelective(Message record);
 
     int updateByPrimaryKey(Message record);
+
+    Page<Message> selectAllMessage();
+
+    int likeMessage(Integer messageId);
+
+    int unlikeMessage(Integer messageId);
 }

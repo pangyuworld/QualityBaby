@@ -1,6 +1,6 @@
 package com.swust.fund.controller;
 
-import com.swust.fund.common.Page;
+import com.github.pagehelper.PageInfo;
 import com.swust.fund.common.restful.ResponseJSON;
 import com.swust.fund.common.restful.UnicomResponseEnums;
 import com.swust.fund.entity.User;
@@ -51,7 +51,7 @@ public class UserController {
             @ApiImplicitParam(name = "pageSize", value = "大小", required = true, dataType = "int", paramType = "query")
     })
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public ResponseJSON<Page<User>> getAll(int pageNum, int pageSize) {
+    public ResponseJSON<PageInfo<User>> getAll(int pageNum, int pageSize) {
         return new ResponseJSON<>(true, userService.getAllUser(pageNum, pageSize));
     }
 
@@ -90,8 +90,8 @@ public class UserController {
             @ApiImplicitParam(name = "pageNum", value = "页码", required = true, dataType = "int", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "大小", required = true, dataType = "int", paramType = "query")
     })
-    @RequestMapping(value = "/activity/user/{activityId}", method = RequestMethod.GET)
-    public ResponseJSON<Page<Map>> getByActivityId(@PathVariable Integer activityId, Integer pageNum, Integer pageSize) {
+    @RequestMapping(value = "/user/activity/{activityId}", method = RequestMethod.GET)
+    public ResponseJSON<PageInfo<Map>> getByActivityId(@PathVariable Integer activityId, Integer pageNum, Integer pageSize) {
         return new ResponseJSON<>(true, userService.getByActivityId(activityId, pageNum, pageSize));
     }
 

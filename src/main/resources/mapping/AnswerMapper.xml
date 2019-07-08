@@ -6,9 +6,10 @@
         <result column="answer_rank" property="answerRank" jdbcType="TINYINT"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="question_id" property="questionId" jdbcType="INTEGER"/>
+        <result column="answer_time" property="answerTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-    answer_id, answer_rank, user_id, question_id
+    answer_id, answer_rank, user_id, question_id, answer_time
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -22,9 +23,9 @@
   </delete>
     <insert id="insert" parameterType="com.swust.fund.entity.Answer">
     insert into t_answer (answer_id, answer_rank, user_id, 
-      question_id)
+      question_id, answer_time)
     values (#{answerId,jdbcType=INTEGER}, #{answerRank,jdbcType=TINYINT}, #{userId,jdbcType=INTEGER}, 
-      #{questionId,jdbcType=INTEGER})
+      #{questionId,jdbcType=INTEGER}, #{answerTime,jdbcType=TIMESTAMP})
   </insert>
     <insert id="insertSelective" parameterType="com.swust.fund.entity.Answer">
         insert into t_answer
@@ -41,6 +42,9 @@
             <if test="questionId != null">
                 question_id,
             </if>
+            <if test="answerTime != null">
+                answer_time,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="answerId != null">
@@ -54,6 +58,9 @@
             </if>
             <if test="questionId != null">
                 #{questionId,jdbcType=INTEGER},
+            </if>
+            <if test="answerTime != null">
+                #{answerTime,jdbcType=TIMESTAMP},
             </if>
         </trim>
     </insert>
@@ -69,6 +76,9 @@
             <if test="questionId != null">
                 question_id = #{questionId,jdbcType=INTEGER},
             </if>
+            <if test="answerTime != null">
+                answer_time = #{answerTime,jdbcType=TIMESTAMP},
+            </if>
         </set>
         where answer_id = #{answerId,jdbcType=INTEGER}
     </update>
@@ -76,7 +86,8 @@
     update t_answer
     set answer_rank = #{answerRank,jdbcType=TINYINT},
       user_id = #{userId,jdbcType=INTEGER},
-      question_id = #{questionId,jdbcType=INTEGER}
+      question_id = #{questionId,jdbcType=INTEGER},
+      answer_time = #{answerTime,jdbcType=TIMESTAMP}
     where answer_id = #{answerId,jdbcType=INTEGER}
   </update>
 </mapper>

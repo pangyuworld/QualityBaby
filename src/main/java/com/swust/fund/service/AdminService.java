@@ -4,8 +4,11 @@ import com.google.code.kaptcha.Producer;
 import com.swust.fund.common.CommonConst;
 import com.swust.fund.common.restful.UnicomResponseEnums;
 import com.swust.fund.common.restful.UnicomRuntimeException;
+import com.swust.fund.dao.AdminLoginLogMapper;
 import com.swust.fund.dao.AdminUserMapper;
+import com.swust.fund.entity.AdminLoginLog;
 import com.swust.fund.entity.AdminUser;
+import com.swust.fund.utils.ip.IpUtil;
 import com.swust.fund.utils.kaptcha.KaptchaUtil;
 import com.swust.fund.utils.password.PasswordUtil;
 import com.swust.fund.utils.redis.RedisUtil;
@@ -13,7 +16,9 @@ import com.swust.fund.utils.token.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * @author pang
@@ -33,6 +38,8 @@ public class AdminService {
     private Producer producer;
     @Autowired
     private KaptchaUtil kaptchaUtil;
+    @Autowired
+    private AdminLoginLogMapper logMapper;
 
     /**
      * 管理员登录逻辑
@@ -43,16 +50,30 @@ public class AdminService {
      * @author pang
      * @date 2019/4/7
      */
-    public String login(String username, String password) {
+    public String login(String username, String password, HttpServletRequest request) {
+        // 从数据库查到登录的管理员信息
         AdminUser adminUser = adminUserMapper.findByAdminLoginName(username);
+        // 如果没有找到，则返回空
         if (adminUser == null) {
             return null;
         }
+        // 如果登录的密码和数据库解密后的密码不一样，则返回-1
         if (!adminUser.getAdminLoginPassword().equals(PasswordUtil.SHA256(password + CommonConst.salt))) {
             return "-1";
         }
         String token = TokenUtil.createJWT(1000 * 60 * 60, username, "administrator");
-        redisUtil.set("token_" + username, token, 1000 * 60 * 60);
+        // 构建新的用户登录日志
+        AdminLoginLog loginLog = new AdminLoginLog();
+        // 获得用户IP
+        Long ipAddress = IpUtil.getIpConvertNum(IpUtil.getIpAddr(request));
+        // 设置登录用户ID
+        loginLog.setAdminId(adminUser.getAdminId());
+        // 设置登录IP
+        loginLog.setLoginIp(ipAddress);
+        // 设置登录时间
+        loginLog.setLoginTime(new Date());
+        // 添加登录记录
+        logMapper.insert(loginLog);
         return token;
     }
 

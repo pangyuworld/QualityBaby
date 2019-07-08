@@ -107,5 +107,8 @@
         select
         <include refid="Base_Column_List"/>
         from t_activity_group
+        <if test="showAll != true">
+            where group_show=true
+        </if>
     </select>
 </mapper>

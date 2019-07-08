@@ -103,4 +103,19 @@
       user_id = #{userId,jdbcType=INTEGER}
     where message_id = #{messageId,jdbcType=INTEGER}
   </update>
+    <select id="selectAllMessage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_message
+    </select>
+    <update id="likeMessage" parameterType="int">
+        update t_message
+        set message_like = message_like+1
+        where message_id=#{messageId}
+    </update>
+    <update id="unlikeMessage" parameterType="int">
+        update t_message
+        set message_like = message_like-1
+        where message_id=#{messageId}
+    </update>
 </mapper>

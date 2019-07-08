@@ -22,6 +22,14 @@ public class CommonConst {
      */
     public static String baseURL;
     /**
+     * 文件上传根路径
+     */
+    public static String uploadPath;
+    /**
+     * 图片服务器路径
+     */
+    public static String imgServerPath;
+    /**
      * 微信公众号所使用的token
      */
     public static String token;
@@ -47,6 +55,9 @@ public class CommonConst {
     public static String salt;
 
 
+    @Value("${img.server.path}")
+    private String tempImgServerPath;
+
     @Value("${password.salt}")
     private String tempSalt;
 
@@ -67,6 +78,9 @@ public class CommonConst {
 
     @Value("${weixin.public.secret}")
     private String tempPublicSecret;
+
+    @Value("${file.upload.path}")
+    private String tempUploadPath;
 
     @PostConstruct
     public void setUrl() {
@@ -103,4 +117,12 @@ public class CommonConst {
         salt = this.tempSalt;
     }
 
+    @PostConstruct
+    public void setUploadPath(){
+        uploadPath=this.tempUploadPath;
+    }
+    @PostConstruct
+    public void setImgServerPath(){
+        imgServerPath=this.tempImgServerPath;
+    }
 }

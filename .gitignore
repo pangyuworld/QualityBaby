@@ -29,5 +29,7 @@ HELP.md
 .vscode/
 
 
-logs/
+/logs/
 /src/test/
+/temp/
+

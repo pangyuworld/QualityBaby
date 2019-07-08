@@ -68,4 +68,32 @@
       tag_show = #{tagShow,jdbcType=BIT}
     where tag_id = #{tagId,jdbcType=INTEGER}
   </update>
+    <select id="selectAllTag" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_tag
+        <if test="showAll != true">
+            where tag_show=true
+        </if>
+    </select>
+    <select id="selectAllTagByUser" resultMap="BaseResultMap">
+        select
+        a.tag_id, tag_name, tag_show
+        from t_tag a
+        inner join t_user_tag tut on a.tag_id = tut.tag_id
+        where tut.user_id=#{userId}
+        <if test="showAll != true">
+            ,a.tag_show=true
+        </if>
+    </select>
+    <select id="selectAllTagByActivity" resultMap="BaseResultMap">
+        select
+        a.tag_id, tag_name, tag_show
+        from t_tag a
+        inner join t_activity_tag t2 on a.tag_id = t2.tag_id
+        where t2.activity_id=#{activityId}
+        <if test="showAll != true">
+            ,a.tag_show=true
+        </if>
+    </select>
 </mapper>

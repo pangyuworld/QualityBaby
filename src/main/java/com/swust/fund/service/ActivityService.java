@@ -3,6 +3,7 @@ package com.swust.fund.service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.swust.fund.common.restful.UnicomResponseEnums;
 import com.swust.fund.common.restful.UnicomRuntimeException;
 import com.swust.fund.dao.ActivityGroupMapper;
 import com.swust.fund.dao.ActivityMapper;
@@ -14,7 +15,9 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author pang
@@ -40,9 +43,9 @@ public class ActivityService {
      * @author pang
      * @date 2019/7/5
      */
-    public PageInfo<Activity> getActivity(int pageNum, int pageSize) {
+    public PageInfo<Activity> getActivity(int pageNum, int pageSize, boolean showAll) {
         PageHelper.startPage(pageNum, pageSize);
-        Page<Activity> activities = activityMapper.selectAllActivity();
+        Page<Activity> activities = activityMapper.selectAllActivity(showAll);
         return new PageInfo<>(activities);
     }
 
@@ -67,9 +70,9 @@ public class ActivityService {
      * @author pang
      * @date 2019/7/5
      */
-    public PageInfo<ActivityGroup> getGroup(int pageNum, int pageSize) {
+    public PageInfo<ActivityGroup> getGroup(int pageNum, int pageSize, boolean showAll) {
         PageHelper.startPage(pageNum, pageSize);
-        Page<ActivityGroup> groups = groupMapper.selectAllGroup();
+        Page<ActivityGroup> groups = groupMapper.selectAllGroup(showAll);
         return new PageInfo<>(groups);
     }
 
@@ -112,6 +115,130 @@ public class ActivityService {
         return groupMapper.selectByPrimaryKey(groupId);
     }
 
+    /**
+     * 修改活动信息
+     *
+     * @param activity 活动信息
+     * @return java.lang.Integer 受影响的数据总数（一般为1或0）
+     * @author pang
+     * @date 2019/7/6
+     */
+    public Integer editActivity(Activity activity) {
+        if (activity.getActivityId() == null || activity.getActivityId() < 1) {
+            throw new UnicomRuntimeException(UnicomResponseEnums.BAD_REQUEST);
+        }
+        return activityMapper.updateByPrimaryKeySelective(activity);
+    }
+
+    /**
+     * 修改活动分组信息
+     *
+     * @param activityGroup 活动分组信息
+     * @return java.lang.Integer 受影响的数据总数（一般为1或0）
+     * @author pang
+     * @date 2019/7/6
+     */
+    public Integer editGroup(ActivityGroup activityGroup) {
+        if (activityGroup.getGroupId() == null || activityGroup.getGroupId() < 1) {
+            throw new UnicomRuntimeException(UnicomResponseEnums.BAD_REQUEST);
+        }
+        return groupMapper.updateByPrimaryKeySelective(activityGroup);
+    }
+
+    /**
+     * 删除活动
+     *
+     * @param activityId 要删除的活动id
+     * @return java.lang.Boolean 删除成功返回true
+     * @author pang
+     * @date 2019/7/6
+     */
+    public Boolean deleteActivity(Integer activityId) {
+        if (activityMapper.deleteByPrimaryKey(activityId) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 删除活动分组
+     *
+     * @param activityGroupId 要删除的分组id
+     * @return java.lang.Boolean 删除成功返回true
+     * @author pang
+     * @date 2019/7/6
+     */
+    public Boolean deleteGroup(Integer activityGroupId) {
+        if (groupMapper.deleteByPrimaryKey(activityGroupId) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 查找活动分组下的活动
+     *
+     * @param activityGroupId 分组id
+     * @param pageNum         页码
+     * @param pageSize        大小
+     * @return com.github.pagehelper.PageInfo<com.swust.fund.entity.Activity> 分组下的活动
+     * @author pang
+     * @date 2019/7/6
+     */
+    public PageInfo<Activity> getActivity(int activityGroupId, int pageNum, int pageSize, boolean showAll) {
+        PageHelper.startPage(pageNum, pageSize);
+        Page<Activity> activities = activityMapper.selectAllActivityByGroup(activityGroupId, showAll);
+        return new PageInfo<>(activities);
+    }
+
+    /**
+     * 加入活动
+     *
+     * @param userId     用户id
+     * @param activityId 活动id
+     * @return java.lang.Integer
+     * @author pang
+     * @date 2019/7/6
+     */
+    public Integer signInActivity(int userId, int activityId) throws UnicomRuntimeException {
+        return activityMapper.signInActivity(new Date(), userId, activityId);
+    }
+
+    /**
+     * 查看用户参加的活动
+     *
+     * @param userId   用户id
+     * @param showAll  是否显示全部
+     * @param pageNum  页码
+     * @param pageSize 大小
+     * @return com.github.pagehelper.PageInfo<java.util.Map>
+     * @author pang
+     * @date 2019/7/6
+     */
+    public PageInfo<Map> getAllActivityByUser(Integer userId, boolean showAll, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        Page<Map> activitys = activityMapper.selectAllActivityByUser(userId, showAll);
+        return new PageInfo<>(activitys);
+    }
+
+    /**
+     * 退出活动
+     *
+     * @param userId     用户id
+     * @param activityId 活动id
+     * @return boolean 退出成功返回true。其他情况返回false
+     * @author pang
+     * @date 2019/7/8
+     */
+    public boolean signOutActivity(int userId, int activityId) {
+        if (activityMapper.signOutActivity(userId, activityId) == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /**
      * 设置活动下的分组实体
@@ -136,9 +263,10 @@ public class ActivityService {
      */
     private Page<Activity> setGroups(Page<Activity> activities) {
         List<Integer> groupIdList = activities.stream().map(Activity::getGroupId).collect(Collectors.toList());
-        Map<Integer, ActivityGroup> groupMap = activityMapper.selectGroupByList(groupIdList)
-                .stream()
-                .collect(Collectors.toMap(ActivityGroup::getGroupId, activityGroup -> activityGroup));
+        Map<Integer, ActivityGroup> groupMap;
+        Stream<ActivityGroup> stream = activityMapper.selectGroupByList(groupIdList)
+                .stream();
+        groupMap = stream.collect(Collectors.toMap(ActivityGroup::getGroupId, Function.identity()));
         for (Activity a : activities) {
             a.setGroup(groupMap.get(a.getGroupId()));
         }

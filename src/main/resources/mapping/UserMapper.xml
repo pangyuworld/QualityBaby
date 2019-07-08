@@ -9,18 +9,18 @@
         <result column="class_name" property="className" jdbcType="VARCHAR"/>
         <result column="gender" property="gender" jdbcType="BIT"/>
         <result column="stu_name" property="stuName" jdbcType="VARCHAR"/>
-        <result column="sign_up_time" property="sign_Up_Time" jdbcType="TIMESTAMP"/>
-        <collection property="tags" ofType="com.swust.fund.entity.Tag" select="selectTags" column="user_id">
-        </collection>
+        <result column="sign_up_time" property="signUpTime" jdbcType="TIMESTAMP"/>
+        <!--<collection property="tags" ofType="com.swust.fund.entity.Tag" select="selectTags" column="user_id">-->
+        <!--</collection>-->
     </resultMap>
     <resultMap id="ResultMapWithBLOBs" type="com.swust.fund.entity.User" extends="BaseResultMap">
         <result column="open_id" property="openId" jdbcType="BINARY"/>
     </resultMap>
-    <resultMap id="tagMap" type="com.swust.fund.entity.Tag">
-        <id column="tag_id" property="tagId" jdbcType="INTEGER"/>
-        <result column="tag_name" property="tagName" jdbcType="VARCHAR"/>
-        <result column="tag_show" property="tagShow" jdbcType="BIT"/>
-    </resultMap>
+    <!--<resultMap id="tagMap" type="com.swust.fund.entity.Tag">-->
+    <!--<id column="tag_id" property="tagId" jdbcType="INTEGER"/>-->
+    <!--<result column="tag_name" property="tagName" jdbcType="VARCHAR"/>-->
+    <!--<result column="tag_show" property="tagShow" jdbcType="BIT"/>-->
+    <!--</resultMap>-->
     <sql id="Base_Column_List">
     t_user.user_id as user_id,	stu_id,	tell_num,	class_name,	gender,	stu_name, sign_up_time
   </sql>
@@ -163,18 +163,17 @@
         <include refid="Base_Column_List"/>
         from t_user
         <include refid="Inner"/>
-        limit #{pageSize,jdbcType=INTEGER} OFFSET #{pageNum,jdbcType=INTEGER}
     </select>
     <select id="selectCount" resultType="java.lang.Integer">
         select count(*) from t_user
     </select>
-    <select id="selectTags" resultMap="tagMap">
-        select
-        a.tag_id as tag_id,	tag_name,	tag_show
-        from t_tag a
-        inner join t_user_tag tut on a.tag_id = tut.tag_id
-        where tut.user_id=#{user_id}
-    </select>
+    <!--<select id="selectTags" resultMap="tagMap">-->
+    <!--select-->
+    <!--a.tag_id as tag_id,	tag_name,	tag_show-->
+    <!--from t_tag a-->
+    <!--inner join t_user_tag tut on a.tag_id = tut.tag_id-->
+    <!--where tut.user_id=#{user_id}-->
+    <!--</select>-->
     <select id="selectByActivityId" resultType="map" parameterType="int">
         select
           a.user_id as userId,
@@ -183,12 +182,11 @@
           a.stu_id as stuId,
           a.stu_name as stuName,
           a.tell_num as tellName,
-          a.sign_up_time as signUpTime
+          a.sign_up_time as signUpTime,
           DATE_FORMAT(a2.join_time,"%Y-%m-%d %H:%i:%s") as joinTime
         from t_user a
         inner join t_user_activity a2 on a.user_id = a2.user_id
         where a2.activity_id=#{activityId}
-        limit #{pageSize,jdbcType=INTEGER} OFFSET #{pageNum,jdbcType=INTEGER}
     </select>
     <select id="selectCountByActivityId" resultType="java.lang.Integer">
         select count(*) from t_user_activity

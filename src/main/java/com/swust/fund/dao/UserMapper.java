@@ -1,9 +1,9 @@
 package com.swust.fund.dao;
 
+import com.github.pagehelper.Page;
 import com.swust.fund.entity.User;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
 import java.util.Map;
 
 public interface UserMapper {
@@ -23,11 +23,11 @@ public interface UserMapper {
 
     User selectByOpenId(@Param(value = "openId") String openId);
 
-    List<User> selectAll(@Param(value = "pageNum") Integer pageNum, @Param(value = "pageSize") Integer pageSize);
+    Page<User> selectAll();
 
     int selectCount();
 
-    List<Map> selectByActivityId(@Param(value = "activityId") Integer activityId, @Param(value = "pageNum") Integer pageNum, @Param(value = "pageSize") Integer pageSize);
+    Page<Map> selectByActivityId(@Param(value = "activityId") Integer activityId);
 
     int selectCountByActivityId(@Param(value = "activityId") Integer activityId);
 

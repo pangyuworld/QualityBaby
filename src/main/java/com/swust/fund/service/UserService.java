@@ -1,6 +1,8 @@
 package com.swust.fund.service;
 
-import com.swust.fund.common.Page;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.swust.fund.common.restful.UnicomResponseEnums;
 import com.swust.fund.common.restful.UnicomRuntimeException;
 import com.swust.fund.dao.UserMapper;
@@ -8,7 +10,6 @@ import com.swust.fund.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -58,10 +59,11 @@ public class UserService {
      * @author pang
      * @date 2019/5/11
      */
-    public Page<User> getAllUser(int pageNum, int pageSize) {
-        List<User> studioList = userMapper.selectAll((pageNum - 1) * pageSize, pageSize);
+    public PageInfo<User> getAllUser(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        Page<User> studioList = userMapper.selectAll();
         int total = userMapper.selectCount();
-        return new Page<>(studioList, total, pageNum, pageSize);
+        return new PageInfo<>(studioList);
     }
 
     /**
@@ -74,8 +76,10 @@ public class UserService {
      */
     public int editUser(User user) {
         if (user.getUserId() == null || user.getOpenId() == null) {
-            throw new UnicomRuntimeException(UnicomResponseEnums.BAD_REQUEST);
+            throw new UnicomRuntimeException(UnicomResponseEnums.BAD_REQUEST, "修改信息必须添加id");
         }
+        // 禁止修改openId
+        user.setOpenId(null);
         return userMapper.updateByPrimaryKeySelective(user);
     }
 
@@ -102,12 +106,11 @@ public class UserService {
      * @author pang
      * @date 2019/6/16
      */
-    public Page<Map> getByActivityId(Integer activityId, int pageNum, int pageSize) {
-        List<Map> list = userMapper.selectByActivityId(activityId, (pageNum - 1) * pageSize, pageSize);
-        int total = userMapper.selectCountByActivityId(activityId);
-        return new Page<>(list, total, pageNum, pageSize);
+    public PageInfo<Map> getByActivityId(Integer activityId, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        Page<Map> list = userMapper.selectByActivityId(activityId);
+        return new PageInfo<>(list);
     }
-
 
 
 }
