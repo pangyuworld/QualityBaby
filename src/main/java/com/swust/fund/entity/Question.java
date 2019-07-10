@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
+import java.util.List;
 
 @ApiModel("问题")
 public class Question {
@@ -24,6 +25,9 @@ public class Question {
 
     @ApiModelProperty("问题顺序")
     private Integer questionSort;
+
+    @ApiModelProperty("问题影响的方面(添加时的不必要参数)")
+    private List<QuestionAspect> questionAspects;
 
     public Integer getQuestionId() {
         return questionId;
@@ -63,5 +67,25 @@ public class Question {
 
     public void setQuestionSort(Integer questionSort) {
         this.questionSort = questionSort;
+    }
+
+    public List<QuestionAspect> getQuestionAspects() {
+        return questionAspects;
+    }
+
+    public void setQuestionAspects(List<QuestionAspect> questionAspects) {
+        this.questionAspects = questionAspects;
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "questionId=" + questionId +
+                ", questionDetail='" + questionDetail + '\'' +
+                ", questionAddTime=" + questionAddTime +
+                ", questionUpdateTime=" + questionUpdateTime +
+                ", questionSort=" + questionSort +
+                ", questionAspects=" + questionAspects +
+                '}';
     }
 }

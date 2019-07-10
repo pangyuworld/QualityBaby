@@ -68,4 +68,12 @@
       aspect_show = #{aspectShow,jdbcType=BIT}
     where aspect_id = #{aspectId,jdbcType=INTEGER}
   </update>
+    <select id="selectAllAspect" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_aspect
+        <if test="showAll != true">
+            where aspect_show=true
+        </if>
+    </select>
 </mapper>

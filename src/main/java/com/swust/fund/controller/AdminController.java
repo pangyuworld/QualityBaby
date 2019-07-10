@@ -1,7 +1,9 @@
 package com.swust.fund.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.swust.fund.common.restful.ResponseJSON;
 import com.swust.fund.common.restful.UnicomResponseEnums;
+import com.swust.fund.entity.AdminLoginLog;
 import com.swust.fund.service.AdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -11,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author pang
@@ -32,8 +36,8 @@ public class AdminController {
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "string", paramType = "query"),
     })
     @RequestMapping(value = "/admin/login", method = RequestMethod.POST)
-    public ResponseJSON<String> login(String username, String password) {
-        String result = adminService.login(username, password);
+    public ResponseJSON<String> login(String username, String password, HttpServletRequest request) {
+        String result = adminService.login(username, password,request);
         if (result == null) {
             return new ResponseJSON<>(false, UnicomResponseEnums.NO_USER_EXIST);
         } else if (result.equals("-1")) {
@@ -59,5 +63,15 @@ public class AdminController {
     @RequestMapping(value = "/admin/capatcha", method = RequestMethod.GET)
     public String getVerificationCode() {
         return adminService.getKaptcha();
+    }
+
+    @ApiOperation("获取全部管理员日志")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pageNum", value = "页码", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "pageSize", value = "大小", required = true, dataType = "int", paramType = "query")
+    })
+    @RequestMapping(value = "/admin/log",method = RequestMethod.GET)
+    public ResponseJSON<PageInfo<AdminLoginLog>> getAdminLoginLog(int pageNum,int pageSize){
+        return new ResponseJSON<>(true,adminService.getAllLog(pageNum, pageSize));
     }
 }

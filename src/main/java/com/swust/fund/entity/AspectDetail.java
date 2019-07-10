@@ -1,12 +1,21 @@
 package com.swust.fund.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel("小方向")
 public class AspectDetail {
+
+    @ApiModelProperty("小方向ID")
     private Integer detailId;
 
+    @ApiModelProperty("小方向名字")
     private String detailName;
 
+    @ApiModelProperty("小方向是否显示")
     private Boolean detailShow;
 
+    @ApiModelProperty("小方向所属的大方向ID")
     private Integer aspectId;
 
     public Integer getDetailId() {

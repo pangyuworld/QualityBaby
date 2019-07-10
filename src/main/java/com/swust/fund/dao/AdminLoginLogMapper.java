@@ -1,5 +1,6 @@
 package com.swust.fund.dao;
 
+import com.github.pagehelper.Page;
 import com.swust.fund.entity.AdminLoginLog;
 
 public interface AdminLoginLogMapper {
@@ -14,4 +15,6 @@ public interface AdminLoginLogMapper {
     int updateByPrimaryKeySelective(AdminLoginLog record);
 
     int updateByPrimaryKey(AdminLoginLog record);
+
+    Page<AdminLoginLog> selectAllLog();
 }

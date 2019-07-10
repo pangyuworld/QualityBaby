@@ -79,4 +79,21 @@
       aspect_id = #{aspectId,jdbcType=INTEGER}
     where detail_id = #{detailId,jdbcType=INTEGER}
   </update>
+    <select id="selectAllAspectDetail" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List"/>
+        from t_aspect_detail
+        <if test="showAll != true">
+            where detail_show=true
+        </if>
+    </select>
+    <select id="selectAllAspectDetailByAspect" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_aspect_detail
+        where aspect_id=#{detailId}
+        <if test="showAll != true">
+            ,detail_show=true
+        </if>
+    </select>
 </mapper>

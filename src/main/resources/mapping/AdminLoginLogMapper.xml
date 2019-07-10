@@ -6,14 +6,16 @@
         <result column="login_time" property="loginTime" jdbcType="TIMESTAMP"/>
         <result column="login_ip" property="loginIp" jdbcType="INTEGER"/>
         <result column="admin_id" property="adminId" jdbcType="INTEGER"/>
+        <result column="admin_name" property="adminName" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, login_time, login_ip, admin_id
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
-        <include refid="Base_Column_List"/>
-        from t_admin_login_log
+    id, login_time, login_ip, a.admin_id as admin_id,u.admin_real_name as admin_name
+        from t_admin_login_log a
+        inner join t_admin_user u on a.admin_id = u.admin_id
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -79,4 +81,10 @@
       admin_id = #{adminId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <select id="selectAllLog" resultMap="BaseResultMap">
+        select
+    id, login_time, login_ip, a.admin_id as admin_id,u.admin_real_name as admin_name
+        from t_admin_login_log a
+        inner join t_admin_user u on a.admin_id = u.admin_id
+    </select>
 </mapper>

@@ -1,10 +1,17 @@
 package com.swust.fund.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel("大方向")
 public class Aspect {
+    @ApiModelProperty("大方向ID")
     private Integer aspectId;
 
+    @ApiModelProperty("大方向名字")
     private String aspectName;
 
+    @ApiModelProperty("是否显示")
     private Boolean aspectShow;
 
     public Integer getAspectId() {

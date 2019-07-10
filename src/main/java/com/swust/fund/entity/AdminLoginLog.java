@@ -15,11 +15,34 @@ public class AdminLoginLog {
     @ApiModelProperty("登录时间")
     private Date loginTime;
 
-    @ApiModelProperty("登录IP")
+    @ApiModelProperty("登录IP,Long型")
     private Long loginIp;
+
+    @ApiModelProperty("登录IP,xxx.xxx.xxx.xxx型")
+    private String loginIpDecode;
 
     @ApiModelProperty("登录管理员IP")
     private Integer adminId;
+
+
+    @ApiModelProperty("登录管理员姓名，插入时候不用填写")
+    private String adminName;
+
+    public String getLoginIpDecode() {
+        return loginIpDecode;
+    }
+
+    public void setLoginIpDecode(String loginIpDecode) {
+        this.loginIpDecode = loginIpDecode;
+    }
+
+    public String getAdminName() {
+        return adminName;
+    }
+
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
+    }
 
     public Integer getId() {
         return id;

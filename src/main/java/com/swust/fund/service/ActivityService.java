@@ -124,9 +124,6 @@ public class ActivityService {
      * @date 2019/7/6
      */
     public Integer editActivity(Activity activity) {
-        if (activity.getActivityId() == null || activity.getActivityId() < 1) {
-            throw new UnicomRuntimeException(UnicomResponseEnums.BAD_REQUEST);
-        }
         return activityMapper.updateByPrimaryKeySelective(activity);
     }
 
@@ -139,9 +136,6 @@ public class ActivityService {
      * @date 2019/7/6
      */
     public Integer editGroup(ActivityGroup activityGroup) {
-        if (activityGroup.getGroupId() == null || activityGroup.getGroupId() < 1) {
-            throw new UnicomRuntimeException(UnicomResponseEnums.BAD_REQUEST);
-        }
         return groupMapper.updateByPrimaryKeySelective(activityGroup);
     }
 

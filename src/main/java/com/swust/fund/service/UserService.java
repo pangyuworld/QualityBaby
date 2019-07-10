@@ -62,7 +62,6 @@ public class UserService {
     public PageInfo<User> getAllUser(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         Page<User> studioList = userMapper.selectAll();
-        int total = userMapper.selectCount();
         return new PageInfo<>(studioList);
     }
 
@@ -75,9 +74,6 @@ public class UserService {
      * @date 2019/5/11
      */
     public int editUser(User user) {
-        if (user.getUserId() == null || user.getOpenId() == null) {
-            throw new UnicomRuntimeException(UnicomResponseEnums.BAD_REQUEST, "修改信息必须添加id");
-        }
         // 禁止修改openId
         user.setOpenId(null);
         return userMapper.updateByPrimaryKeySelective(user);

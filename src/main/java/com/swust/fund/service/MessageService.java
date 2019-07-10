@@ -71,9 +71,6 @@ public class MessageService {
      * @return java.lang.Integer 
      */
     public Integer editMessage(Message message){
-        if (message.getMessageId()==null||message.getMessageId()<1){
-            throw new UnicomRuntimeException(UnicomResponseEnums.BAD_REQUEST,"缺少ID");
-        }
         return messageMapper.updateByPrimaryKeySelective(message);
     }
     

@@ -1,5 +1,8 @@
 package com.swust.fund.service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.code.kaptcha.Producer;
 import com.swust.fund.common.CommonConst;
 import com.swust.fund.common.restful.UnicomResponseEnums;
@@ -131,5 +134,23 @@ public class AdminService {
             throw new UnicomRuntimeException(UnicomResponseEnums.SYSTEM_ERROR, "验证码获取失败");
         }
         return encode;
+    }
+
+    /**
+     * 获得全部管理员日志
+     *
+     * @param pageNum  页码
+     * @param pageSize 大小
+     * @return com.github.pagehelper.PageInfo<com.swust.fund.entity.AdminLoginLog>
+     * @author pang
+     * @date 2019/7/9
+     */
+    public PageInfo<AdminLoginLog> getAllLog(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        Page<AdminLoginLog> logPage = logMapper.selectAllLog();
+        for (AdminLoginLog a:logPage){
+            a.setLoginIpDecode(IpUtil.getNumConvertIp(a.getLoginIp()));
+        }
+        return new PageInfo<>(logPage);
     }
 }

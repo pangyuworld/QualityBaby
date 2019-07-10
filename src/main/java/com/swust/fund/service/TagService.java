@@ -74,9 +74,6 @@ public class TagService {
      * @date 2019/7/6
      */
     public Integer editTag(Tag tag) {
-        if (tag.getTagId() == null || tag.getTagId() < 1) {
-            throw new UnicomRuntimeException(UnicomResponseEnums.BAD_REQUEST);
-        }
         return tagMapper.updateByPrimaryKeySelective(tag);
     }
 
