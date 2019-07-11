@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.swust.fund.dao.AspectMapper">
+    <cache type="org.mybatis.caches.redis.RedisCache"/>
     <resultMap id="BaseResultMap" type="com.swust.fund.entity.Aspect">
         <id column="aspect_id" property="aspectId" jdbcType="INTEGER"/>
         <result column="aspect_name" property="aspectName" jdbcType="VARCHAR"/>

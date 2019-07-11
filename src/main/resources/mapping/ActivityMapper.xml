@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.swust.fund.dao.ActivityMapper">
+    <cache type="org.mybatis.caches.redis.RedisCache"/>
     <resultMap id="BaseResultMap" type="com.swust.fund.entity.Activity">
         <id column="activity_id" property="activityId" jdbcType="INTEGER"/>
         <result column="activity_name" property="activityName" jdbcType="VARCHAR"/>

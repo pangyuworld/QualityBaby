@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.swust.fund.dao.ActivityGroupMapper">
+    <cache type="org.mybatis.caches.redis.RedisCache"/>
     <resultMap id="BaseResultMap" type="com.swust.fund.entity.ActivityGroup">
         <id column="group_id" property="groupId" jdbcType="INTEGER"/>
         <result column="gourp_name" property="gourpName" jdbcType="VARCHAR"/>
