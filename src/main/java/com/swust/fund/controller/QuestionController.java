@@ -2,6 +2,7 @@ package com.swust.fund.controller;
 
 import com.swust.fund.common.restful.ResponseJSON;
 import com.swust.fund.common.restful.UnicomResponseEnums;
+import com.swust.fund.entity.Answer;
 import com.swust.fund.entity.Question;
 import com.swust.fund.entity.QuestionAspect;
 import com.swust.fund.service.QuestionService;
@@ -71,5 +72,28 @@ public class QuestionController {
         } else {
             return new ResponseJSON(false, UnicomResponseEnums.NO_USER_EXIST);
         }
+    }
+
+    @ApiOperation("更新问题内容")
+    @RequestMapping(value = "/question", method = RequestMethod.PUT)
+    public ResponseJSON<Integer> editQuestion(Question question) {
+        return new ResponseJSON<>(true, questionService.editQuestion(question));
+    }
+
+    @ApiOperation("更新问题对应的小方向的影响")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "questionId", value = "问题id", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "detailId", value = "问题对应的小方向id", required = true, dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "isWell", value = "修改后问题对应的方向", required = true, dataType = "boolean", paramType = "query")
+    })
+    @RequestMapping(value = "/question-detail", method = RequestMethod.PUT)
+    public ResponseJSON<Integer> editQuestionAspect(int questionId, int detailId, boolean isWell) {
+        return new ResponseJSON<>(true, questionService.editQuestoinAspect(questionId, detailId, isWell));
+    }
+
+    @ApiOperation("回答问题")
+    @RequestMapping(value = "/answer", method = RequestMethod.POST)
+    public ResponseJSON<Integer> answerQuestion(@RequestBody List<Answer> answerList) {
+        return new ResponseJSON<>(true, questionService.addAnswer(answerList));
     }
 }

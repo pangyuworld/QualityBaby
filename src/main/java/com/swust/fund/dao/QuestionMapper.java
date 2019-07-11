@@ -5,14 +5,13 @@ import com.swust.fund.entity.QuestionAspect;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 public interface QuestionMapper {
     int deleteByPrimaryKey(Integer questionId);
 
     int insert(Question record);
 
-    int insertQuestionAspect(@Param("questionId") Integer questionId,@Param("list") List<QuestionAspect> params);
+    int insertQuestionAspect(@Param("questionId") Integer questionId, @Param("list") List<QuestionAspect> params);
 
     int insertSelective(Question record);
 
@@ -24,5 +23,10 @@ public interface QuestionMapper {
 
     List<Question> getAllQuestion();
 
-    int deleteQuestionAspect(@Param("questionId") Integer questionId,@Param("detailId") Integer detailId);
+    int deleteQuestionAspect(@Param("questionId") Integer questionId, @Param("detailId") Integer detailId);
+
+    int updateQuestionAspect(@Param("questionId") Integer questionId, @Param("detailId") Integer detailId, @Param("isWell") Boolean isWell);
+
+    List<QuestionAspect> selectAllQuestionAspect();
+
 }

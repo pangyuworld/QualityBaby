@@ -1,12 +1,15 @@
 package com.swust.fund.service;
 
+import com.swust.fund.dao.AnswerMapper;
+import com.swust.fund.dao.AspectDetailMapper;
 import com.swust.fund.dao.QuestionMapper;
+import com.swust.fund.entity.Answer;
 import com.swust.fund.entity.Question;
 import com.swust.fund.entity.QuestionAspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * @author pang
@@ -20,6 +23,10 @@ import java.util.List;
 public class QuestionService {
     @Autowired
     private QuestionMapper questionMapper;
+    @Autowired
+    private AnswerMapper answerMapper;
+    @Autowired
+    private AspectDetailMapper detailMapper;
 
     /**
      * 获得单个问题
@@ -54,6 +61,8 @@ public class QuestionService {
      * @date 2019/7/10
      */
     public Integer addQuestion(Question question, List<QuestionAspect> questionAspect) {
+        question.setQuestionAddTime(new Date());
+        question.setQuestionUpdateTime(new Date());
         questionMapper.insert(question);
         return addQuestionAspect(question.getQuestionId(), questionAspect);
     }
@@ -102,5 +111,80 @@ public class QuestionService {
         } else {
             return false;
         }
+    }
+
+    /**
+     * 更新问题内容
+     *
+     * @param question
+     * @return java.lang.Integer
+     * @author pang
+     * @date 2019/7/11
+     */
+    public Integer editQuestion(Question question) {
+        question.setQuestionUpdateTime(new Date());
+        return questionMapper.updateByPrimaryKeySelective(question);
+    }
+
+    /**
+     * 修改问题对应的小方向
+     *
+     * @param questionId 问题id
+     * @param detailId   小方向id
+     * @param isWell     修改后的isWell
+     * @return java.lang.Integer
+     * @author pang
+     * @date 2019/7/11
+     */
+    public Integer editQuestoinAspect(Integer questionId, Integer detailId, Boolean isWell) {
+        return questionMapper.updateQuestionAspect(questionId, detailId, isWell);
+    }
+
+    public Integer addAnswer(List<Answer> answerList) {
+        sortAnswer(answerList);
+        answerList.forEach(a -> a.setAnswerTime(new Date()));
+        List<QuestionAspect> questionAspectList = questionMapper.selectAllQuestionAspect();
+        Map<Integer, Integer> scoreMap = new HashMap<>(10);
+        for (int i = 0, j = 0; i < answerList.size(); i++) {
+            Answer ai = answerList.get(i);
+            while (j < questionAspectList.size()) {
+                QuestionAspect qj = questionAspectList.get(j);
+                if (ai.getQuestionId() < qj.getQuestionId()) {
+                    // TODO 如果i的id比j的id小，则i+1
+                    break;
+                } else if (ai.getQuestionId() > qj.getQuestionId()) {
+                    // TODO 如果i的id比j的id大，则j+1
+                    j++;
+                    continue;
+                } else {
+                    // TODO 如果i和j的id相等
+                    Integer score = scoreMap.get(qj.getAspectId())==null?0:scoreMap.get(qj.getAspectId());
+                    if (qj.getWell()) {
+                        scoreMap.put(qj.getAspectId(), score + ai.getAnswerRank());
+                    } else {
+                        scoreMap.put(qj.getAspectId(), score - ai.getAnswerRank());
+                    }
+                    j++;
+                }
+            }
+        }
+        detailMapper.insertScore(answerList.get(0).getUserId(), scoreMap);
+        return answerMapper.insertAnswerList(answerList);
+    }
+
+    /**
+     * 将回答按照问题id进行排序
+     *
+     * @param answerList 要排序的回答列表
+     * @author pang
+     * @date 2019/7/11
+     */
+    private void sortAnswer(List<Answer> answerList) {
+        Collections.sort(answerList, new Comparator<Answer>() {
+            @Override
+            public int compare(Answer o1, Answer o2) {
+                return o1.getQuestionId() - o2.getQuestionId();
+            }
+        });
     }
 }

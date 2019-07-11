@@ -90,4 +90,12 @@
       answer_time = #{answerTime,jdbcType=TIMESTAMP}
     where answer_id = #{answerId,jdbcType=INTEGER}
   </update>
+    <insert id="insertAnswerList">
+        insert into t_answer ( answer_rank, user_id,
+        question_id, answer_time)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.answerRank},#{item.userId},#{item.questionId},#{item.answerTime})
+        </foreach>
+    </insert>
 </mapper>

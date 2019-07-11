@@ -12,7 +12,7 @@ public class Answer {
     private Integer answerId;
 
     @ApiModelProperty("答案得分")
-    private Byte answerRank;
+    private Integer answerRank;
 
     @ApiModelProperty("用户ID")
     private Integer userId;
@@ -34,11 +34,11 @@ public class Answer {
         this.answerId = answerId;
     }
 
-    public Byte getAnswerRank() {
+    public Integer getAnswerRank() {
         return answerRank;
     }
 
-    public void setAnswerRank(Byte answerRank) {
+    public void setAnswerRank(Integer answerRank) {
         this.answerRank = answerRank;
     }
 

@@ -2,6 +2,8 @@ package com.swust.fund.dao;
 
 import com.swust.fund.entity.Answer;
 
+import java.util.List;
+
 public interface AnswerMapper {
     int deleteByPrimaryKey(Integer answerId);
 
@@ -14,4 +16,6 @@ public interface AnswerMapper {
     int updateByPrimaryKeySelective(Answer record);
 
     int updateByPrimaryKey(Answer record);
+
+    int insertAnswerList(List<Answer> answerList);
 }

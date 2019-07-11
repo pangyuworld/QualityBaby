@@ -23,6 +23,16 @@ public class QuestionAspect {
     private String aspectName;
     @ApiModelProperty("是否是正面影响。即加分")
     private Boolean isWell;
+    @ApiModelProperty("影响的问题ID")
+    private Integer questionId;
+
+    public Integer getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(Integer questionId) {
+        this.questionId = questionId;
+    }
 
     public Integer getAspectId() {
         return aspectId;

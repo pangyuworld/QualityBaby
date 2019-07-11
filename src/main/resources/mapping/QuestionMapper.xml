@@ -15,6 +15,7 @@
         <result column="detail_id" property="aspectId" jdbcType="INTEGER"/>
         <result column="is_well" property="isWell" jdbcType="BIT"/>
         <result column="detail_name" property="aspectName" jdbcType="VARCHAR"/>
+        <result column="question_id" property="questionId" javaType="INTEGER"/>
     </resultMap>
     <select id="getQuestionAspect" resultMap="questionAspectMap" parameterType="int">
         select
@@ -22,6 +23,7 @@
             a.is_well as is_well,
             a.detail_id as detail_id,
             t.detail_name as detail_name
+            a.question_id as question_id
         from t_aspect_detial_question a
         inner join t_aspect_detail t on a.detail_id = t.detail_id
         where a.question_id=#{id}
@@ -129,4 +131,19 @@
     delete from t_aspect_detial_question
     where question_id = #{questionId,jdbcType=INTEGER} and detail_id=#{detailId}
     </delete>
+    <update id="updateQuestionAspect">
+        update t_aspect_detial_question
+        set is_well=#{isWell}
+        where question_id = #{questionId,jdbcType=INTEGER} and detail_id=#{detailId}
+    </update>
+    <select id="selectAllQuestionAspect" resultMap="questionAspectMap">
+        select
+        id,
+        question_id,
+        detail_id,
+        is_well,
+        question_id
+        from t_aspect_detial_question
+        order by question_id asc
+    </select>
 </mapper>

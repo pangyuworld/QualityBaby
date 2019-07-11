@@ -79,7 +79,7 @@
       aspect_id = #{aspectId,jdbcType=INTEGER}
     where detail_id = #{detailId,jdbcType=INTEGER}
   </update>
-    <select id="selectAllAspectDetail" resultMap="BaseResultMap" >
+    <select id="selectAllAspectDetail" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from t_aspect_detail
@@ -96,4 +96,11 @@
             ,detail_show=true
         </if>
     </select>
+    <insert id="insertScore">
+        insert into t_user_aspect_detail(user_id,detail_score,detail_id)
+        values
+        <foreach collection="scoreMap" item="value" index="key" separator=",">
+            (#{userId},#{value},#{key})
+        </foreach>
+    </insert>
 </mapper>
