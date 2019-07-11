@@ -76,4 +76,17 @@
             where aspect_show=true
         </if>
     </select>
+    <select id="selectScoreByUser" parameterType="int" resultType="map">
+        SELECT
+            a.aspect_id as aspect_id,
+            a.aspect_name as aspect_name,
+            a.aspect_show  as aspect_show,
+            SUM(c.detail_score) as score
+        FROM
+            t_aspect a
+        INNER JOIN t_aspect_detail b ON a.aspect_id=b.aspect_id
+        inner JOIN t_user_aspect_detail c ON c.detail_id=b.detail_id
+        where c.user_id=#{userId}
+        GROUP BY a.aspect_id
+    </select>
 </mapper>

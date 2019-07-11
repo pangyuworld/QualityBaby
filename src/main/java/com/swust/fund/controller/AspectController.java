@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author pang
@@ -110,5 +111,22 @@ public class AspectController {
     @RequestMapping(value = "/detail/aspect", method = RequestMethod.GET)
     public ResponseJSON<List<AspectDetail>> getAspectDetailByAspect(int aspectId, @RequestParam(defaultValue = "false") boolean showAll) {
         return new ResponseJSON<>(true, aspectService.getDetailByAspect(aspectId, showAll));
+    }
+
+    @ApiOperation("获取用户的雷达图相关因素")
+    @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "int", paramType = "path")
+    @RequestMapping(value = "/aspect/score/{userId}", method = RequestMethod.GET)
+    public ResponseJSON<List<Map>> getAspectScoreByUserId(@PathVariable int userId) {
+        return new ResponseJSON<>(true, aspectService.getAspectScoreByUser(userId));
+    }
+
+    @ApiOperation("获取用户的雷达图相关因素")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "aspectId", value = "大方向id", required = true, dataType = "int", paramType = "path"),
+            @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "int", paramType = "path")
+    })
+    @RequestMapping(value = "/aspect/{aspectId}/detail/score/{userId}", method = RequestMethod.GET)
+    public ResponseJSON<List<Map>> getDetailScoreByUserId(@PathVariable int userId, @PathVariable int aspectId) {
+        return new ResponseJSON<>(true, aspectService.getDetailScoreByUser(userId, aspectId));
     }
 }

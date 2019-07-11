@@ -103,4 +103,17 @@
             (#{userId},#{value},#{key})
         </foreach>
     </insert>
+    <select id="selectDetailScoreByUser" resultType="map">
+    SELECT
+        a.detail_id detail_id,
+        a.detail_name AS detail_name,
+        a.detail_show AS detail_show,
+        a.aspect_id AS aspect_id,
+        SUM( b.detail_score ) AS score
+    FROM
+        t_aspect_detail a
+    INNER JOIN t_user_aspect_detail b ON a.detail_id = b.detail_id
+    where a.aspect_id=#{aspectId} and b.user_id=#{userId}
+    group by b.detail_id
+    </select>
 </mapper>

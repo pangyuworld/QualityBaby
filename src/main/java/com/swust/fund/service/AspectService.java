@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author pang
@@ -161,5 +162,30 @@ public class AspectService {
      */
     public List<AspectDetail> getDetailByAspect(Integer aspectId, Boolean showAll) {
         return detailMapper.selectAllAspectDetailByAspect(aspectId, showAll);
+    }
+
+    /**
+     * 获取用户的大的雷达图
+     *
+     * @param userId 用户Id
+     * @return java.util.List<java.util.Map>
+     * @author pang
+     * @date 2019/7/11
+     */
+    public List<Map> getAspectScoreByUser(int userId) {
+        return aspectMapper.selectScoreByUser(userId);
+    }
+
+    /**
+     * 获取用户小的雷达图
+     *
+     * @param userId   用户ID
+     * @param aspectId 大方向ID
+     * @return java.util.List<java.util.Map>
+     * @author pang
+     * @date 2019/7/11
+     */
+    public List<Map> getDetailScoreByUser(int userId, int aspectId) {
+        return detailMapper.selectDetailScoreByUser(userId, aspectId);
     }
 }

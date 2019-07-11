@@ -1,10 +1,10 @@
 package com.swust.fund.dao;
 
-import com.github.pagehelper.Page;
 import com.swust.fund.entity.Aspect;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AspectMapper {
     int deleteByPrimaryKey(Integer aspectId);
@@ -20,4 +20,6 @@ public interface AspectMapper {
     int updateByPrimaryKey(Aspect record);
 
     List<Aspect> selectAllAspect(@Param("showAll") Boolean showAll);
+
+    List<Map> selectScoreByUser(@Param("userId") Integer userId);
 }
