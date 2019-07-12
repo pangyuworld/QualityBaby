@@ -37,7 +37,7 @@ public class AdminController {
     })
     @RequestMapping(value = "/admin/login", method = RequestMethod.POST)
     public ResponseJSON<String> login(String username, String password, HttpServletRequest request) {
-        String result = adminService.login(username, password,request);
+        String result = adminService.login(username, password, request);
         if (result == null) {
             return new ResponseJSON<>(false, UnicomResponseEnums.NO_USER_EXIST);
         } else if (result.equals("-1")) {
@@ -70,8 +70,8 @@ public class AdminController {
             @ApiImplicitParam(name = "pageNum", value = "页码", required = true, dataType = "int", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "大小", required = true, dataType = "int", paramType = "query")
     })
-    @RequestMapping(value = "/admin/log",method = RequestMethod.GET)
-    public ResponseJSON<PageInfo<AdminLoginLog>> getAdminLoginLog(int pageNum,int pageSize){
-        return new ResponseJSON<>(true,adminService.getAllLog(pageNum, pageSize));
+    @RequestMapping(value = "/admin/log", method = RequestMethod.GET)
+    public ResponseJSON<PageInfo<AdminLoginLog>> getAdminLoginLog(int pageNum, int pageSize) {
+        return new ResponseJSON<>(true, adminService.getAllLog(pageNum, pageSize));
     }
 }

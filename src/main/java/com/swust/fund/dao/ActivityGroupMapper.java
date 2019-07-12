@@ -2,6 +2,7 @@ package com.swust.fund.dao;
 
 import com.github.pagehelper.Page;
 import com.swust.fund.entity.ActivityGroup;
+import org.apache.ibatis.annotations.Param;
 
 public interface ActivityGroupMapper {
     int deleteByPrimaryKey(Integer groupId);
@@ -16,5 +17,5 @@ public interface ActivityGroupMapper {
 
     int updateByPrimaryKey(ActivityGroup record);
 
-    Page<ActivityGroup> selectAllGroup(boolean showAll);
+    Page<ActivityGroup> selectAllGroup(@Param("showAll") boolean showAll);
 }

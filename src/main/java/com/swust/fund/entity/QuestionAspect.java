@@ -4,6 +4,8 @@ package com.swust.fund.entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
+
 /**
  * @author pang
  * @version V1.0
@@ -13,8 +15,9 @@ import io.swagger.annotations.ApiModelProperty;
  * @date 2019/7/9 9:48
  */
 @ApiModel("问题和影响方面对应表，属于问题的子表")
-public class QuestionAspect {
+public class QuestionAspect implements Serializable {
 
+    private static final long serialVersionUID = -130889622542610812L;
     @ApiModelProperty("ID")
     private Integer id;
     @ApiModelProperty("影响方面ID")

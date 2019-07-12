@@ -1,146 +1,18 @@
-2019-05-05 11:26:30.936 [background-preinit] DEBUG o.h.v.m.ResourceBundleMessageInterpolator - Loaded expression factory via original TCCL
-2019-05-05 12:43:54.637 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==>  Preparing: select b.studio_id , b.studio_information, b.studio_name, b.studio_show, b.studio_start, a.activity_id, a.activity_information, a.activity_name, a.activity_person_num, a.activity_show, a.activity_sign_up, a.activity_start, a.activity_end from t_studio b inner join t_activity a on b.studio_id = a.studio_id 
-2019-05-05 12:43:54.669 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==> Parameters: 
-2019-05-05 12:43:54.694 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - <==      Total: 1
-2019-05-05 12:44:04.343 [http-nio-19316-exec-2] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==>  Preparing: select b.studio_id , b.studio_information, b.studio_name, b.studio_show, b.studio_start, a.activity_id, a.activity_information, a.activity_name, a.activity_person_num, a.activity_show, a.activity_sign_up, a.activity_start, a.activity_end from t_studio b inner join t_activity a on b.studio_id = a.studio_id 
-2019-05-05 12:44:04.344 [http-nio-19316-exec-2] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==> Parameters: 
-2019-05-05 12:44:04.345 [http-nio-19316-exec-2] DEBUG com.swust.fund.dao.StudioMapper.selectAll - <==      Total: 1
-2019-05-05 12:44:09.170 [http-nio-19316-exec-3] DEBUG com.swust.fund.dao.StudioMapper.selectByPrimaryKey - ==>  Preparing: select b.studio_id , b.studio_information, b.studio_name, b.studio_show, b.studio_start, a.activity_id, a.activity_information, a.activity_name, a.activity_person_num, a.activity_show, a.activity_sign_up, a.activity_start, a.activity_end from t_studio b left join t_activity a on a.studio_id = b.studio_id where b.studio_id = ? 
-2019-05-05 12:44:09.171 [http-nio-19316-exec-3] DEBUG com.swust.fund.dao.StudioMapper.selectByPrimaryKey - ==> Parameters: 2(Integer)
-2019-05-05 12:44:09.173 [http-nio-19316-exec-3] DEBUG com.swust.fund.dao.StudioMapper.selectByPrimaryKey - <==      Total: 1
-2019-05-05 12:45:45.817 [http-nio-19316-exec-2] DEBUG com.swust.fund.dao.StudioMapper.selectByPrimaryKey - ==>  Preparing: select b.studio_id , b.studio_information, b.studio_name, b.studio_show, b.studio_start, a.activity_id, a.activity_information, a.activity_name, a.activity_person_num, a.activity_show, a.activity_sign_up, a.activity_start, a.activity_end from t_studio b left join t_activity a on a.studio_id = b.studio_id where b.studio_id = ? 
-2019-05-05 12:45:45.846 [http-nio-19316-exec-2] DEBUG com.swust.fund.dao.StudioMapper.selectByPrimaryKey - ==> Parameters: 2(Integer)
-2019-05-05 12:45:45.873 [http-nio-19316-exec-2] DEBUG com.swust.fund.dao.StudioMapper.selectByPrimaryKey - <==      Total: 1
-2019-05-05 12:47:58.535 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectByPrimaryKey - ==>  Preparing: select b.studio_id , b.studio_information, b.studio_name, b.studio_show, b.studio_start, a.activity_id, a.activity_information, a.activity_name, a.activity_person_num, a.activity_show, a.activity_sign_up, a.activity_start, a.activity_end from t_studio b left join t_activity a on a.studio_id = b.studio_id where b.studio_id = ? 
-2019-05-05 12:47:58.559 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectByPrimaryKey - ==> Parameters: 2(Integer)
-2019-05-05 12:47:58.585 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectByPrimaryKey - <==      Total: 1
-2019-05-05 12:48:47.993 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectByPrimaryKey - ==>  Preparing: select b.studio_id , b.studio_information, b.studio_name, b.studio_show, b.studio_start, a.activity_id, a.activity_information, a.activity_name, a.activity_person_num, a.activity_show, a.activity_sign_up, a.activity_start, a.activity_end from t_studio b left join t_activity a on a.studio_id = b.studio_id where b.studio_id = ? 
-2019-05-05 12:48:48.015 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectByPrimaryKey - ==> Parameters: 2(Integer)
-2019-05-05 12:48:48.036 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectByPrimaryKey - <==      Total: 1
-2019-05-05 12:50:31.468 [http-nio-19316-exec-2] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==>  Preparing: select b.studio_id , b.studio_information, b.studio_name, b.studio_show, b.studio_start, a.activity_id, a.activity_information, a.activity_name, a.activity_person_num, a.activity_show, a.activity_sign_up, a.activity_start, a.activity_end from t_studio b inner join t_activity a on b.studio_id = a.studio_id 
-2019-05-05 12:50:31.491 [http-nio-19316-exec-2] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==> Parameters: 
-2019-05-05 12:50:31.514 [http-nio-19316-exec-2] DEBUG com.swust.fund.dao.StudioMapper.selectAll - <==      Total: 1
-2019-05-05 12:53:03.544 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==>  Preparing: select b.studio_id , b.studio_information, b.studio_name, b.studio_show, b.studio_start, a.activity_id, a.activity_information, a.activity_name, a.activity_person_num, a.activity_show, a.activity_sign_up, a.activity_start, a.activity_end from t_studio b left join t_activity a on b.studio_id = a.studio_id 
-2019-05-05 12:53:03.567 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==> Parameters: 
-2019-05-05 12:53:03.599 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - <==      Total: 18
-2019-05-05 12:53:27.228 [http-nio-19316-exec-2] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==>  Preparing: select b.studio_id , b.studio_information, b.studio_name, b.studio_show, b.studio_start, a.activity_id, a.activity_information, a.activity_name, a.activity_person_num, a.activity_show, a.activity_sign_up, a.activity_start, a.activity_end from t_studio b left join t_activity a on b.studio_id = a.studio_id 
-2019-05-05 12:53:27.251 [http-nio-19316-exec-2] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==> Parameters: 
-2019-05-05 12:53:27.284 [http-nio-19316-exec-2] DEBUG com.swust.fund.dao.StudioMapper.selectAll - <==      Total: 18
-2019-05-05 12:54:35.511 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==>  Preparing: select b.studio_id , b.studio_information, b.studio_name, b.studio_show, b.studio_start, a.activity_id, a.activity_information, a.activity_name, a.activity_person_num, a.activity_show, a.activity_sign_up, a.activity_start, a.activity_end from t_studio b left join t_activity a on b.studio_id = a.studio_id 
-2019-05-05 12:54:35.535 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==> Parameters: 
-2019-05-05 12:54:35.567 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - <==      Total: 18
-2019-05-05 12:58:28.298 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==>  Preparing: select b.studio_id , b.studio_information, b.studio_name, b.studio_show, b.studio_start, a.activity_id, a.activity_information, a.activity_name, a.activity_person_num, a.activity_show, a.activity_sign_up, a.activity_start, a.activity_end from t_studio b left join t_activity a on b.studio_id = a.studio_id 
-2019-05-05 12:58:28.322 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==> Parameters: 
-2019-05-05 12:58:28.357 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - <==      Total: 18
-2019-05-05 13:01:52.050 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==>  Preparing: select studio_id, studio_name, studio_information, studio_start, studio_show from t_studio b left join t_activity a on b.studio_id = a.studio_id 
-2019-05-05 13:01:52.072 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==> Parameters: 
-2019-05-05 13:02:15.171 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==>  Preparing: select studio_id, studio_name, studio_information, studio_start, studio_show from t_studio b -- left join t_activity a on b.studio_id = a.studio_id 
-2019-05-05 13:02:15.191 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==> Parameters: 
-2019-05-05 13:02:15.219 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - <==      Total: 18
-2019-05-05 13:03:57.306 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==>  Preparing: select studio_id, studio_name, studio_information, studio_start, studio_show from t_studio b -- left join t_activity a on b.studio_id = a.studio_id 
-2019-05-05 13:03:57.327 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==> Parameters: 
-2019-05-05 13:03:57.355 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - <==      Total: 18
-2019-05-05 13:05:04.190 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==>  Preparing: select studio_id, studio_name, studio_information, studio_start, studio_show from t_studio b -- left join t_activity a on b.studio_id = a.studio_id 
-2019-05-05 13:05:04.217 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==> Parameters: 
-2019-05-05 13:05:04.248 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - <==      Total: 18
-2019-05-05 13:05:59.949 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==>  Preparing: select b.studio_id , b.studio_information, b.studio_name, b.studio_show, b.studio_start, a.activity_id, a.activity_information, a.activity_name, a.activity_person_num, a.activity_show, a.activity_sign_up, a.activity_start, a.activity_end from t_studio b left join t_activity a on b.studio_id = a.studio_id 
-2019-05-05 13:05:59.972 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==> Parameters: 
-2019-05-05 13:06:00.005 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - <==      Total: 18
-2019-05-05 13:09:50.810 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==>  Preparing: select b.studio_id , b.studio_information, b.studio_name, b.studio_show, b.studio_start, a.activity_id, a.activity_information, a.activity_name, a.activity_person_num, a.activity_show, a.activity_sign_up, a.activity_start, a.activity_end from t_studio b left join t_activity a on b.studio_id = a.studio_id 
-2019-05-05 13:09:50.833 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==> Parameters: 
-2019-05-05 13:09:50.870 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - <==      Total: 18
-2019-05-05 13:12:30.161 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==>  Preparing: select b.studio_id , b.studio_information, b.studio_name, b.studio_show, b.studio_start, a.activity_id, a.activity_information, a.activity_name, a.activity_person_num, a.activity_show, a.activity_sign_up, a.activity_start, a.activity_end from t_studio b left join t_activity a on b.studio_id = a.studio_id 
-2019-05-05 13:12:30.201 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==> Parameters: 
-2019-05-05 13:12:30.235 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - <==      Total: 18
-2019-05-05 13:14:06.087 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==>  Preparing: select b.studio_id , b.studio_information, b.studio_name, b.studio_show, b.studio_start, a.activity_id, a.activity_information, a.activity_name, a.activity_person_num, a.activity_show, a.activity_sign_up, a.activity_start, a.activity_end from t_studio b left join t_activity a on b.studio_id = a.studio_id 
-2019-05-05 13:14:06.111 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==> Parameters: 
-2019-05-05 13:14:06.147 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - <==       : 18
-2019-05-05 15:38:52.682 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==>  Preparing: select b.studio_id , b.studio_information, b.studio_name, b.studio_show, b.studio_start, a.activity_id, a.activity_information, a.activity_name, a.activity_person_num, a.activity_show, a.activity_sign_up, a.activity_start, a.activity_end from t_studio b left join t_activity a on b.studio_id = a.studio_id limit ?,? 
-2019-05-05 15:38:52.810 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==> Parameters: 0(Integer), 9(Integer)
-2019-05-05 15:38:52.836 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - <==      Total: 9
-2019-05-05 15:38:52.839 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectCount - ==>  Preparing: select count(*) from t_studio 
-2019-05-05 15:38:52.839 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectCount - ==> Parameters: 
-2019-05-05 15:38:52.842 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectCount - <==      Total: 1
-2019-05-05 15:59:59.417 [http-nio-19316-exec-3] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==>  Preparing: select b.studio_id , b.studio_information, b.studio_name, b.studio_show, b.studio_start, a.activity_id, a.activity_information, a.activity_name, a.activity_person_num, a.activity_show, a.activity_sign_up, a.activity_start, a.activity_end from t_studio b left join t_activity a on b.studio_id = a.studio_id limit ?,? 
-2019-05-05 15:59:59.418 [http-nio-19316-exec-3] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==> Parameters: -9(Integer), 9(Integer)
-2019-05-05 16:15:05.996 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==>  Preparing: select studio_id, studio_name, studio_information, studio_start, studio_show from t_studio limit ?,? 
-2019-05-05 16:15:06.026 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==> Parameters: 0(Integer), 9(Integer)
-2019-05-05 16:15:06.069 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectAll - <==      Total: 9
-2019-05-05 16:15:06.070 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectCount - ==>  Preparing: select count(*) from t_studio 
-2019-05-05 16:15:06.071 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectCount - ==> Parameters: 
-2019-05-05 16:15:06.073 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.selectCount - <==      Total: 1
-2019-05-05 16:15:13.879 [http-nio-19316-exec-3] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==>  Preparing: select studio_id, studio_name, studio_information, studio_start, studio_show from t_studio limit ?,? 
-2019-05-05 16:15:13.880 [http-nio-19316-exec-3] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==> Parameters: 9(Integer), 9(Integer)
-2019-05-05 16:15:13.884 [http-nio-19316-exec-3] DEBUG com.swust.fund.dao.StudioMapper.selectAll - <==      Total: 9
-2019-05-05 16:15:13.884 [http-nio-19316-exec-3] DEBUG com.swust.fund.dao.StudioMapper.selectCount - ==>  Preparing: select count(*) from t_studio 
-2019-05-05 16:15:13.885 [http-nio-19316-exec-3] DEBUG com.swust.fund.dao.StudioMapper.selectCount - ==> Parameters: 
-2019-05-05 16:15:13.886 [http-nio-19316-exec-3] DEBUG com.swust.fund.dao.StudioMapper.selectCount - <==      Total: 1
-2019-05-05 16:31:47.433 [http-nio-19316-exec-10] DEBUG com.swust.fund.dao.StudioMapper.insert - ==>  Preparing: insert into t_studio (studio_id, studio_name, studio_information, studio_start, studio_show) values (?, ?, ?, ?, ?) 
-2019-05-05 16:31:47.480 [http-nio-19316-exec-10] DEBUG com.swust.fund.dao.StudioMapper.insert - ==> Parameters: null, swagger测试(String), swagger测试介绍(String), 2018-02-02 22:22:22.0(Timestamp), true(Boolean)
-2019-05-05 16:31:47.550 [http-nio-19316-exec-10] DEBUG com.swust.fund.dao.StudioMapper.insert - <==    Updates: 1
-2019-05-05 16:32:05.938 [http-nio-19316-exec-9] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==>  Preparing: select studio_id, studio_name, studio_information, studio_start, studio_show from t_studio limit ?,? 
-2019-05-05 16:32:05.939 [http-nio-19316-exec-9] DEBUG com.swust.fund.dao.StudioMapper.selectAll - ==> Parameters: 0(Integer), 22(Integer)
-2019-05-05 16:32:05.965 [http-nio-19316-exec-9] DEBUG com.swust.fund.dao.StudioMapper.selectAll - <==      Total: 19
-2019-05-05 16:32:05.966 [http-nio-19316-exec-9] DEBUG com.swust.fund.dao.StudioMapper.selectCount - ==>  Preparing: select count(*) from t_studio 
-2019-05-05 16:32:05.967 [http-nio-19316-exec-9] DEBUG com.swust.fund.dao.StudioMapper.selectCount - ==> Parameters: 
-2019-05-05 16:32:05.969 [http-nio-19316-exec-9] DEBUG com.swust.fund.dao.StudioMapper.selectCount - <==      Total: 1
-2019-05-05 16:34:06.618 [http-nio-19316-exec-2] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==>  Preparing: delete from t_studio where studio_id = ? 
-2019-05-05 16:34:06.618 [http-nio-19316-exec-2] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==> Parameters: 1(Integer)
-2019-05-05 16:36:11.034 [http-nio-19316-exec-3] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==>  Preparing: delete from t_studio where studio_id = ? 
-2019-05-05 16:36:11.035 [http-nio-19316-exec-3] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==> Parameters: 1(Integer)
-2019-05-05 16:36:25.984 [http-nio-19316-exec-4] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==>  Preparing: delete from t_studio where studio_id = ? 
-2019-05-05 16:36:25.984 [http-nio-19316-exec-4] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==> Parameters: 1(Integer)
-2019-05-05 16:40:35.161 [http-nio-19316-exec-6] DEBUG com.swust.fund.dao.StudioMapper.insert - ==>  Preparing: insert into t_studio (studio_id, studio_name, studio_information, studio_start, studio_show) values (?, ?, ?, ?, ?) 
-2019-05-05 16:40:35.162 [http-nio-19316-exec-6] DEBUG com.swust.fund.dao.StudioMapper.insert - ==> Parameters: null, swagger测试(String), swagger测试介绍(String), 2018-02-02 22:22:22.0(Timestamp), true(Boolean)
-2019-05-05 16:40:35.228 [http-nio-19316-exec-6] DEBUG com.swust.fund.dao.StudioMapper.insert - <==    Updates: 1
-2019-05-05 16:41:27.942 [http-nio-19316-exec-5] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==>  Preparing: delete from t_studio where studio_id = ? 
-2019-05-05 16:41:27.942 [http-nio-19316-exec-5] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==> Parameters: 1(Integer)
-2019-05-05 16:41:28.015 [http-nio-19316-exec-5] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - <==    Updates: 1
-2019-05-05 16:41:29.893 [http-nio-19316-exec-7] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==>  Preparing: delete from t_studio where studio_id = ? 
-2019-05-05 16:41:29.894 [http-nio-19316-exec-7] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==> Parameters: 1(Integer)
-2019-05-05 16:41:29.894 [http-nio-19316-exec-7] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - <==    Updates: 0
-2019-05-05 16:41:30.483 [http-nio-19316-exec-10] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==>  Preparing: delete from t_studio where studio_id = ? 
-2019-05-05 16:41:30.483 [http-nio-19316-exec-10] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==> Parameters: 1(Integer)
-2019-05-05 16:41:30.484 [http-nio-19316-exec-10] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - <==    Updates: 0
-2019-05-05 16:41:31.226 [http-nio-19316-exec-9] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==>  Preparing: delete from t_studio where studio_id = ? 
-2019-05-05 16:41:31.227 [http-nio-19316-exec-9] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==> Parameters: 1(Integer)
-2019-05-05 16:41:31.227 [http-nio-19316-exec-9] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - <==    Updates: 0
-2019-05-05 16:41:31.622 [http-nio-19316-exec-8] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==>  Preparing: delete from t_studio where studio_id = ? 
-2019-05-05 16:41:31.622 [http-nio-19316-exec-8] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==> Parameters: 1(Integer)
-2019-05-05 16:41:31.623 [http-nio-19316-exec-8] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - <==    Updates: 0
-2019-05-05 16:41:31.820 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==>  Preparing: delete from t_studio where studio_id = ? 
-2019-05-05 16:41:31.820 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==> Parameters: 1(Integer)
-2019-05-05 16:41:31.821 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - <==    Updates: 0
-2019-05-05 16:41:32.012 [http-nio-19316-exec-2] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==>  Preparing: delete from t_studio where studio_id = ? 
-2019-05-05 16:41:32.012 [http-nio-19316-exec-2] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==> Parameters: 1(Integer)
-2019-05-05 16:41:32.013 [http-nio-19316-exec-2] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - <==    Updates: 0
-2019-05-05 16:41:32.188 [http-nio-19316-exec-3] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==>  Preparing: delete from t_studio where studio_id = ? 
-2019-05-05 16:41:32.188 [http-nio-19316-exec-3] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==> Parameters: 1(Integer)
-2019-05-05 16:41:32.189 [http-nio-19316-exec-3] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - <==    Updates: 0
-2019-05-05 16:41:32.387 [http-nio-19316-exec-4] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==>  Preparing: delete from t_studio where studio_id = ? 
-2019-05-05 16:41:32.388 [http-nio-19316-exec-4] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==> Parameters: 1(Integer)
-2019-05-05 16:41:32.390 [http-nio-19316-exec-4] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - <==    Updates: 0
-2019-05-05 16:41:59.474 [http-nio-19316-exec-6] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==>  Preparing: delete from t_studio where studio_id = ? 
-2019-05-05 16:41:59.474 [http-nio-19316-exec-6] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==> Parameters: 1(Integer)
-2019-05-05 16:41:59.475 [http-nio-19316-exec-6] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - <==    Updates: 0
-2019-05-05 16:41:59.938 [http-nio-19316-exec-5] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==>  Preparing: delete from t_studio where studio_id = ? 
-2019-05-05 16:41:59.939 [http-nio-19316-exec-5] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==> Parameters: 1(Integer)
-2019-05-05 16:41:59.940 [http-nio-19316-exec-5] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - <==    Updates: 0
-2019-05-05 16:42:00.170 [http-nio-19316-exec-7] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==>  Preparing: delete from t_studio where studio_id = ? 
-2019-05-05 16:42:00.171 [http-nio-19316-exec-7] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==> Parameters: 1(Integer)
-2019-05-05 16:42:00.172 [http-nio-19316-exec-7] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - <==    Updates: 0
-2019-05-05 16:42:00.373 [http-nio-19316-exec-10] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==>  Preparing: delete from t_studio where studio_id = ? 
-2019-05-05 16:42:00.373 [http-nio-19316-exec-10] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==> Parameters: 1(Integer)
-2019-05-05 16:42:00.374 [http-nio-19316-exec-10] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - <==    Updates: 0
-2019-05-05 16:42:00.566 [http-nio-19316-exec-9] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==>  Preparing: delete from t_studio where studio_id = ? 
-2019-05-05 16:42:00.566 [http-nio-19316-exec-9] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - ==> Parameters: 1(Integer)
-2019-05-05 16:42:00.567 [http-nio-19316-exec-9] DEBUG com.swust.fund.dao.StudioMapper.deleteByPrimaryKey - <==    Updates: 0
-2019-05-05 18:34:56.528 [http-nio-19316-exec-8] DEBUG c.s.fund.dao.AdminUserMapper.findByAdminLoginName - ==>  Preparing: select admin_id, admin_real_name, admin_login_name, admin_login_password from t_admin_user where admin_login_name = ? 
-2019-05-05 18:34:56.568 [http-nio-19316-exec-8] DEBUG c.s.fund.dao.AdminUserMapper.findByAdminLoginName - ==> Parameters: admin(String)
-2019-05-05 18:34:56.619 [http-nio-19316-exec-8] DEBUG c.s.fund.dao.AdminUserMapper.findByAdminLoginName - <==      Total: 1
-2019-05-05 18:40:04.509 [http-nio-19316-exec-1] DEBUG c.s.fund.dao.AdminUserMapper.findByAdminLoginName - ==>  Preparing: select admin_id, admin_real_name, admin_login_name, admin_login_password from t_admin_user where admin_login_name = ? 
-2019-05-05 18:40:04.543 [http-nio-19316-exec-1] DEBUG c.s.fund.dao.AdminUserMapper.findByAdminLoginName - ==> Parameters: admin(String)
-2019-05-05 18:40:04.566 [http-nio-19316-exec-1] DEBUG c.s.fund.dao.AdminUserMapper.findByAdminLoginName - <==      Total: 1
-2019-05-05 18:40:09.452 [http-nio-19316-exec-2] DEBUG c.s.fund.dao.AdminUserMapper.findByAdminLoginName - ==>  Preparing: select admin_id, admin_real_name, admin_login_name, admin_login_password from t_admin_user where admin_login_name = ? 
-2019-05-05 18:40:09.453 [http-nio-19316-exec-2] DEBUG c.s.fund.dao.AdminUserMapper.findByAdminLoginName - ==> Parameters: admin(String)
-2019-05-05 18:40:09.453 [http-nio-19316-exec-2] DEBUG c.s.fund.dao.AdminUserMapper.findByAdminLoginName - <==      Total: 1
+2019-07-12 19:33:35.079 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.ActivityGroupMapper - Cache Hit Ratio [com.swust.fund.dao.ActivityGroupMapper]: 0.0
+2019-07-12 19:33:35.105 [http-nio-19316-exec-1] DEBUG c.s.f.dao.ActivityGroupMapper.selectAllGroup_COUNT - ==>  Preparing: SELECT count(0) FROM t_activity_group 
+2019-07-12 19:33:35.130 [http-nio-19316-exec-1] DEBUG c.s.f.dao.ActivityGroupMapper.selectAllGroup_COUNT - ==> Parameters: 
+2019-07-12 19:33:35.238 [http-nio-19316-exec-1] DEBUG c.s.f.dao.ActivityGroupMapper.selectAllGroup_COUNT - <==      Total: 1
+2019-07-12 19:33:35.241 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.ActivityGroupMapper - Cache Hit Ratio [com.swust.fund.dao.ActivityGroupMapper]: 0.0
+2019-07-12 19:33:35.242 [http-nio-19316-exec-1] DEBUG c.s.fund.dao.ActivityGroupMapper.selectAllGroup - ==>  Preparing: select group_id, gourp_name, group_show, group_icon, group_sort, group_add_time from t_activity_group LIMIT ? 
+2019-07-12 19:33:35.243 [http-nio-19316-exec-1] DEBUG c.s.fund.dao.ActivityGroupMapper.selectAllGroup - ==> Parameters: 1(Integer)
+2019-07-12 19:33:35.269 [http-nio-19316-exec-1] DEBUG c.s.fund.dao.ActivityGroupMapper.selectAllGroup - <==      Total: 1
+2019-07-12 19:35:08.478 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.ActivityGroupMapper - Cache Hit Ratio [com.swust.fund.dao.ActivityGroupMapper]: 1.0
+2019-07-12 19:35:08.480 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.ActivityGroupMapper - Cache Hit Ratio [com.swust.fund.dao.ActivityGroupMapper]: 0.5
+2019-07-12 19:35:08.489 [http-nio-19316-exec-1] DEBUG c.s.fund.dao.ActivityGroupMapper.selectAllGroup - ==>  Preparing: select group_id, gourp_name, group_show, group_icon, group_sort, group_add_time from t_activity_group LIMIT ? 
+2019-07-12 19:35:08.514 [http-nio-19316-exec-1] DEBUG c.s.fund.dao.ActivityGroupMapper.selectAllGroup - ==> Parameters: 1(Integer)
+2019-07-12 19:35:08.534 [http-nio-19316-exec-1] DEBUG c.s.fund.dao.ActivityGroupMapper.selectAllGroup - <==      Total: 1
+2019-07-12 19:36:33.111 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.ActivityGroupMapper - Cache Hit Ratio [com.swust.fund.dao.ActivityGroupMapper]: 1.0
+2019-07-12 19:36:33.113 [http-nio-19316-exec-1] DEBUG com.swust.fund.dao.ActivityGroupMapper - Cache Hit Ratio [com.swust.fund.dao.ActivityGroupMapper]: 0.5
+2019-07-12 19:36:33.123 [http-nio-19316-exec-1] DEBUG c.s.fund.dao.ActivityGroupMapper.selectAllGroup - ==>  Preparing: select group_id, gourp_name, group_show, group_icon, group_sort, group_add_time from t_activity_group LIMIT ? 
+2019-07-12 19:36:33.147 [http-nio-19316-exec-1] DEBUG c.s.fund.dao.ActivityGroupMapper.selectAllGroup - ==> Parameters: 1(Integer)
+2019-07-12 19:36:33.169 [http-nio-19316-exec-1] DEBUG c.s.fund.dao.ActivityGroupMapper.selectAllGroup - <==      Total: 1

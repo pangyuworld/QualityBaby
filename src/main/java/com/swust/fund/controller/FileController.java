@@ -2,10 +2,8 @@ package com.swust.fund.controller;
 
 import com.swust.fund.common.restful.ResponseJSON;
 import com.swust.fund.common.restful.UnicomResponseEnums;
-import com.swust.fund.common.restful.UnicomRuntimeException;
 import com.swust.fund.service.FileService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

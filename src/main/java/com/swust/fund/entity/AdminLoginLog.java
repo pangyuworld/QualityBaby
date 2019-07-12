@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @ApiModel("管理员登录日志")
-public class AdminLoginLog {
+public class AdminLoginLog implements Serializable {
+    private static final long serialVersionUID = -130234234343812L;
     @ApiModelProperty("记录ID")
     private Integer id;
 

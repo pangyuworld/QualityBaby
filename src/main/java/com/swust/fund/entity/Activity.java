@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @ApiModel("活动")
-public class Activity {
+public class Activity implements Serializable {
+    private static final long serialVersionUID = -13088960562222333L;
     @ApiModelProperty("活动id")
     private Integer activityId;
 

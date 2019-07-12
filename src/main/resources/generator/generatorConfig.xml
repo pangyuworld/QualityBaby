@@ -44,7 +44,7 @@
         <!--<table tableName="t_admin_user" domainObjectName="AdminUser" enableCountByExample="false" enableUpdateByExample="false"-->
         <!--enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="t_answer" domainObjectName="Answer" enableCountByExample="false" enableUpdateByExample="false"-->
-               <!--enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
+        <!--enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="t_aspect" domainObjectName="Aspect" enableCountByExample="false" enableUpdateByExample="false"-->
         <!--enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
         <!--<table tableName="t_aspect_detail" domainObjectName="AspectDetail" enableCountByExample="false"-->

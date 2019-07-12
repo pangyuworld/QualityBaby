@@ -118,11 +118,12 @@ public class CommonConst {
     }
 
     @PostConstruct
-    public void setUploadPath(){
-        uploadPath=this.tempUploadPath;
+    public void setUploadPath() {
+        uploadPath = this.tempUploadPath;
     }
+
     @PostConstruct
-    public void setImgServerPath(){
-        imgServerPath=this.tempImgServerPath;
+    public void setImgServerPath() {
+        imgServerPath = this.tempImgServerPath;
     }
 }

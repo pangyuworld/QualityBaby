@@ -2,13 +2,13 @@ package com.swust.fund.entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiOperation;
 
 import java.io.Serializable;
 import java.util.Date;
 
 @ApiModel("评论")
 public class Message implements Serializable {
+    private static final long serialVersionUID = -131231254110812L;
     @ApiModelProperty("评论id")
     private Integer messageId;
 

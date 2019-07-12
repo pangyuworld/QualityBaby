@@ -3,9 +3,12 @@ package com.swust.fund.entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel("小方向")
-public class AspectDetail {
+import java.io.Serializable;
 
+@ApiModel("小方向")
+public class AspectDetail implements Serializable {
+
+    private static final long serialVersionUID = -1308896056123123812L;
     @ApiModelProperty("小方向ID")
     private Integer detailId;
 

@@ -148,7 +148,7 @@ public class AdminService {
     public PageInfo<AdminLoginLog> getAllLog(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         Page<AdminLoginLog> logPage = logMapper.selectAllLog();
-        for (AdminLoginLog a:logPage){
+        for (AdminLoginLog a : logPage) {
             a.setLoginIpDecode(IpUtil.getNumConvertIp(a.getLoginIp()));
         }
         return new PageInfo<>(logPage);

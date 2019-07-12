@@ -1,7 +1,6 @@
 package com.swust.fund.service;
 
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.RandomUtil;
 import com.swust.fund.common.CommonConst;
 import com.swust.fund.common.restful.SpringExceptionHandle;
 import com.swust.fund.utils.random.LittleUUID;
@@ -15,7 +14,6 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * @author pang
@@ -34,7 +32,7 @@ public class FileService {
      *
      * @param file          图片文件
      * @param directoryName 图片归档名
-     * @return java.util.Map<java.lang.String   ,   java.lang.Object>
+     * @return java.util.Map<java.lang.String       ,       java.lang.Object>
      * @author pang
      * @date 2019/7/8
      */

@@ -158,7 +158,7 @@ public class QuestionService {
                     continue;
                 } else {
                     // TODO 如果i和j的id相等
-                    Integer score = scoreMap.get(qj.getAspectId())==null?0:scoreMap.get(qj.getAspectId());
+                    Integer score = scoreMap.get(qj.getAspectId()) == null ? 0 : scoreMap.get(qj.getAspectId());
                     if (qj.getWell()) {
                         scoreMap.put(qj.getAspectId(), score + ai.getAnswerRank());
                     } else {

@@ -3,6 +3,7 @@ package com.swust.fund.entity;
 import java.io.Serializable;
 
 public class AdminUser implements Serializable {
+    private static final long serialVersionUID = -130889605833212L;
     private Integer adminId;
 
     private String adminRealName;

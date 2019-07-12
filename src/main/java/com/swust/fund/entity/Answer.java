@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @ApiModel("填写的问卷")
-public class Answer {
+public class Answer implements Serializable {
+    private static final long serialVersionUID = -1308896056712312812L;
     @ApiModelProperty("答案ID")
     private Integer answerId;
 
@@ -23,7 +25,6 @@ public class Answer {
     @ApiModelProperty("回答的时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date answerTime;
-
 
 
     public Integer getAnswerId() {
