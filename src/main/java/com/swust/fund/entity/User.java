@@ -38,6 +38,9 @@ public class User implements Serializable {
     @ApiModelProperty(value = "注册时间")
     private Date signUpTime;
 
+    @ApiModelProperty("用户头像地址")
+    private String userIcon;
+
     public Date getSignUpTime() {
         return signUpTime;
     }
@@ -104,6 +107,13 @@ public class User implements Serializable {
         this.openId = openId;
     }
 
+    public String getUserIcon() {
+        return userIcon;
+    }
+
+    public void setUserIcon(String userIcon) {
+        this.userIcon = userIcon;
+    }
     // public List<Tag> getTags() {
     //     return tags;
     // }

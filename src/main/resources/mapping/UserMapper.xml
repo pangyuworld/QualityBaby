@@ -10,6 +10,7 @@
         <result column="gender" property="gender" jdbcType="BIT"/>
         <result column="stu_name" property="stuName" jdbcType="VARCHAR"/>
         <result column="sign_up_time" property="signUpTime" jdbcType="TIMESTAMP"/>
+        <result column="user_icon" property="userIcon" jdbcType="VARCHAR"/>
         <!--<collection property="tags" ofType="com.swust.fund.entity.Tag" select="selectTags" column="user_id">-->
         <!--</collection>-->
     </resultMap>
@@ -22,7 +23,7 @@
     <!--<result column="tag_show" property="tagShow" jdbcType="BIT"/>-->
     <!--</resultMap>-->
     <sql id="Base_Column_List">
-    t_user.user_id as user_id,	stu_id,	tell_num,	class_name,	gender,	stu_name, sign_up_time
+    t_user.user_id as user_id,	stu_id,	tell_num,	class_name,	gender,	stu_name, sign_up_time,user_icon
   </sql>
     <sql id="Blob_Column_List">
     open_id
@@ -43,10 +44,10 @@
     <insert id="insert" parameterType="com.swust.fund.entity.User">
     insert into t_user (user_id, stu_id, tell_num, 
       class_name, gender, stu_name, 
-      open_id,sign_up_time)
+      open_id,sign_up_time,user_icon)
     values (#{userId,jdbcType=INTEGER}, #{stuId,jdbcType=INTEGER}, #{tellNum,jdbcType=VARCHAR}, 
       #{className,jdbcType=VARCHAR}, #{gender,jdbcType=BIT}, #{stuName,jdbcType=VARCHAR}, 
-      #{openId,jdbcType=BINARY},#{signUpTime,jdbcType=TIMESTAMP})
+      #{openId,jdbcType=BINARY},#{signUpTime,jdbcType=TIMESTAMP},#{userIcon,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.swust.fund.entity.User">
         insert into t_user
@@ -75,6 +76,9 @@
             <if test="signUpTime != null">
                 sign_up_time,
             </if>
+            <if test="userIcon != null">
+                user_icon,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null">
@@ -100,6 +104,9 @@
             </if>
             <if test="signUpTime != null">
                 #{signUpTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userIcon != null">
+                #{userIcon,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -127,6 +134,9 @@
             <if test="signUpTime != null">
                 sign_up_time=#{signUpTime,jdbcType=TIMESTAMP},
             </if>
+            <if test="userIcon != null">
+                user_icon=#{userIcon,jdbcType=VARCHAR},
+            </if>
         </set>
         where user_id = #{openId,jdbcType=BINARY}
     </update>
@@ -138,7 +148,8 @@
       gender = #{gender,jdbcType=BIT},
       stu_name = #{stuName,jdbcType=VARCHAR},
       open_id = #{openId,jdbcType=BINARY} ,
-      sign_up_time=#{signUpTime,jdbcType=TIMESTAMP}
+      sign_up_time=#{signUpTime,jdbcType=TIMESTAMP},
+      user_icon=#{userIcon,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
     <update id="updateByPrimaryKey" parameterType="com.swust.fund.entity.User">
@@ -148,7 +159,8 @@
       class_name = #{className,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=BIT},
       stu_name = #{stuName,jdbcType=VARCHAR},
-      sign_up_time=#{signUpTime,jdbcType=TIMESTAMP}
+      sign_up_time=#{signUpTime,jdbcType=TIMESTAMP},
+      user_icon=#{userIcon,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
     <select id="selectByOpenId" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -183,6 +195,7 @@
           a.stu_name as stuName,
           a.tell_num as tellName,
           a.sign_up_time as signUpTime,
+          a.user_icon as userIcon
           DATE_FORMAT(a2.join_time,"%Y-%m-%d %H:%i:%s") as joinTime
         from t_user a
         inner join t_user_activity a2 on a.user_id = a2.user_id
