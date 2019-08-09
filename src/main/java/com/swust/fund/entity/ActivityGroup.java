@@ -14,7 +14,7 @@ public class ActivityGroup implements Serializable {
     private Integer groupId;
 
     @ApiModelProperty("分组名")
-    private String gourpName;
+    private String groupName;
 
     @ApiModelProperty("分组是否显示")
     private Boolean groupShow;
@@ -37,12 +37,12 @@ public class ActivityGroup implements Serializable {
         this.groupId = groupId;
     }
 
-    public String getGourpName() {
-        return gourpName;
+    public String getGroupName() {
+        return groupName;
     }
 
-    public void setGourpName(String gourpName) {
-        this.gourpName = gourpName == null ? null : gourpName.trim();
+    public void setGroupName(String groupName) {
+        this.groupName = groupName == null ? null : groupName.trim();
     }
 
     public Boolean getGroupShow() {

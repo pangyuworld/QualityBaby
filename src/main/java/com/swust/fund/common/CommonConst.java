@@ -53,6 +53,10 @@ public class CommonConst {
      * SHA256加密的盐值
      */
     public static String salt;
+    /**
+     * 文件最大上传大小
+     */
+    public static String maxFileSize;
 
 
     @Value("${img.server.path}")
@@ -81,6 +85,9 @@ public class CommonConst {
 
     @Value("${file.upload.path}")
     private String tempUploadPath;
+
+    // @Value("${spring.servlet.multipart.max-file-size}")
+    private String tempMaxFileSize;
 
     @PostConstruct
     public void setUrl() {
@@ -126,4 +133,9 @@ public class CommonConst {
     public void setImgServerPath() {
         imgServerPath = this.tempImgServerPath;
     }
+
+    // @PostConstruct
+    // public void setMaxFileSize() {
+    //     maxFileSize = this.tempMaxFileSize;
+    // }
 }

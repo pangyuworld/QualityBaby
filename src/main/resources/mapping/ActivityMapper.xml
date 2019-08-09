@@ -22,12 +22,12 @@
   </sql>
     <select id="selectGroup" resultType="com.swust.fund.entity.ActivityGroup" parameterType="int">
     select
-    group_id, gourp_name, group_show, group_icon, group_sort, group_add_time
+    group_id, group_name, group_show, group_icon, group_sort, group_add_time
     from t_activity_group
     </select>
     <select id="selectGroupByList" resultType="com.swust.fund.entity.ActivityGroup">
         select
-        group_id, gourp_name, group_show, group_icon, group_sort, group_add_time
+        group_id, group_name, group_show, group_icon, group_sort, group_add_time
         from t_activity_group
         where group_id in
         <foreach collection="list" item="groupId" index="index" open="(" close=")" separator=",">
