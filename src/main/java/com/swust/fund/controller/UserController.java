@@ -78,6 +78,7 @@ public class UserController {
             @ApiImplicitParam(name = "className", value = "用户班级姓名", required = true, dataType = "string", paramType = "query", example = "物联1704"),
             @ApiImplicitParam(name = "gender", value = "用户性别", required = true, dataType = "boolean", paramType = "query", example = "true"),
             @ApiImplicitParam(name = "stuName", value = "用户姓名", required = true, dataType = "string", paramType = "query", example = "张星宇"),
+            @ApiImplicitParam(name = "userIcon", value = "用户头像地址", required = true, dataType = "string", paramType = "query"),
     })
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     public ResponseJSON<Integer> add(User user) {

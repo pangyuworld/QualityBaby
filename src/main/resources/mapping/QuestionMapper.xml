@@ -23,7 +23,7 @@
             a.id as id,
             a.is_well as is_well,
             a.detail_id as detail_id,
-            t.detail_name as detail_name
+            t.detail_name as detail_name,
             a.question_id as question_id
         from t_aspect_detial_question a
         inner join t_aspect_detail t on a.detail_id = t.detail_id

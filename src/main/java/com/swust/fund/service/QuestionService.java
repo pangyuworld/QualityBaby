@@ -187,4 +187,16 @@ public class QuestionService {
             }
         });
     }
+
+    /**
+     * 判断用户是否回答了问题
+     *
+     * @param userId 要检查的用户ID
+     * @return boolean
+     * @author pang
+     * @date 2019/8/10
+     */
+    public boolean isAnswered(Integer userId) {
+        return (answerMapper.selectAllAnswerCount(userId) > 0);
+    }
 }

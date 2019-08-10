@@ -99,4 +99,8 @@
             (#{item.answerRank},#{item.userId},#{item.questionId},#{item.answerTime})
         </foreach>
     </insert>
+    <select id="selectAllAnswerCount" resultType="int">
+        select count(*) from t_answer
+        where user_id=#{userId}
+    </select>
 </mapper>

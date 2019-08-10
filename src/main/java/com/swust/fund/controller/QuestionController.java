@@ -96,4 +96,11 @@ public class QuestionController {
     public ResponseJSON<Integer> answerQuestion(@RequestBody List<Answer> answerList) {
         return new ResponseJSON<>(true, questionService.addAnswer(answerList));
     }
+
+    @ApiOperation("用户是否回答了问卷")
+    @ApiImplicitParam(name = "userId", value = "用户id", required = true, dataType = "int", paramType = "path")
+    @RequestMapping(value = "/answer/{userId}", method = RequestMethod.GET)
+    public ResponseJSON<Boolean> isAnsweredByUserId(@PathVariable int userId) {
+        return new ResponseJSON<>(true, questionService.isAnswered(userId));
+    }
 }

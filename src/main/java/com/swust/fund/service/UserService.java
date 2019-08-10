@@ -8,6 +8,7 @@ import com.swust.fund.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -86,6 +87,7 @@ public class UserService {
      * @date 2019/5/12
      */
     public int addUser(User user) {
+        user.setSignUpTime(new Date());
         return userMapper.insertSelective(user);
     }
 

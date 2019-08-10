@@ -4,14 +4,14 @@
     <cache type="org.mybatis.caches.redis.RedisCache"/>
     <resultMap id="BaseResultMap" type="com.swust.fund.entity.ActivityGroup">
         <id column="group_id" property="groupId" jdbcType="INTEGER"/>
-        <result column="gourp_name" property="groupName" jdbcType="VARCHAR"/>
+        <result column="group_name" property="groupName" jdbcType="VARCHAR"/>
         <result column="group_show" property="groupShow" jdbcType="BIT"/>
         <result column="group_icon" property="groupIcon" jdbcType="VARCHAR"/>
         <result column="group_sort" property="groupSort" jdbcType="TINYINT"/>
         <result column="group_add_time" property="groupAddTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-    group_id, gourp_name, group_show, group_icon, group_sort, group_add_time
+    group_id, group_name, group_show, group_icon, group_sort, group_add_time
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -38,7 +38,7 @@
                 group_id,
             </if>
             <if test="groupName != null">
-                gourp_name,
+                group_name,
             </if>
             <if test="groupShow != null">
                 group_show,
@@ -78,7 +78,7 @@
         update t_activity_group
         <set>
             <if test="groupName != null">
-                gourp_name = #{groupName,jdbcType=VARCHAR},
+                group_name = #{groupName,jdbcType=VARCHAR},
             </if>
             <if test="groupShow != null">
                 group_show = #{groupShow,jdbcType=BIT},

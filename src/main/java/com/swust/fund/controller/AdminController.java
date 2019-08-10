@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author pang
@@ -36,14 +38,17 @@ public class AdminController {
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "string", paramType = "query"),
     })
     @RequestMapping(value = "/admin/login", method = RequestMethod.POST)
-    public ResponseJSON<String> login(String username, String password, HttpServletRequest request) {
+    public ResponseJSON<Map<String,String>> login(String username, String password, HttpServletRequest request) {
         String result = adminService.login(username, password, request);
+        Map<String,String> map=new HashMap<>(2);
         if (result == null) {
             return new ResponseJSON<>(false, UnicomResponseEnums.NO_USER_EXIST);
         } else if (result.equals("-1")) {
             return new ResponseJSON<>(false, UnicomResponseEnums.NOT_MATCH);
         } else {
-            return new ResponseJSON<>(true, result, UnicomResponseEnums.LOGIN_SUCCESS);
+            map.put("token",result);
+            map.put("adminName",adminService.findAdminUserByLoginName(username).getAdminRealName());
+            return new ResponseJSON<>(true, map, UnicomResponseEnums.LOGIN_SUCCESS);
         }
     }
 
