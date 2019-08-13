@@ -160,9 +160,11 @@ public class QuestionService {
                     // TODO 如果i和j的id相等
                     Integer score = scoreMap.get(qj.getAspectId()) == null ? 0 : scoreMap.get(qj.getAspectId());
                     if (qj.getWell()) {
+                        // 正向
                         scoreMap.put(qj.getAspectId(), score + ai.getAnswerRank());
                     } else {
-                        scoreMap.put(qj.getAspectId(), score - ai.getAnswerRank());
+                        // 反向
+                        scoreMap.put(qj.getAspectId(), score + (5 - ai.getAnswerRank()));
                     }
                     j++;
                 }

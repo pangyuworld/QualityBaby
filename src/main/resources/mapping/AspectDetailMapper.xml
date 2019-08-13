@@ -94,7 +94,7 @@
         from t_aspect_detail
         where aspect_id=#{detailId}
         <if test="showAll != true">
-            ,detail_show=true
+            and detail_show=true
         </if>
     </select>
     <insert id="insertScore">

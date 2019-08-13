@@ -2,6 +2,7 @@ package com.swust.fund.dao;
 
 import com.github.pagehelper.Page;
 import com.swust.fund.entity.Message;
+import org.apache.ibatis.annotations.Param;
 
 public interface MessageMapper {
     int deleteByPrimaryKey(Integer messageId);
@@ -16,7 +17,7 @@ public interface MessageMapper {
 
     int updateByPrimaryKey(Message record);
 
-    Page<Message> selectAllMessage();
+    Page<Message> selectAllMessage(@Param("showAll") Boolean showAll);
 
     int likeMessage(Integer messageId);
 

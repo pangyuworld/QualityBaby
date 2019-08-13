@@ -152,8 +152,8 @@ public class ActivityController {
             @ApiImplicitParam(name = "userId", value = "用户userId", required = true, dataType = "int", paramType = "query")
     })
     @RequestMapping(value = "/activity/user", method = RequestMethod.DELETE)
-    public ResponseJSON signOutActivity(int userId, int activity) {
-        if (activityService.signOutActivity(userId, activity)) {
+    public ResponseJSON signOutActivity(int userId, int activityId) {
+        if (activityService.signOutActivity(userId, activityId)) {
             return new ResponseJSON(true, UnicomResponseEnums.SUCCESS_OPTION);
         } else {
             return new ResponseJSON(false, UnicomResponseEnums.BAD_REQUEST);
@@ -167,7 +167,7 @@ public class ActivityController {
             @ApiImplicitParam(name = "pageSize", value = "大小", required = true, dataType = "int", paramType = "query"),
             @ApiImplicitParam(name = "showAll", value = "是否显示全部（用户不显示全部）", required = false, dataType = "boolean", paramType = "query")
     })
-    @RequestMapping(value = "/activity/user/{useId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/activity/user/{userId}", method = RequestMethod.GET)
     public ResponseJSON<PageInfo<Map>> getAllActivityByUser(@PathVariable int userId, int pageNum, int pageSize, @RequestParam(defaultValue = "false") boolean showAll) {
         return new ResponseJSON<>(true, activityService.getAllActivityByUser(userId, showAll, pageNum, pageSize));
     }

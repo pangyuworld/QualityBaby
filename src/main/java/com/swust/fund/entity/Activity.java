@@ -25,6 +25,9 @@ public class Activity implements Serializable {
     @ApiModelProperty("活动参与人数")
     private Integer activityPersonNum;
 
+    @ApiModelProperty("活动已报名人数")
+    private Integer activitySignInNum;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @ApiModelProperty("活动开始时间")
     private Date activityStart;
@@ -49,6 +52,14 @@ public class Activity implements Serializable {
 
     @ApiModelProperty("分组所属于的分组信息")
     private ActivityGroup group;
+
+    public Integer getActivitySignInNum() {
+        return activitySignInNum;
+    }
+
+    public void setActivitySignInNum(Integer activitySignInNum) {
+        this.activitySignInNum = activitySignInNum;
+    }
 
     public Integer getActivityId() {
         return activityId;

@@ -32,8 +32,9 @@ public interface ActivityMapper {
 
     Integer signInActivity(@Param("joinTime") Date joinTime, @Param("userId") Integer userId, @Param("activityId") Integer activityId);
 
-    Page<Map> selectAllActivityByUser(@Param("groupId") Integer groupId, @Param("showAll") boolean showAll);
+    Page<Map> selectAllActivityByUser(@Param("userId") Integer userId, @Param("showAll") boolean showAll);
 
     Integer signOutActivity(@Param("userId") Integer userId, @Param("activityId") Integer activityId);
 
+    Integer selectSignInNum(@Param("activityId") Integer activityId);
 }

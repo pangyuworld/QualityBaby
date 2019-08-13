@@ -35,7 +35,7 @@ public class MessageService {
      */
     public PageInfo<Message> getMessage(int pageNum, int pageSize, boolean showAll) {
         PageHelper.startPage(pageNum, pageSize);
-        Page<Message> messagePage = messageMapper.selectAllMessage();
+        Page<Message> messagePage = messageMapper.selectAllMessage(showAll);
         return new PageInfo<>(messagePage);
     }
 
@@ -61,6 +61,7 @@ public class MessageService {
      */
     public Integer addMessage(Message message) {
         message.setMessageTime(new Date());
+        message.setMessageLike(0);
         return messageMapper.insert(message);
     }
 

@@ -45,6 +45,7 @@ public class ActivityService {
     public PageInfo<Activity> getActivity(int pageNum, int pageSize, boolean showAll) {
         PageHelper.startPage(pageNum, pageSize);
         Page<Activity> activities = activityMapper.selectAllActivity(showAll);
+        setSignInNum(activities);
         return new PageInfo<>(activities);
     }
 
@@ -57,7 +58,7 @@ public class ActivityService {
      * @date 2019/7/5
      */
     public Activity getActivity(int activityId) {
-        return setGroup(activityMapper.selectByPrimaryKey(activityId));
+        return setSignInNum(setGroup(activityMapper.selectByPrimaryKey(activityId)));
     }
 
     /**
@@ -183,6 +184,7 @@ public class ActivityService {
     public PageInfo<Activity> getActivity(int activityGroupId, int pageNum, int pageSize, boolean showAll) {
         PageHelper.startPage(pageNum, pageSize);
         Page<Activity> activities = activityMapper.selectAllActivityByGroup(activityGroupId, showAll);
+        setSignInNum(activities);
         return new PageInfo<>(activities);
     }
 
@@ -265,4 +267,29 @@ public class ActivityService {
         }
         return activities;
     }
+
+    /**
+     * 设置活动已报名人数
+     *
+     * @param activities 活动列表
+     * @author pang
+     * @date 2019/8/12
+     */
+    private void setSignInNum(Page<Activity> activities) {
+        for (Activity a : activities) {
+            a.setActivitySignInNum(activityMapper.selectSignInNum(a.getActivityId()));
+        }
+    }
+
+    /**
+     *  设置活动已报名人数
+     * @author pang
+     * @date 2019/8/12
+     * @param activitie 单个活动
+     */
+    private Activity setSignInNum(Activity activitie) {
+        activitie.setActivitySignInNum(activityMapper.selectSignInNum(activitie.getActivityId()));
+        return activitie;
+    }
+
 }

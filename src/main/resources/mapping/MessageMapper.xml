@@ -108,6 +108,10 @@
         select
         <include refid="Base_Column_List"/>
         from t_message
+        <if test="showAll != true">
+            where message_show=true
+        </if>
+        order by t_message.message_time desc
     </select>
     <update id="likeMessage" parameterType="int">
         update t_message
