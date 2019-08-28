@@ -92,7 +92,7 @@
         select
         <include refid="Base_Column_List"/>
         from t_aspect_detail
-        where aspect_id=#{detailId}
+        where aspect_id=#{aspectId}
         <if test="showAll != true">
             and detail_show=true
         </if>

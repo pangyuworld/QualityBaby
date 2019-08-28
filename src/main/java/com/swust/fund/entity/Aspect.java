@@ -17,6 +17,9 @@ public class Aspect implements Serializable {
     @ApiModelProperty("是否显示")
     private Boolean aspectShow;
 
+    @ApiModelProperty("雷达图大维度总分")
+    private Integer aspectScore;
+
     public Integer getAspectId() {
         return aspectId;
     }
@@ -39,5 +42,13 @@ public class Aspect implements Serializable {
 
     public void setAspectShow(Boolean aspectShow) {
         this.aspectShow = aspectShow;
+    }
+
+    public Integer getAspectScore() {
+        return aspectScore;
+    }
+
+    public void setAspectScore(Integer aspectScore) {
+        this.aspectScore = aspectScore;
     }
 }

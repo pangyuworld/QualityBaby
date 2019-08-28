@@ -195,7 +195,7 @@
           a.stu_name as stuName,
           a.tell_num as tellName,
           a.sign_up_time as signUpTime,
-          a.user_icon as userIcon
+          a.user_icon as userIcon,
           DATE_FORMAT(a2.join_time,"%Y-%m-%d %H:%i:%s") as joinTime
         from t_user a
         inner join t_user_activity a2 on a.user_id = a2.user_id

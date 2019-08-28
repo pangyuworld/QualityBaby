@@ -6,9 +6,10 @@
         <id column="aspect_id" property="aspectId" jdbcType="INTEGER"/>
         <result column="aspect_name" property="aspectName" jdbcType="VARCHAR"/>
         <result column="aspect_show" property="aspectShow" jdbcType="BIT"/>
+        <result column="aspect_score" property="aspectScore" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
-    aspect_id, aspect_name, aspect_show
+    aspect_id, aspect_name, aspect_show,aspect_score
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -21,9 +22,9 @@
     where aspect_id = #{aspectId,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.swust.fund.entity.Aspect">
-    insert into t_aspect (aspect_id, aspect_name, aspect_show
+    insert into t_aspect (aspect_id, aspect_name, aspect_show,aspect_score
       )
-    values (#{aspectId,jdbcType=INTEGER}, #{aspectName,jdbcType=VARCHAR}, #{aspectShow,jdbcType=BIT}
+    values (#{aspectId,jdbcType=INTEGER}, #{aspectName,jdbcType=VARCHAR}, #{aspectShow,jdbcType=BIT},#{aspectScore,jdbcType=INTEGER}
       )
   </insert>
     <insert id="insertSelective" parameterType="com.swust.fund.entity.Aspect">
@@ -38,6 +39,9 @@
             <if test="aspectShow != null">
                 aspect_show,
             </if>
+            <if test="aspectScore != null">
+                aspect_score,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="aspectId != null">
@@ -48,6 +52,9 @@
             </if>
             <if test="aspectShow != null">
                 #{aspectShow,jdbcType=BIT},
+            </if>
+            <if test="aspectScore != null">
+                #{aspectScore,jdbcType=INTEGER},
             </if>
         </trim>
     </insert>
@@ -60,12 +67,16 @@
             <if test="aspectShow != null">
                 aspect_show = #{aspectShow,jdbcType=BIT},
             </if>
+            <if test="aspectScore != null">
+                aspect_score=#{aspectScore,jdbcType=INTEGER},
+            </if>
         </set>
         where aspect_id = #{aspectId,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.swust.fund.entity.Aspect">
     update t_aspect
     set aspect_name = #{aspectName,jdbcType=VARCHAR},
+                aspect_score=#{aspectScore,jdbcType=INTEGER},
       aspect_show = #{aspectShow,jdbcType=BIT}
     where aspect_id = #{aspectId,jdbcType=INTEGER}
   </update>
@@ -82,6 +93,7 @@
             a.aspect_id as aspect_id,
             a.aspect_name as aspect_name,
             a.aspect_show  as aspect_show,
+            a.aspect_score as aspect_score,
             SUM(c.detail_score) as score
         FROM
             t_aspect a
