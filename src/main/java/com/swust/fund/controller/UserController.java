@@ -58,7 +58,7 @@ public class UserController {
     @ApiOperation("更新用户信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "openId", value = "微信openId", required = true, dataType = "string", paramType = "query"),
-            @ApiImplicitParam(name = "stuId", value = "用户学号", required = true, dataType = "string", paramType = "query", example = "5120170586"),
+            @ApiImplicitParam(name = "stuId", value = "用户学号", required = false, dataType = "string", paramType = "query", example = "5120170586"),
             @ApiImplicitParam(name = "tellNum", value = "用户电话号码", required = false, dataType = "string", paramType = "query", example = "15681910683"),
             @ApiImplicitParam(name = "className", value = "用户班级姓名", required = false, dataType = "string", paramType = "query", example = "物联1704"),
             @ApiImplicitParam(name = "gender", value = "用户性别", required = false, dataType = "boolean", paramType = "query", example = "true"),

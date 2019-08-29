@@ -73,8 +73,6 @@ public class UserService {
      * @date 2019/5/11
      */
     public int editUser(User user) {
-        // 禁止修改openId
-        user.setOpenId(null);
         return userMapper.updateByPrimaryKeySelective(user);
     }
 
