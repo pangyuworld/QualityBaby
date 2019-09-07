@@ -26,4 +26,6 @@ public interface AspectDetailMapper {
     int insertScore(@Param("userId") int userId, @Param("scoreMap") Map<Integer, Integer> scoreMap);
 
     List<Map> selectDetailScoreByUser(@Param("userId") Integer userId, @Param("aspectId") Integer aspectId);
+
+    List<Map> selectAllUserScore();
 }

@@ -117,4 +117,15 @@
     where a.aspect_id=#{aspectId} and b.user_id=#{userId}
     group by b.detail_id
     </select>
+    <select id="selectAllUserScore" resultType="map">
+        SELECT
+            a.user_id as userId,
+            SUM( a.detail_score ) as score
+        FROM
+            t_user_aspect_detail a
+        GROUP BY
+            a.user_id
+        ORDER BY
+            SUM( a.detail_score ) DESC
+    </select>
 </mapper>

@@ -36,18 +36,22 @@ public class AdminController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "string", paramType = "query"),
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "string", paramType = "query"),
+            @ApiImplicitParam(name = "key", value = "键值，标识验证码", required = true, dataType = "string", paramType = "query"),
+            @ApiImplicitParam(name = "captcha", value = "验证码的值", required = true, dataType = "string", paramType = "query"),
     })
     @RequestMapping(value = "/admin/login", method = RequestMethod.POST)
-    public ResponseJSON<Map<String,String>> login(String username, String password, HttpServletRequest request) {
-        String result = adminService.login(username, password, request);
-        Map<String,String> map=new HashMap<>(2);
+    public ResponseJSON<Map<String, String>> login(String username, String password,String key,String captcha, HttpServletRequest request) {
+        String result = adminService.login(username, password,key,captcha, request);
+        Map<String, String> map = new HashMap<>(2);
         if (result == null) {
             return new ResponseJSON<>(false, UnicomResponseEnums.NO_USER_EXIST);
         } else if (result.equals("-1")) {
             return new ResponseJSON<>(false, UnicomResponseEnums.NOT_MATCH);
+        } else if (result.equals("-2")) {
+            return new ResponseJSON<>(false, UnicomResponseEnums.ERROR_IDCODE);
         } else {
-            map.put("token",result);
-            map.put("adminName",adminService.findAdminUserByLoginName(username).getAdminRealName());
+            map.put("token", result);
+            map.put("adminName", adminService.findAdminUserByLoginName(username).getAdminRealName());
             return new ResponseJSON<>(true, map, UnicomResponseEnums.LOGIN_SUCCESS);
         }
     }
@@ -65,9 +69,10 @@ public class AdminController {
     }
 
     @ApiOperation("获得验证码")
-    @RequestMapping(value = "/admin/capatcha", method = RequestMethod.GET)
-    public String getVerificationCode() {
-        return adminService.getKaptcha();
+    @ApiImplicitParam(name = "key", value = "用于唯一表示验证码的key值", required = true, dataType = "string", paramType = "query")
+    @RequestMapping(value = "/admin/captcha", method = RequestMethod.GET)
+    public String getVerificationCode(String key) {
+        return adminService.getKaptcha(key);
     }
 
     @ApiOperation("获取全部管理员日志")

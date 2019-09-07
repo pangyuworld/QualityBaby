@@ -53,7 +53,14 @@ public class AdminService {
      * @author pang
      * @date 2019/4/7
      */
-    public String login(String username, String password, HttpServletRequest request) {
+    public String login(String username, String password,String key,String captcha, HttpServletRequest request) {
+        // 验证验证码是否有效
+        if (redisUtil.get(key)==null||redisUtil.get(key).toString().compareTo(captcha)!=0){
+            // 如果验证码无效，则返回-2
+            return "-2";
+        }
+        // 清除redis数据
+        redisUtil.del(key);
         // 从数据库查到登录的管理员信息
         AdminUser adminUser = adminUserMapper.findByAdminLoginName(username);
         // 如果没有找到，则返回空
@@ -123,9 +130,13 @@ public class AdminService {
      * @author pang
      * @date 2019/4/12
      */
-    public String getKaptcha() {
+    public String getKaptcha(String key) {
         // 生成验证码内容
         String capText = producer.createText();
+        // 先清除之前的验证码
+        redisUtil.del(key);
+        // 将验证码内容存入缓存，并设置2分钟失效
+        redisUtil.set(key,capText,1000*60*2);
         // 获得base64编码
         String encode = null;
         try {

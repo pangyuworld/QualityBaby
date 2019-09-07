@@ -129,4 +129,10 @@ public class AspectController {
     public ResponseJSON<List<Map>> getDetailScoreByUserId(@PathVariable int userId, @PathVariable int aspectId) {
         return new ResponseJSON<>(true, aspectService.getDetailScoreByUser(userId, aspectId));
     }
+
+    @ApiOperation("获取排名信息")
+    @RequestMapping(value = "/aspect/sort/{userId}",method = RequestMethod.GET)
+    public ResponseJSON<Map> getSortByUserId(@PathVariable int userId){
+        return new ResponseJSON<>(true,aspectService.gerSortByUserId(userId));
+    }
 }

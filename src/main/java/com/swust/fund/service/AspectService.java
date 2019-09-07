@@ -7,6 +7,7 @@ import com.swust.fund.entity.AspectDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -187,5 +188,26 @@ public class AspectService {
      */
     public List<Map> getDetailScoreByUser(int userId, int aspectId) {
         return detailMapper.selectDetailScoreByUser(userId, aspectId);
+    }
+
+    /**
+     * 查找用户排名，返回包含了总数和排名的字典
+     * @author pang
+     * @date 2019/9/7
+     * @param userId
+     * @return java.util.Map<java.lang.String,java.lang.String>
+     */
+    public Map<String,String> gerSortByUserId(int userId){
+        List<Map> result=detailMapper.selectAllUserScore();
+        Map<String,String> resultMap=new HashMap<>(5);
+        for (int i=0;i<result.size();i++){
+            if (result.get(i).get("userId").toString().compareTo(""+userId)==0){
+                resultMap.put("total",""+result.size());
+                resultMap.put("sort",""+(i+1));
+                return resultMap;
+            }
+        }
+        resultMap.put("error","没有找到该用户信息");
+        return resultMap;
     }
 }
