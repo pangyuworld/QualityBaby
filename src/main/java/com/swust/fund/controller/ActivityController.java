@@ -7,6 +7,8 @@ import com.swust.fund.common.restful.UnicomRuntimeException;
 import com.swust.fund.entity.Activity;
 import com.swust.fund.entity.ActivityGroup;
 import com.swust.fund.service.ActivityService;
+import com.swust.fund.utils.token.Token;
+import com.swust.fund.utils.wx.WxRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -37,6 +39,8 @@ public class ActivityController {
             @ApiImplicitParam(name = "showAll", value = "是否显示全部（用户不显示全部）", required = false, dataType = "boolean", paramType = "query")
     })
     @RequestMapping(value = "/activity", method = RequestMethod.GET)
+    @Token
+    @WxRequest
     public ResponseJSON<PageInfo<Activity>> getAllActivity(int pageNum, int pageSize, @RequestParam(defaultValue = "false") boolean showAll) {
         return new ResponseJSON<>(true, activityService.getActivity(pageNum, pageSize, showAll));
     }
@@ -44,6 +48,8 @@ public class ActivityController {
     @ApiOperation("查找单个活动")
     @ApiImplicitParam(name = "activityId", value = "活动id", required = true, dataType = "int", paramType = "path")
     @RequestMapping(value = "/activity/{activityId}", method = RequestMethod.GET)
+    @Token
+    @WxRequest
     public ResponseJSON<Activity> getActivity(@PathVariable int activityId) {
         return new ResponseJSON<>(true, activityService.getActivity(activityId));
     }
@@ -55,6 +61,8 @@ public class ActivityController {
             @ApiImplicitParam(name = "showAll", value = "是否显示全部（用户不显示全部）", required = false, dataType = "boolean", paramType = "query")
     })
     @RequestMapping(value = "/activity-group", method = RequestMethod.GET)
+    @Token
+    @WxRequest
     public ResponseJSON<PageInfo<ActivityGroup>> getAllActivityGroup(int pageNum, int pageSize, @RequestParam(defaultValue = "false") boolean showAll) {
         return new ResponseJSON<>(true, activityService.getGroup(pageNum, pageSize, showAll));
     }
@@ -63,12 +71,15 @@ public class ActivityController {
     @ApiOperation("查找单个活动分类")
     @ApiImplicitParam(name = "activityGroupId", value = "活动分类id", required = true, dataType = "int", paramType = "path")
     @RequestMapping(value = "/activity-group/{activityGroupId}", method = RequestMethod.GET)
+    @Token
+    @WxRequest
     public ResponseJSON<ActivityGroup> getActivityGroup(@PathVariable int activityGroupId) {
         return new ResponseJSON<>(true, activityService.getGroup(activityGroupId));
     }
 
     @ApiOperation("添加新的活动")
     @RequestMapping(value = "/activity", method = RequestMethod.POST)
+    @Token
     public ResponseJSON<Integer> addActivity(Activity activity) {
         try {
             return new ResponseJSON<>(true, activityService.addActivity(activity));
@@ -79,6 +90,7 @@ public class ActivityController {
 
     @ApiOperation("添加新的活动分类")
     @RequestMapping(value = "/activity-group", method = RequestMethod.POST)
+    @Token
     public ResponseJSON<Integer> addActivityGroup(ActivityGroup activityGroup) {
         try {
             return new ResponseJSON<>(true, activityService.addGroup(activityGroup));
@@ -89,18 +101,21 @@ public class ActivityController {
 
     @ApiOperation("修改活动信息")
     @RequestMapping(value = "/activity", method = RequestMethod.PUT)
+    @Token
     public ResponseJSON<Integer> editActivity(Activity activity) {
         return new ResponseJSON<>(true, activityService.editActivity(activity));
     }
 
     @ApiOperation("修改分组信息")
     @RequestMapping(value = "/activity-group", method = RequestMethod.PUT)
+    @Token
     public ResponseJSON<Integer> editGroup(ActivityGroup activityGroup) {
         return new ResponseJSON<>(true, activityService.editGroup(activityGroup));
     }
 
     @ApiOperation("删除活动信息")
     @RequestMapping(value = "/activity/{activityId}", method = RequestMethod.DELETE)
+    @Token
     public ResponseJSON deleteActivity(@PathVariable int activityId) {
         if (activityService.deleteActivity(activityId)) {
             return new ResponseJSON(true, UnicomResponseEnums.SUCCESS_OPTION);
@@ -111,6 +126,7 @@ public class ActivityController {
 
     @ApiOperation("删除活动分组信息")
     @RequestMapping(value = "/activity-group/{activityGroupId}", method = RequestMethod.DELETE)
+    @Token
     public ResponseJSON deleteGroup(@PathVariable int activityGroupId) {
         if (activityService.deleteGroup(activityGroupId)) {
             return new ResponseJSON(true, UnicomResponseEnums.SUCCESS_OPTION);
@@ -127,6 +143,8 @@ public class ActivityController {
             @ApiImplicitParam(name = "showAll", value = "是否显示全部（用户不显示全部）", required = false, dataType = "boolean", paramType = "query")
     })
     @RequestMapping(value = "/activity/activity-group/{activityGroupId}", method = RequestMethod.GET)
+    @Token
+    @WxRequest
     public ResponseJSON<PageInfo<Activity>> getAllActivityByGroup(@PathVariable int activityGroupId, int pageNum, int pageSize, @RequestParam(defaultValue = "false") boolean showAll) {
         return new ResponseJSON<>(true, activityService.getActivity(activityGroupId, pageNum, pageSize, showAll));
     }
@@ -137,6 +155,7 @@ public class ActivityController {
             @ApiImplicitParam(name = "userId", value = "用户userId", required = true, dataType = "int", paramType = "query")
     })
     @RequestMapping(value = "/activity/user", method = RequestMethod.POST)
+    @WxRequest
     public ResponseJSON<Integer> signInActivity(int userId, int activityId) {
         try {
             return new ResponseJSON<>(true, activityService.signInActivity(userId, activityId), UnicomResponseEnums.SUCCESS_OPTION);
@@ -152,6 +171,7 @@ public class ActivityController {
             @ApiImplicitParam(name = "userId", value = "用户userId", required = true, dataType = "int", paramType = "query")
     })
     @RequestMapping(value = "/activity/user", method = RequestMethod.DELETE)
+    @WxRequest
     public ResponseJSON signOutActivity(int userId, int activityId) {
         if (activityService.signOutActivity(userId, activityId)) {
             return new ResponseJSON(true, UnicomResponseEnums.SUCCESS_OPTION);
@@ -168,6 +188,8 @@ public class ActivityController {
             @ApiImplicitParam(name = "showAll", value = "是否显示全部（用户不显示全部）", required = false, dataType = "boolean", paramType = "query")
     })
     @RequestMapping(value = "/activity/user/{userId}", method = RequestMethod.GET)
+    @Token
+    @WxRequest
     public ResponseJSON<PageInfo<Map>> getAllActivityByUser(@PathVariable int userId, int pageNum, int pageSize, @RequestParam(defaultValue = "false") boolean showAll) {
         return new ResponseJSON<>(true, activityService.getAllActivityByUser(userId, showAll, pageNum, pageSize));
     }

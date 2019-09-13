@@ -5,6 +5,8 @@ import com.swust.fund.common.restful.ResponseJSON;
 import com.swust.fund.common.restful.UnicomResponseEnums;
 import com.swust.fund.entity.AdminLoginLog;
 import com.swust.fund.service.AdminService;
+import com.swust.fund.utils.token.Token;
+import com.swust.fund.utils.wx.WxRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -63,6 +65,7 @@ public class AdminController {
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "string", paramType = "query"),
     })
     @RequestMapping(value = "/admin/registered", method = RequestMethod.POST)
+    @Token
     public ResponseJSON<String> registered(String realName, String username, String password) {
         adminService.registered(realName, username, password);
         return new ResponseJSON<>(true, "注册成功", UnicomResponseEnums.SUCCESS_OPTION);
@@ -81,6 +84,7 @@ public class AdminController {
             @ApiImplicitParam(name = "pageSize", value = "大小", required = true, dataType = "int", paramType = "query")
     })
     @RequestMapping(value = "/admin/log", method = RequestMethod.GET)
+    @Token
     public ResponseJSON<PageInfo<AdminLoginLog>> getAdminLoginLog(int pageNum, int pageSize) {
         return new ResponseJSON<>(true, adminService.getAllLog(pageNum, pageSize));
     }

@@ -1,7 +1,9 @@
 package com.swust.fund.config;
 
 import com.swust.fund.interceptor.TokenInterceptor;
+import com.swust.fund.interceptor.WxRequestInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -14,10 +16,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
  * @description: 拦截器注册中心
  * @date 2019/4/7 9:40
  */
-// @Configuration
+@Configuration
 public class InterceptorConfig extends WebMvcConfigurationSupport {
     @Autowired
     private TokenInterceptor tokenInterceptor;
+    @Autowired
+    private WxRequestInterceptor wxRequestInterceptor;
 
     /**
      * 添加token拦截器
@@ -30,6 +34,8 @@ public class InterceptorConfig extends WebMvcConfigurationSupport {
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(tokenInterceptor)
+                .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**");
+        registry.addInterceptor(wxRequestInterceptor)
                 .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**");
         super.addInterceptors(registry);
     }

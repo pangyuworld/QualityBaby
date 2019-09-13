@@ -3,6 +3,8 @@ package com.swust.fund.controller;
 import com.swust.fund.common.restful.ResponseJSON;
 import com.swust.fund.common.restful.UnicomResponseEnums;
 import com.swust.fund.service.WxService;
+import com.swust.fund.utils.token.Token;
+import com.swust.fund.utils.wx.WxRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -30,6 +32,7 @@ public class WxController {
     @ApiOperation("微信小程序确认登录")
     @ApiImplicitParam(name = "code", value = "通过wx.login()获得的登录凭证", dataType = "string", paramType = "query", required = true)
     @RequestMapping(value = "/wx/confirm/login", method = RequestMethod.POST)
+    @WxRequest
     public ResponseJSON<Map<String, String>> confirmLogin(String code) {
         return new ResponseJSON<>(true, wxService.login(code), UnicomResponseEnums.SUCCESS_OPTION);
     }

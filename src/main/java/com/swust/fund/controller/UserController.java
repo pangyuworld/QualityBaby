@@ -5,6 +5,8 @@ import com.swust.fund.common.restful.ResponseJSON;
 import com.swust.fund.common.restful.UnicomResponseEnums;
 import com.swust.fund.entity.User;
 import com.swust.fund.service.UserService;
+import com.swust.fund.utils.token.Token;
+import com.swust.fund.utils.wx.WxRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -34,6 +36,7 @@ public class UserController {
     @ApiOperation("根据openId查找用户")
     @ApiImplicitParam(name = "openId", value = "用户openId", required = true, dataType = "string", paramType = "query")
     @RequestMapping(value = "/user/openId", method = RequestMethod.POST)
+    @WxRequest
     public ResponseJSON<User> getUserByOpenId(String openId) {
         return new ResponseJSON<>(true, userService.getUserByOpenId(openId));
     }
@@ -41,6 +44,8 @@ public class UserController {
     @ApiOperation("根据userId查找用户")
     @ApiImplicitParam(name = "userId", value = "用户userId", required = true, dataType = "int", paramType = "path")
     @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
+    @Token
+    @WxRequest
     public ResponseJSON<User> getUserByUserId(@PathVariable int userId) {
         return new ResponseJSON<>(true, userService.getUserById(userId));
     }
@@ -51,6 +56,7 @@ public class UserController {
             @ApiImplicitParam(name = "pageSize", value = "大小", required = true, dataType = "int", paramType = "query")
     })
     @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @Token
     public ResponseJSON<PageInfo<User>> getAll(int pageNum, int pageSize) {
         return new ResponseJSON<>(true, userService.getAllUser(pageNum, pageSize));
     }
@@ -65,6 +71,7 @@ public class UserController {
             @ApiImplicitParam(name = "stuName", value = "用户姓名", required = false, dataType = "string", paramType = "query", example = "张星宇"),
     })
     @RequestMapping(value = "/user", method = RequestMethod.PUT)
+    @WxRequest
     public ResponseJSON<User> edit(User user) {
         userService.editUser(user);
         return new ResponseJSON<>(true, user, UnicomResponseEnums.SUCCESS_OPTION);
@@ -81,6 +88,7 @@ public class UserController {
             @ApiImplicitParam(name = "userIcon", value = "用户头像地址", required = true, dataType = "string", paramType = "query"),
     })
     @RequestMapping(value = "/user", method = RequestMethod.POST)
+    @WxRequest
     public ResponseJSON<Integer> add(User user) {
         return new ResponseJSON<>(true, userService.addUser(user), UnicomResponseEnums.SUCCESS_OPTION);
     }
@@ -92,6 +100,8 @@ public class UserController {
             @ApiImplicitParam(name = "pageSize", value = "大小", required = true, dataType = "int", paramType = "query")
     })
     @RequestMapping(value = "/user/activity/{activityId}", method = RequestMethod.GET)
+    @Token
+    @WxRequest
     public ResponseJSON<PageInfo<Map>> getByActivityId(@PathVariable Integer activityId, Integer pageNum, Integer pageSize) {
         return new ResponseJSON<>(true, userService.getByActivityId(activityId, pageNum, pageSize));
     }

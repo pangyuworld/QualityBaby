@@ -5,9 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.bind.BindException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +19,7 @@ import java.sql.SQLException;
  * @create: 2019-03-21 18:16
  * @version: v1.0
  **/
-// @RestControllerAdvice(annotations = {RestController.class})
+@RestControllerAdvice(annotations = {RestController.class})
 public class SpringExceptionHandle {
     private static final Logger logger = LoggerFactory.getLogger(SpringExceptionHandle.class);
 

@@ -3,6 +3,8 @@ package com.swust.fund.controller;
 import com.swust.fund.common.restful.ResponseJSON;
 import com.swust.fund.common.restful.UnicomResponseEnums;
 import com.swust.fund.service.FileService;
+import com.swust.fund.utils.token.Token;
+import com.swust.fund.utils.wx.WxRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,7 @@ public class FileController {
 
     @ApiOperation("上传活动图片")
     @RequestMapping(value = "/activity/uploadImages", method = RequestMethod.POST)
+    @Token
     public ResponseJSON<Map<String, String>> activityFileUpload(@RequestParam(value = "file") MultipartFile file) {
         try {
             return new ResponseJSON<>(true, fileService.uploadImage(file, "activity"), UnicomResponseEnums.FILEUPLOAD_SUCCESS);
@@ -43,6 +46,7 @@ public class FileController {
 
     @ApiOperation("上传活动分组的图标")
     @RequestMapping(value = "/activity-group/uploadImages", method = RequestMethod.POST)
+    @Token
     public ResponseJSON<Map<String, String>> groupFileUpload(@RequestParam(value = "file") MultipartFile file) {
         try {
             return new ResponseJSON<>(true, fileService.uploadImage(file, "group"), UnicomResponseEnums.FILEUPLOAD_SUCCESS);

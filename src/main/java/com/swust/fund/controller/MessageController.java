@@ -5,6 +5,8 @@ import com.swust.fund.common.restful.ResponseJSON;
 import com.swust.fund.common.restful.UnicomResponseEnums;
 import com.swust.fund.entity.Message;
 import com.swust.fund.service.MessageService;
+import com.swust.fund.utils.token.Token;
+import com.swust.fund.utils.wx.WxRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -32,6 +34,8 @@ public class MessageController {
     @ApiOperation("查找留言")
     @ApiImplicitParam(name = "messageId", value = "留言id", required = true, dataType = "int", paramType = "path")
     @RequestMapping(value = "/message/{messageId}", method = RequestMethod.GET)
+    @Token
+    @WxRequest
     public ResponseJSON<Message> getMessage(@PathVariable int messageId) {
         return new ResponseJSON<>(true, messageService.getMessage(messageId));
     }
@@ -43,24 +47,30 @@ public class MessageController {
             @ApiImplicitParam(name = "showAll", value = "是否显示全部（用户不显示全部）", required = false, dataType = "boolean", paramType = "query")
     })
     @RequestMapping(value = "/message", method = RequestMethod.GET)
+    @Token
+    @WxRequest
     public ResponseJSON<PageInfo<Message>> getAllMessage(int pageNum, int pageSize, boolean showAll) {
         return new ResponseJSON<>(true, messageService.getMessage(pageNum, pageSize, showAll));
     }
 
     @ApiOperation("添加新的留言")
     @RequestMapping(value = "/message", method = RequestMethod.POST)
+    @WxRequest
     public ResponseJSON<Integer> addMessage(Message message) {
         return new ResponseJSON<>(true, messageService.addMessage(message));
     }
 
     @ApiOperation("修改留言信息")
     @RequestMapping(value = "/message", method = RequestMethod.PUT)
+    @WxRequest
     public ResponseJSON<Integer> editMessage(Message message) {
         return new ResponseJSON<>(true, messageService.editMessage(message));
     }
 
     @ApiOperation("删除留言")
     @RequestMapping(value = "/message", method = RequestMethod.DELETE)
+    @Token
+    @WxRequest
     public ResponseJSON deleteMessage(Integer messageId) {
         if (messageService.deleteMessage(messageId)) {
             return new ResponseJSON(true, UnicomResponseEnums.SUCCESS_OPTION);

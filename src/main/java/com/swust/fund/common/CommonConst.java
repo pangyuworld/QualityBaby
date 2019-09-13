@@ -18,6 +18,10 @@ import javax.annotation.PostConstruct;
 @PropertySource("classpath:secret.properties")
 public class CommonConst {
     /**
+     * 管理员token验证时间
+     */
+    public static final long TOKEN_TIME=1000 * 60 * 60;
+    /**
      * 微信接口基础url
      */
     public static String baseURL;

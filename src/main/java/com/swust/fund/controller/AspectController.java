@@ -5,6 +5,8 @@ import com.swust.fund.common.restful.UnicomResponseEnums;
 import com.swust.fund.entity.Aspect;
 import com.swust.fund.entity.AspectDetail;
 import com.swust.fund.service.AspectService;
+import com.swust.fund.utils.token.Token;
+import com.swust.fund.utils.wx.WxRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -32,6 +34,8 @@ public class AspectController {
     @ApiOperation("获取单个大方向")
     @ApiImplicitParam(name = "aspectId", value = "大方向id", required = true, dataType = "int", paramType = "path")
     @RequestMapping(value = "/aspect/{aspectId}", method = RequestMethod.GET)
+    @Token
+    @WxRequest
     public ResponseJSON<Aspect> getAspect(@PathVariable int aspectId) {
         return new ResponseJSON<>(true, aspectService.getAspect(aspectId));
     }
@@ -39,6 +43,8 @@ public class AspectController {
     @ApiOperation("获取单个小方向")
     @ApiImplicitParam(name = "detailId", value = "小方向id", required = true, dataType = "int", paramType = "path")
     @RequestMapping(value = "/detail/{detailId}", method = RequestMethod.GET)
+    @Token
+    @WxRequest
     public ResponseJSON<AspectDetail> getAspectDetail(@PathVariable int detailId) {
         return new ResponseJSON<>(true, aspectService.getDetail(detailId));
     }
@@ -46,6 +52,8 @@ public class AspectController {
     @ApiOperation("获取全部大方向")
     @ApiImplicitParam(name = "showAll", value = "是否显示全部（用户不显示全部）", required = false, dataType = "boolean", paramType = "query")
     @RequestMapping(value = "/aspect", method = RequestMethod.GET)
+    @Token
+    @WxRequest
     public ResponseJSON<List<Aspect>> getAllAspect(@RequestParam(defaultValue = "false") boolean showAll) {
         return new ResponseJSON<>(true, aspectService.getAspect(showAll));
     }
@@ -53,30 +61,36 @@ public class AspectController {
     @ApiOperation("获取全部小方向")
     @ApiImplicitParam(name = "showAll", value = "是否显示全部（用户不显示全部）", required = false, dataType = "boolean", paramType = "query")
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
+    @Token
+    @WxRequest
     public ResponseJSON<List<AspectDetail>> getAllAspectDetail(@RequestParam(defaultValue = "false") boolean showAll) {
         return new ResponseJSON<>(true, aspectService.getDetail(showAll));
     }
 
     @ApiOperation("添加大方向")
     @RequestMapping(value = "/aspect", method = RequestMethod.POST)
+    @Token
     public ResponseJSON<Integer> addAspect(Aspect aspect) {
         return new ResponseJSON<>(true, aspectService.addAspect(aspect));
     }
 
     @ApiOperation("添加小方向")
     @RequestMapping(value = "/detail", method = RequestMethod.POST)
+    @Token
     public ResponseJSON<Integer> addAspectDetail(AspectDetail detail) {
         return new ResponseJSON<>(true, aspectService.addDetail(detail));
     }
 
     @ApiOperation("修改大方向")
     @RequestMapping(value = "/aspect", method = RequestMethod.PUT)
+    @Token
     public ResponseJSON<Integer> editAspect(Aspect aspect) {
         return new ResponseJSON<>(true, aspectService.editAspect(aspect));
     }
 
     @ApiOperation("修改小方向")
     @RequestMapping(value = "/detail", method = RequestMethod.PUT)
+    @Token
     public ResponseJSON<Integer> editAspectDetail(AspectDetail detail) {
         return new ResponseJSON<>(true, aspectService.editDetail(detail));
     }
@@ -84,6 +98,7 @@ public class AspectController {
     @ApiOperation("删除大方向")
     @ApiImplicitParam(name = "aspectId", value = "大方向id", required = true, dataType = "int", paramType = "path")
     @RequestMapping(value = "/aspect/{aspectId}", method = RequestMethod.DELETE)
+    @Token
     public ResponseJSON deleteAspect(@PathVariable int aspectId) {
         if (aspectService.deleteAspect(aspectId)) {
             return new ResponseJSON(true, UnicomResponseEnums.SUCCESS_OPTION);
@@ -95,6 +110,7 @@ public class AspectController {
     @ApiOperation("删除小方向")
     @ApiImplicitParam(name = "detailId", value = "小方向id", required = true, dataType = "int", paramType = "path")
     @RequestMapping(value = "/detail/{detailId}", method = RequestMethod.DELETE)
+    @Token
     public ResponseJSON deleteAspectDetail(@PathVariable int detailId) {
         if (aspectService.deleteDetail(detailId)) {
             return new ResponseJSON(true, UnicomResponseEnums.SUCCESS_OPTION);
@@ -109,6 +125,8 @@ public class AspectController {
             @ApiImplicitParam(name = "showAll", value = "是否显示全部（用户不显示全部）", required = false, dataType = "boolean", paramType = "query")
     })
     @RequestMapping(value = "/detail/aspect", method = RequestMethod.GET)
+    @Token
+    @WxRequest
     public ResponseJSON<List<AspectDetail>> getAspectDetailByAspect(int aspectId, @RequestParam(defaultValue = "false") boolean showAll) {
         return new ResponseJSON<>(true, aspectService.getDetailByAspect(aspectId, showAll));
     }
@@ -116,6 +134,8 @@ public class AspectController {
     @ApiOperation("获取用户的雷达图相关因素")
     @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "int", paramType = "path")
     @RequestMapping(value = "/aspect/score/{userId}", method = RequestMethod.GET)
+    @Token
+    @WxRequest
     public ResponseJSON<List<Map>> getAspectScoreByUserId(@PathVariable int userId) {
         return new ResponseJSON<>(true, aspectService.getAspectScoreByUser(userId));
     }
@@ -126,12 +146,16 @@ public class AspectController {
             @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "int", paramType = "path")
     })
     @RequestMapping(value = "/aspect/{aspectId}/detail/score/{userId}", method = RequestMethod.GET)
+    @Token
+    @WxRequest
     public ResponseJSON<List<Map>> getDetailScoreByUserId(@PathVariable int userId, @PathVariable int aspectId) {
         return new ResponseJSON<>(true, aspectService.getDetailScoreByUser(userId, aspectId));
     }
 
     @ApiOperation("获取排名信息")
     @RequestMapping(value = "/aspect/sort/{userId}",method = RequestMethod.GET)
+    @Token
+    @WxRequest
     public ResponseJSON<Map> getSortByUserId(@PathVariable int userId){
         return new ResponseJSON<>(true,aspectService.gerSortByUserId(userId));
     }

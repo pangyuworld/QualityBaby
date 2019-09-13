@@ -9,6 +9,7 @@ import com.swust.fund.utils.redis.RedisUtil;
 import com.swust.fund.utils.token.PassToken;
 import com.swust.fund.utils.token.Token;
 import com.swust.fund.utils.token.TokenUtil;
+import com.swust.fund.utils.wx.WxRequest;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -41,18 +42,24 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             Token token = handlerMethod.getMethodAnnotation(Token.class);
             PassToken passToken = handlerMethod.getMethodAnnotation(PassToken.class);
+            WxRequest wxRequest = handlerMethod.getMethodAnnotation(WxRequest.class);
             if (token == null) {
                 // TODO 如果没有注解，则直接通过，不需要拦截器
-                return true;
+                return super.preHandle(request, response, handler);
             }
             if (passToken != null) {
                 // TODO 如果有跳过token验证的注解，则直接通过
-                return true;
+                return super.preHandle(request, response, handler);
             }
             // TODO 获取token
             String tokenStr = request.getHeader("token");
             if (tokenStr == null || tokenStr.length() < 1) {
-                // TODO 如果没有token，则抛出异常
+                // TODO 如果没有token，则判断是不是微信登录
+                if (wxRequest!=null){
+                    // 如果是微信登录，那就直接进行微信验证
+                    return true;
+                }
+                // 否则就抛出异常
                 throw new UnicomRuntimeException(UnicomResponseEnums.NOLOGIN, "无token，请重新登录");
             }
             // TODO 解析token
@@ -66,12 +73,12 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
                 // TODO 用户不存在
                 throw new UnicomRuntimeException(UnicomResponseEnums.NO_USER_EXIST, "用户不存在");
             }
-            if (!redisUtil.get("token_" + username).toString().equals(tokenStr)) {
+            if (!redisUtil.get("token" + username).toString().equals(tokenStr)) {
                 // TODO 如果token和redis中的不相同，则为失效的token
                 throw new UnicomRuntimeException(UnicomResponseEnums.LOGOUT_SUCCESS, "用户不存在");
             }
             // TODO token验证通过
-            return true;
+            return super.preHandle(request, response, handler);
         }
         return false;
     }

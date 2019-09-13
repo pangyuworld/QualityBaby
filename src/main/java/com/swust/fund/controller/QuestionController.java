@@ -6,6 +6,8 @@ import com.swust.fund.entity.Answer;
 import com.swust.fund.entity.Question;
 import com.swust.fund.entity.QuestionAspect;
 import com.swust.fund.service.QuestionService;
+import com.swust.fund.utils.token.Token;
+import com.swust.fund.utils.wx.WxRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -33,18 +35,23 @@ public class QuestionController {
     @ApiOperation("查找问题")
     @ApiImplicitParam(name = "questionId", value = "问题id", required = true, dataType = "int", paramType = "path")
     @RequestMapping(value = "/question/{questionId}", method = RequestMethod.GET)
+    @WxRequest
+    @Token
     public ResponseJSON<Question> getQuestion(@PathVariable int questionId) {
         return new ResponseJSON<>(true, questionService.getQuestion(questionId));
     }
 
     @ApiOperation("查找问题")
     @RequestMapping(value = "/question", method = RequestMethod.GET)
+    @Token
+    @WxRequest
     public ResponseJSON<List<Question>> getAllQuestion() {
         return new ResponseJSON<>(true, questionService.getAllQuestion());
     }
 
     @ApiOperation("添加新的问题")
     @RequestMapping(value = "/question", method = RequestMethod.POST)
+    @Token
     public ResponseJSON<Integer> addQuestion(Question question, @RequestBody List<QuestionAspect> questionAspect) {
         return new ResponseJSON<>(true, questionService.addQuestion(question, questionAspect));
     }
@@ -52,6 +59,7 @@ public class QuestionController {
     @ApiOperation("删除问题")
     @ApiImplicitParam(name = "questionId", value = "问题id", required = true, dataType = "int", paramType = "path")
     @RequestMapping(value = "/question/{questionId}", method = RequestMethod.DELETE)
+    @Token
     public ResponseJSON deleteQuestion(@PathVariable int questionId) {
         if (questionService.deleteQuestoin(questionId)) {
             return new ResponseJSON(true, UnicomResponseEnums.SUCCESS_OPTION);
@@ -66,6 +74,7 @@ public class QuestionController {
             @ApiImplicitParam(name = "detailId", value = "问题对应的小方向id", required = true, dataType = "int", paramType = "query")
     })
     @RequestMapping(value = "/question-detail", method = RequestMethod.DELETE)
+    @Token
     public ResponseJSON deleteQuestionAspect(int questionId, int detailId) {
         if (questionService.deleteQuestionAspect(questionId, detailId)) {
             return new ResponseJSON(true, UnicomResponseEnums.SUCCESS_OPTION);
@@ -76,6 +85,7 @@ public class QuestionController {
 
     @ApiOperation("更新问题内容")
     @RequestMapping(value = "/question", method = RequestMethod.PUT)
+    @Token
     public ResponseJSON<Integer> editQuestion(Question question) {
         return new ResponseJSON<>(true, questionService.editQuestion(question));
     }
@@ -87,12 +97,14 @@ public class QuestionController {
             @ApiImplicitParam(name = "isWell", value = "修改后问题对应的方向", required = true, dataType = "boolean", paramType = "query")
     })
     @RequestMapping(value = "/question-detail", method = RequestMethod.PUT)
+    @Token
     public ResponseJSON<Integer> editQuestionAspect(int questionId, int detailId, boolean isWell) {
         return new ResponseJSON<>(true, questionService.editQuestoinAspect(questionId, detailId, isWell));
     }
 
     @ApiOperation("回答问题")
     @RequestMapping(value = "/answer", method = RequestMethod.POST)
+    @WxRequest
     public ResponseJSON<Integer> answerQuestion(@RequestBody List<Answer> answerList) {
         return new ResponseJSON<>(true, questionService.addAnswer(answerList));
     }
@@ -100,6 +112,8 @@ public class QuestionController {
     @ApiOperation("用户是否回答了问卷")
     @ApiImplicitParam(name = "userId", value = "用户id", required = true, dataType = "int", paramType = "path")
     @RequestMapping(value = "/answer/{userId}", method = RequestMethod.GET)
+    @Token
+    @WxRequest
     public ResponseJSON<Boolean> isAnsweredByUserId(@PathVariable int userId) {
         return new ResponseJSON<>(true, questionService.isAnswered(userId));
     }

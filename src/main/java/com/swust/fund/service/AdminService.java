@@ -71,7 +71,7 @@ public class AdminService {
         if (!adminUser.getAdminLoginPassword().equals(PasswordUtil.SHA256(password + CommonConst.salt))) {
             return "-1";
         }
-        String token = TokenUtil.createJWT(1000 * 60 * 60, username, "administrator");
+        String token = TokenUtil.createJWT(CommonConst.TOKEN_TIME, username, "administrator");
         // 构建新的用户登录日志
         AdminLoginLog loginLog = new AdminLoginLog();
         // 获得用户IP
@@ -84,6 +84,8 @@ public class AdminService {
         loginLog.setLoginTime(new Date());
         // 添加登录记录
         logMapper.insert(loginLog);
+        // 将token存在缓存中
+        redisUtil.set("token"+username,token,CommonConst.TOKEN_TIME);
         return token;
     }
 
