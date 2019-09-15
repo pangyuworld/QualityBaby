@@ -19,7 +19,7 @@ import java.sql.SQLException;
  * @create: 2019-03-21 18:16
  * @version: v1.0
  **/
-@RestControllerAdvice(annotations = {RestController.class})
+// @RestControllerAdvice(annotations = {RestController.class})
 public class SpringExceptionHandle {
     private static final Logger logger = LoggerFactory.getLogger(SpringExceptionHandle.class);
 

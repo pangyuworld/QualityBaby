@@ -16,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
  * @description: 拦截器注册中心
  * @date 2019/4/7 9:40
  */
-@Configuration
+// @Configuration
 public class InterceptorConfig extends WebMvcConfigurationSupport {
     @Autowired
     private TokenInterceptor tokenInterceptor;

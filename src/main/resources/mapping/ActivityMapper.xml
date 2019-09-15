@@ -24,6 +24,7 @@
     select
     group_id, group_name, group_show, group_icon, group_sort, group_add_time
     from t_activity_group
+    where group_id=#{groupId}
     </select>
     <select id="selectGroupByList" resultType="com.swust.fund.entity.ActivityGroup">
         select

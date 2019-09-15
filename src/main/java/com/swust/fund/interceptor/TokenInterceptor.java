@@ -52,11 +52,12 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
                 return super.preHandle(request, response, handler);
             }
             // TODO 获取token
-            String tokenStr = request.getHeader("token");
+            String tokenStr = request.getHeader("Authorization");
             if (tokenStr == null || tokenStr.length() < 1) {
                 // TODO 如果没有token，则判断是不是微信登录
                 if (wxRequest!=null){
                     // 如果是微信登录，那就直接进行微信验证
+                    request.setAttribute("AccessToken",false);
                     return true;
                 }
                 // 否则就抛出异常
@@ -75,9 +76,10 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
             }
             if (!redisUtil.get("token" + username).toString().equals(tokenStr)) {
                 // TODO 如果token和redis中的不相同，则为失效的token
-                throw new UnicomRuntimeException(UnicomResponseEnums.LOGOUT_SUCCESS, "用户不存在");
+                throw new UnicomRuntimeException(UnicomResponseEnums.LOGOUT_SUCCESS, "已经退出登录");
             }
             // TODO token验证通过
+            request.setAttribute("AccessToken",true);
             return super.preHandle(request, response, handler);
         }
         return false;
