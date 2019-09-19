@@ -35,7 +35,6 @@
             <charset>UTF-8</charset>
         </encoder>
     </appender>
-    质量
 
     <!--输出到文件-->
 

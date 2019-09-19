@@ -41,6 +41,9 @@ public class User implements Serializable {
     @ApiModelProperty("用户头像地址")
     private String userIcon;
 
+    @ApiModelProperty(value = "学生归属地（真：城市，假：城市）")
+    private Boolean userFrom;
+
     public Date getSignUpTime() {
         return signUpTime;
     }
@@ -114,6 +117,16 @@ public class User implements Serializable {
     public void setUserIcon(String userIcon) {
         this.userIcon = userIcon;
     }
+
+    public Boolean getUserFrom() {
+        return userFrom;
+    }
+
+    public User setUserFrom(Boolean userFrom) {
+        this.userFrom = userFrom;
+        return this;
+    }
+
     // public List<Tag> getTags() {
     //     return tags;
     // }

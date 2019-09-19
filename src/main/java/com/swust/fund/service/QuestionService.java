@@ -140,6 +140,14 @@ public class QuestionService {
         return questionMapper.updateQuestionAspect(questionId, detailId, isWell);
     }
 
+    /**
+     * 处理用户回答问题的请求
+     *
+     * @param answerList 用户回答问题的列表
+     * @return java.lang.Integer
+     * @author pang
+     * @date 2019/9/19
+     */
     public Integer addAnswer(List<Answer> answerList) {
         sortAnswer(answerList);
         answerList.forEach(a -> a.setAnswerTime(new Date()));
