@@ -195,25 +195,28 @@ public class AspectService {
     }
 
     /**
-     * 查找用户排名，返回包含了总数和排名的字典
+     * 查找用户小维度排名
      *
-     * @param userId
+     * @param userId 用户ID
      * @return java.util.Map
      * @author pang
      * @date 2019/9/7
      */
-    public Map<String, String> gerSortByUserId(int userId) {
-        List<Map> result = detailMapper.selectAllUserScore();
-        Map<String, String> resultMap = new HashMap<>(5);
-        for (int i = 0; i < result.size(); i++) {
-            if (result.get(i).get("userId").toString().compareTo("" + userId) == 0) {
-                resultMap.put("total", "" + result.size());
-                resultMap.put("sort", "" + (i + 1));
-                return resultMap;
-            }
-        }
-        resultMap.put("error", "没有找到该用户信息");
-        return resultMap;
+    public List<Map> getDetailSortByUserId(int userId) {
+        List<Map> result = detailMapper.selectDetailSortByUser(userId);
+        return result;
+    }
+
+    /**
+     * 查找用户大维度排名
+     *
+     * @param userId 用户ID
+     * @return java.util.List<java.util.Map>
+     * @author pang
+     * @date 2019/9/25
+     */
+    public List<Map> getAspectSortByUserId(int userId) {
+        return aspectMapper.selectAspectSortByUser(userId);
     }
 
     /**
@@ -224,7 +227,7 @@ public class AspectService {
      * @date 2019/9/24
      */
     @Async("threadPool")
-    private Future<String> updateDetailSort() {
+    public Future<String> updateDetailSort() {
         List<Integer> detailList = detailMapper.selectAllDetailId();
         List<Map<String, Integer>> sortMapList = new LinkedList<>();
         Map<String, Integer> sortMap;
@@ -259,7 +262,7 @@ public class AspectService {
      * @date 2019/9/25
      */
     @Async("threadPool")
-    private Future<String> updateAspectSort() {
+    public Future<String> updateAspectSort() {
         List<Integer> aspectList = aspectMapper.selectAllAspectId();
         List<Map<String, Integer>> sortMapList = new LinkedList<>();
         Map<String, Integer> sortMap;
@@ -292,6 +295,7 @@ public class AspectService {
      * @author pang
      * @date 2019/9/25
      */
+    @Async("threadPool")
     public void updateSort() {
         this.updateDetailSort();
         this.updateAspectSort();

@@ -132,4 +132,14 @@
     <delete id="deleteAspectSort">
         delete from t_user_aspect_sort
     </delete>
+
+    <select id="selectAspectSortByUser" parameterType="int" resultType="map">
+        select
+        a.aspect_sort as aspectSort,
+        t.aspect_name as aspectName,
+        t.aspect_show as aspectShow
+        from t_user_aspect_sort a
+        inner join t_aspect t on a.aspect_id = t.aspect_id
+        where a.user_id=#{userId}
+    </select>
 </mapper>

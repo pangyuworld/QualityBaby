@@ -152,11 +152,19 @@ public class AspectController {
         return new ResponseJSON<>(true, aspectService.getDetailScoreByUser(userId, aspectId));
     }
 
-    @ApiOperation("获取排名信息")
+    @ApiOperation("获取小维度排名信息")
+    @RequestMapping(value = "/detail/sort/{userId}",method = RequestMethod.GET)
+    @Token
+    @WxRequest
+    public ResponseJSON<List<Map>> getDetailSortByUserId(@PathVariable int userId){
+        return new ResponseJSON<>(true,aspectService.getDetailSortByUserId(userId));
+    }
+
+    @ApiOperation("获取大维度排名信息")
     @RequestMapping(value = "/aspect/sort/{userId}",method = RequestMethod.GET)
     @Token
     @WxRequest
-    public ResponseJSON<Map> getSortByUserId(@PathVariable int userId){
-        return new ResponseJSON<>(true,aspectService.gerSortByUserId(userId));
+    public ResponseJSON<List < Map>> getAspectSortByUserId(@PathVariable int userId){
+        return new ResponseJSON<>(true,aspectService.getAspectSortByUserId(userId));
     }
 }

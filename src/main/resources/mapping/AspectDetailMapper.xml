@@ -117,17 +117,6 @@
     where a.aspect_id=#{aspectId} and b.user_id=#{userId}
     group by b.detail_id
     </select>
-    <select id="selectAllUserScore" resultType="map">
-        SELECT
-            a.user_id as userId,
-            SUM( a.detail_score ) as score
-        FROM
-            t_user_aspect_detail a
-        GROUP BY
-            a.user_id
-        ORDER BY
-            SUM( a.detail_score ) DESC
-    </select>
     <select id="selectAllUserDetailSort" resultType="int" parameterType="int">
         SELECT
         a.user_id as userId
@@ -150,4 +139,13 @@
     <delete id="deleteDetailSort">
         delete from t_user_aspect_detail_sort
     </delete>
+    <select id="selectDetailSortByUser" resultType="map" parameterType="int">
+        select
+        a.detail_sort as detailSort,
+        t.detail_name as detailName,
+        t.detail_show as detailShow
+        from t_user_aspect_detail_sort a
+        inner join t_aspect_detail t on a.detail_id = t.detail_id
+        where a.user_id=#{userId}
+    </select>
 </mapper>

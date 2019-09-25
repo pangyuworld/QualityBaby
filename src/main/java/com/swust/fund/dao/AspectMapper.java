@@ -30,4 +30,6 @@ public interface AspectMapper {
     int deleteAspectSort();
 
     int updateAspectSort(List<Map<String,Integer>> sortMapList);
+
+    List<Map> selectAspectSortByUser(@Param("userId") Integer userId);
 }

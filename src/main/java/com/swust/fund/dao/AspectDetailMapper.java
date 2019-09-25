@@ -1,4 +1,7 @@
 package com.swust.fund.dao;
+import	java.util.Map;
+import	java.util.List;
+import	java.lang.reflect.Parameter;
 
 import com.swust.fund.entity.AspectDetail;
 import org.apache.ibatis.annotations.Param;
@@ -27,8 +30,6 @@ public interface AspectDetailMapper {
 
     List<Map> selectDetailScoreByUser(@Param("userId") Integer userId, @Param("aspectId") Integer aspectId);
 
-    List<Map> selectAllUserScore();
-
     List<Integer> selectAllUserDetailSort(@Param("detailId") Integer detaileId);
 
     List<Integer> selectAllDetailId();
@@ -36,4 +37,6 @@ public interface AspectDetailMapper {
     int updateDetailSort(List<Map<String,Integer>> sortMapList);
 
     int deleteDetailSort();
+
+    List<Map> selectDetailSortByUser(@Param("userId") Integer userId);
 }
