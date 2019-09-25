@@ -5,11 +5,15 @@ import com.swust.fund.dao.AspectMapper;
 import com.swust.fund.entity.Aspect;
 import com.swust.fund.entity.AspectDetail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
 
 /**
  * @author pang
@@ -192,22 +196,104 @@ public class AspectService {
 
     /**
      * 查找用户排名，返回包含了总数和排名的字典
+     *
+     * @param userId
+     * @return java.util.Map
      * @author pang
      * @date 2019/9/7
-     * @param userId
-     * @return java.util.Map<java.lang.String,java.lang.String>
      */
-    public Map<String,String> gerSortByUserId(int userId){
-        List<Map> result=detailMapper.selectAllUserScore();
-        Map<String,String> resultMap=new HashMap<>(5);
-        for (int i=0;i<result.size();i++){
-            if (result.get(i).get("userId").toString().compareTo(""+userId)==0){
-                resultMap.put("total",""+result.size());
-                resultMap.put("sort",""+(i+1));
+    public Map<String, String> gerSortByUserId(int userId) {
+        List<Map> result = detailMapper.selectAllUserScore();
+        Map<String, String> resultMap = new HashMap<>(5);
+        for (int i = 0; i < result.size(); i++) {
+            if (result.get(i).get("userId").toString().compareTo("" + userId) == 0) {
+                resultMap.put("total", "" + result.size());
+                resultMap.put("sort", "" + (i + 1));
                 return resultMap;
             }
         }
-        resultMap.put("error","没有找到该用户信息");
+        resultMap.put("error", "没有找到该用户信息");
         return resultMap;
+    }
+
+    /**
+     * 排名小维度
+     *
+     * @return java.util.concurrent.Future<java.lang.String>
+     * @author pang
+     * @date 2019/9/24
+     */
+    @Async("threadPool")
+    private Future<String> updateDetailSort() {
+        List<Integer> detailList = detailMapper.selectAllDetailId();
+        List<Map<String, Integer>> sortMapList = new LinkedList<>();
+        Map<String, Integer> sortMap;
+        for (int detailId : detailList) {
+            List<Integer> userIdList = detailMapper.selectAllUserDetailSort(detailId);
+            for (int i = 0; i < userIdList.size(); i++) {
+                // 新建一个map，大小为3，不扩容（因为正好够用）
+                sortMap = new HashMap<>(3, 1);
+                // 添加用户id
+                sortMap.put("userId", userIdList.get(i));
+                // 添加小维度id
+                sortMap.put("detailId", detailId);
+                // 添加用户排名
+                sortMap.put("detailSort", i + 1);
+                // 将数据添加到链表
+                sortMapList.add(sortMap);
+            }
+        }
+        // 先清空表
+        detailMapper.deleteDetailSort();
+        // 在插入表
+        detailMapper.updateDetailSort(sortMapList);
+        return new AsyncResult<>(Thread.currentThread().getName());
+    }
+
+    /**
+     * 排名大维度
+     *
+     * @param
+     * @return java.util.concurrent.Future<java.lang.String>
+     * @author pang
+     * @date 2019/9/25
+     */
+    @Async("threadPool")
+    private Future<String> updateAspectSort() {
+        List<Integer> aspectList = aspectMapper.selectAllAspectId();
+        List<Map<String, Integer>> sortMapList = new LinkedList<>();
+        Map<String, Integer> sortMap;
+        for (int aspectId : aspectList) {
+            List<Integer> userIdList = aspectMapper.selectAllUserAspectSort(aspectId);
+            for (int i = 0; i < userIdList.size(); i++) {
+                // 新建一个map，大小为3，不扩容（因为正好够用）
+                sortMap = new HashMap<>(3, 1);
+                // 添加用户id
+                sortMap.put("userId", userIdList.get(i));
+                // 添加小维度id
+                sortMap.put("aspectId", aspectId);
+                // 添加用户排名
+                sortMap.put("aspectSort", i + 1);
+                // 将数据添加到链表
+                sortMapList.add(sortMap);
+            }
+        }
+        // 先清空表
+        aspectMapper.deleteAspectSort();
+        // 在插入表
+        aspectMapper.updateAspectSort(sortMapList);
+        return new AsyncResult<>(Thread.currentThread().getName());
+    }
+
+    /**
+     * 更新成绩排名
+     *
+     * @return void
+     * @author pang
+     * @date 2019/9/25
+     */
+    public void updateSort() {
+        this.updateDetailSort();
+        this.updateAspectSort();
     }
 }

@@ -27,6 +27,8 @@ public class QuestionService {
     private AnswerMapper answerMapper;
     @Autowired
     private AspectDetailMapper detailMapper;
+    @Autowired
+    private AspectService aspectService;
 
     /**
      * 获得单个问题
@@ -179,6 +181,8 @@ public class QuestionService {
             }
         }
         detailMapper.insertScore(answerList.get(0).getUserId(), scoreMap);
+        // 更新成绩排名
+        aspectService.updateSort();
         return answerMapper.insertAnswerList(answerList);
     }
 

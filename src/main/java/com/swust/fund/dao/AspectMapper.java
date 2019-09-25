@@ -22,4 +22,12 @@ public interface AspectMapper {
     List<Aspect> selectAllAspect(@Param("showAll") Boolean showAll);
 
     List<Map> selectScoreByUser(@Param("userId") Integer userId);
+
+    List<Integer> selectAllAspectId();
+
+    List<Integer> selectAllUserAspectSort(@Param("aspectId") Integer aspectId);
+
+    int deleteAspectSort();
+
+    int updateAspectSort(List<Map<String,Integer>> sortMapList);
 }

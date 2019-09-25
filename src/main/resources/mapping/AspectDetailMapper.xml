@@ -128,4 +128,26 @@
         ORDER BY
             SUM( a.detail_score ) DESC
     </select>
+    <select id="selectAllUserDetailSort" resultType="int" parameterType="int">
+        SELECT
+        a.user_id as userId
+        FROM t_user_aspect_detail a
+        where a.detail_id=#{detailId}
+        ORDER BY a.detail_score DESC
+    </select>
+    <select id="selectAllDetailId" resultType="int">
+        select
+        a.detail_id as detailId
+        from t_aspect_detail a
+    </select>
+    <insert id="updateDetailSort" parameterType="map">
+        INSERT INTO t_user_aspect_detail_sort ( user_id, detail_id, detail_sort )
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.userId},#{item.detailId} ,#{item.detailSort})
+        </foreach>
+    </insert>
+    <delete id="deleteDetailSort">
+        delete from t_user_aspect_detail_sort
+    </delete>
 </mapper>

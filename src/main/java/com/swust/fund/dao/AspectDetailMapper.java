@@ -28,4 +28,12 @@ public interface AspectDetailMapper {
     List<Map> selectDetailScoreByUser(@Param("userId") Integer userId, @Param("aspectId") Integer aspectId);
 
     List<Map> selectAllUserScore();
+
+    List<Integer> selectAllUserDetailSort(@Param("detailId") Integer detaileId);
+
+    List<Integer> selectAllDetailId();
+
+    int updateDetailSort(List<Map<String,Integer>> sortMapList);
+
+    int deleteDetailSort();
 }

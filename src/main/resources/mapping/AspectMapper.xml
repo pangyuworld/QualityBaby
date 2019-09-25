@@ -102,4 +102,34 @@
         where c.user_id=#{userId}
         GROUP BY a.aspect_id
     </select>
+
+
+    <!-- 查找所有的aspectId -->
+    <select id="selectAllAspectId" resultType="int">
+        select
+        aspect_id
+        from t_aspect
+    </select>
+    <!-- 根据aspectId查找用户分数排名 -->
+    <select id="selectAllUserAspectSort" parameterType="int" resultType="int">
+        select
+        a.user_id
+        from t_user_aspect_detail a
+        inner join t_aspect_detail b on b.detail_id=a.detail_id
+        WHERE b.aspect_id=#{aspectId}
+        GROUP BY a.user_id
+        ORDER BY sum(a.detail_score) desc
+    </select>
+    <!-- 更新成绩 -->
+    <insert id="updateAspectSort" parameterType="map">
+        INSERT INTO t_user_aspect_sort ( user_id, aspect_id, aspect_sort )
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.userId},#{item.aspectId} ,#{item.aspectSort})
+        </foreach>
+    </insert>
+    <!-- 清空成绩表 -->
+    <delete id="deleteAspectSort">
+        delete from t_user_aspect_sort
+    </delete>
 </mapper>
