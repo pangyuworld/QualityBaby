@@ -220,7 +220,7 @@
         g.group_add_time as groupAddTime,
         g.group_icon as groupIcon,
         g.group_sort as groupSort,
-        g.group_show AS groupShow,
+        g.group_show AS g|roupShow,
         a2.join_time as joinTime
         from t_activity a
         inner join t_activity_group g on a.group_id = g.group_id

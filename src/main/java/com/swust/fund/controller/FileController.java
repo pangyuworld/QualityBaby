@@ -3,8 +3,8 @@ package com.swust.fund.controller;
 import com.swust.fund.common.restful.ResponseJSON;
 import com.swust.fund.common.restful.UnicomResponseEnums;
 import com.swust.fund.service.FileService;
+import com.swust.fund.service.QuestionService;
 import com.swust.fund.utils.token.Token;
-import com.swust.fund.utils.wx.WxRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Map;
 
 /**
@@ -30,6 +32,8 @@ import java.util.Map;
 public class FileController {
     @Autowired
     private FileService fileService;
+    @Autowired
+    private QuestionService questionService;
 
     @ApiOperation("上传活动图片")
     @RequestMapping(value = "/activity/uploadImages", method = RequestMethod.POST)
@@ -55,5 +59,10 @@ public class FileController {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @RequestMapping(value = "/excel", method = RequestMethod.GET)
+    public void getFile(HttpServletResponse response) throws IOException {
+        fileService.exportExcel(response);
     }
 }
