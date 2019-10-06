@@ -221,7 +221,7 @@
         g.group_icon as groupIcon,
         g.group_sort as groupSort,
         g.group_show AS groupShow,
-        a2.join_time as joinTime
+        DATE_FORMAT(a2.join_time,"%Y-%m-%d %H:%i:%s") as joinTime
         from t_activity a
         inner join t_activity_group g on a.group_id = g.group_id
         inner join t_user_activity a2 on a.activity_id = a2.activity_id

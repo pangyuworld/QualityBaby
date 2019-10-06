@@ -3,6 +3,7 @@ package com.swust.fund.service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.swust.fund.common.restful.UnicomResponseEnums;
 import com.swust.fund.common.restful.UnicomRuntimeException;
 import com.swust.fund.dao.ActivityGroupMapper;
 import com.swust.fund.dao.ActivityMapper;
@@ -198,6 +199,15 @@ public class ActivityService {
      * @date 2019/7/6
      */
     public Integer signInActivity(int userId, int activityId) throws UnicomRuntimeException {
+        Activity activity = this.getActivity(activityId);
+        // 如果超出时间了
+        if (activity.getActivityEndSignUp().after(new Date())) {
+            throw new UnicomRuntimeException(UnicomResponseEnums.NO_PERMISSION, "已经超过最晚报名时间");
+        }
+        // 如果报名人数满了
+        if (activity.getActivityPersonNum() <= activityMapper.selectSignInNum(activityId)) {
+            throw new UnicomRuntimeException(UnicomResponseEnums.NO_PERMISSION, "报名人数已满");
+        }
         return activityMapper.signInActivity(new Date(), userId, activityId);
     }
 
@@ -228,6 +238,9 @@ public class ActivityService {
      * @date 2019/7/8
      */
     public boolean signOutActivity(int userId, int activityId) {
+        if (this.getActivity(activityId).getActivityEndSignUp().after(new Date())) {
+            throw new UnicomRuntimeException(UnicomResponseEnums.NO_PERMISSION, "已经超过最晚报名时间");
+        }
         if (activityMapper.signOutActivity(userId, activityId) == 1) {
             return true;
         } else {
@@ -282,10 +295,11 @@ public class ActivityService {
     }
 
     /**
-     *  设置活动已报名人数
+     * 设置活动已报名人数
+     *
+     * @param activitie 单个活动
      * @author pang
      * @date 2019/8/12
-     * @param activitie 单个活动
      */
     private Activity setSignInNum(Activity activitie) {
         activitie.setActivitySignInNum(activityMapper.selectSignInNum(activitie.getActivityId()));
