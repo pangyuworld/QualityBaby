@@ -53,9 +53,9 @@ public class AdminService {
      * @author pang
      * @date 2019/4/7
      */
-    public String login(String username, String password,String key,String captcha, HttpServletRequest request) {
+    public String login(String username, String password, String key, String captcha, HttpServletRequest request) {
         // 验证验证码是否有效
-        if (redisUtil.get(key)==null||redisUtil.get(key).toString().compareTo(captcha)!=0){
+        if (redisUtil.get(key) == null || redisUtil.get(key).toString().compareTo(captcha) != 0) {
             // 如果验证码无效，则返回-2
             return "-2";
         }
@@ -85,7 +85,7 @@ public class AdminService {
         // 添加登录记录
         logMapper.insert(loginLog);
         // 将token存在缓存中
-        redisUtil.set("token"+username,token,CommonConst.TOKEN_TIME);
+        redisUtil.set("token" + username, token, CommonConst.TOKEN_TIME / 1000);
         return token;
     }
 
@@ -138,7 +138,7 @@ public class AdminService {
         // 先清除之前的验证码
         redisUtil.del(key);
         // 将验证码内容存入缓存，并设置2分钟失效
-        redisUtil.set(key,capText,1000*60*2);
+        redisUtil.set(key, capText, 30);
         // 获得base64编码
         String encode = null;
         try {

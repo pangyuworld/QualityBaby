@@ -45,12 +45,12 @@
     delete from t_activity
     where activity_id = #{activityId,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="com.swust.fund.entity.Activity" useGeneratedKeys="true" keyProperty="id">
-    insert into t_activity (activity_id, activity_name, activity_information, 
+    <insert id="insert" parameterType="com.swust.fund.entity.Activity">
+    insert into t_activity ( activity_name, activity_information,
       activity_img, activity_person_num, activity_start, 
       activity_end, activity_start_sign_up, activity_end_sign_up, 
       activity_show, group_id)
-    values (#{activityId,jdbcType=INTEGER}, #{activityName,jdbcType=VARCHAR}, #{activityInformation,jdbcType=VARCHAR}, 
+    values ( #{activityName,jdbcType=VARCHAR}, #{activityInformation,jdbcType=VARCHAR},
       #{activityImg,jdbcType=VARCHAR}, #{activityPersonNum,jdbcType=INTEGER}, #{activityStart,jdbcType=TIMESTAMP}, 
       #{activityEnd,jdbcType=TIMESTAMP}, #{activityStartSignUp,jdbcType=TIMESTAMP}, #{activityEndSignUp,jdbcType=TIMESTAMP}, 
       #{activityShow,jdbcType=BIT}, #{groupId,jdbcType=INTEGER})

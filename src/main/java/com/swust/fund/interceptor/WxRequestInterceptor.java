@@ -40,7 +40,7 @@ public class WxRequestInterceptor extends HandlerInterceptorAdapter {
                 return super.preHandle(request, response, handler);
             } else {
                 // 否则抛出异常
-                throw new UnicomRuntimeException(UnicomResponseEnums.METHOD_NOT_ALLOWED, "请求失败");
+                throw new UnicomRuntimeException(UnicomResponseEnums.METHOD_NOT_ALLOWED, "请求设备错误");
             }
         }
         return false;

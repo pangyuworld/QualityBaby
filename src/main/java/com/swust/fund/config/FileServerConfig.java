@@ -34,7 +34,7 @@ public class FileServerConfig extends WebMvcConfigurerAdapter {
     public MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
         //单个文件最大
-        // factory.setMaxFileSize(CommonConst.maxFileSize);
+        factory.setMaxFileSize("2MB");
         return factory.createMultipartConfig();
     }
 
